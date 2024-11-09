@@ -1,14 +1,11 @@
 import 'package:aplikasi_booking_dokter/app/data/consts/consts.dart';
-import 'package:aplikasi_booking_dokter/app/modules/home/views/home.dart';
 import 'package:aplikasi_booking_dokter/app/modules/home/views/home_view.dart';
 import 'package:aplikasi_booking_dokter/app/modules/signup/views/signup_view.dart';
 import 'package:aplikasi_booking_dokter/app/res/components/custom_button.dart';
 import 'package:aplikasi_booking_dokter/app/res/components/custom_textfield.dart';
 import 'package:get/get.dart';
-
 class LoginView extends StatelessWidget {
   const LoginView({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,7 +46,7 @@ class LoginView extends StatelessWidget {
                   CustomButton(
                     buttonText: AppStrings.login,
                     onTap: () {
-                      Get.to(() => const Home());
+                      Get.to(() => const HomeView());
                     },
                   ),
                   SizedBox(height: 20),
