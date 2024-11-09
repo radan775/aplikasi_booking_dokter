@@ -1,6 +1,5 @@
 import 'package:aplikasi_booking_dokter/app/data/consts/consts.dart';
 import 'package:aplikasi_booking_dokter/app/modules/home/views/home.dart';
-import 'package:aplikasi_booking_dokter/app/modules/home/views/home_view.dart';
 import 'package:aplikasi_booking_dokter/app/modules/signup/views/signup_view.dart';
 import 'package:aplikasi_booking_dokter/app/res/components/custom_button.dart';
 import 'package:aplikasi_booking_dokter/app/res/components/custom_textfield.dart';

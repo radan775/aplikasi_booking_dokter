@@ -1,5 +1,8 @@
 import 'package:aplikasi_booking_dokter/app/data/consts/colors.dart';
+import 'package:aplikasi_booking_dokter/app/modules/category_view/category_view.dart';
 import 'package:aplikasi_booking_dokter/app/modules/home/views/home_view.dart';
+import 'package:aplikasi_booking_dokter/app/modules/login/views/login_view.dart';
+import 'package:aplikasi_booking_dokter/app/modules/setting_view/setting_view.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
@@ -13,15 +16,9 @@ class _HomeState extends State<Home> {
   int selectedIndex = 0;
   List screenList = [
     HomeView(),
-    Container(
-      color: Colors.red,
-    ),
-    Container(
-      color: Colors.green,
-    ),
-    Container(
-      color: Colors.blue,
-    )
+    CategoryView(),
+    LoginView(),
+    SettingView(),
   ];
 
   @override
@@ -41,7 +38,9 @@ class _HomeState extends State<Home> {
           type: BottomNavigationBarType.fixed,
           currentIndex: selectedIndex,
           onTap: (value) {
-            setState(() {});
+            setState(() {
+              selectedIndex = value;
+            });
           },
           items: [
             BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
