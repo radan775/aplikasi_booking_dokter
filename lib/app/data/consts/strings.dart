@@ -18,5 +18,11 @@ class AppStrings {
       signup = "Signup",
       welcome = "Welcome",
       alreadyHaveAccount = "Already have an account?",
-      dontHaveAccount = "Don't have an account?";
+      dontHaveAccount = "Don't have an account?",
+      body = "Body",
+      ear = "Ear",
+      liver = "Liver",
+      lungs = "Lungs",
+      heart = "Heart",
+      kidney = "Kidney";
 }
