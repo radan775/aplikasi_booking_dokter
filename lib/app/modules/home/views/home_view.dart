@@ -31,11 +31,12 @@ class HomeView extends StatelessWidget {
                 ),
                 10.widthBox,
                 IconButton(
-                    onPressed: () {},
-                    icon: Icon(
-                      Icons.search,
-                      color: AppColors.whiteColor,
-                    ))
+                  onPressed: () {},
+                  icon: Icon(
+                    Icons.search,
+                    color: AppColors.whiteColor,
+                  ),
+                ),
               ],
             ),
           ),
@@ -45,7 +46,7 @@ class HomeView extends StatelessWidget {
             child: Column(
               children: [
                 SizedBox(
-                  height: 80,
+                  height: 95,
                   child: ListView.builder(
                     physics: const BouncingScrollPhysics(),
                     scrollDirection: Axis.horizontal,
@@ -60,13 +61,11 @@ class HomeView extends StatelessWidget {
                           ),
                           padding: EdgeInsets.all(12),
                           margin: const EdgeInsets.only(right: 8),
-                          height: 44,
-                          width: 44,
                           child: Column(
                             children: [
                               Image.asset(
                                 iconsList[index],
-                                width: 30,
+                                width: 40,
                                 color: AppColors.whiteColor,
                               ),
                               5.heightBox,
@@ -85,7 +84,7 @@ class HomeView extends StatelessWidget {
                 Align(
                   alignment: Alignment.centerLeft,
                   child: AppStyles.bold(
-                    title: "Popular Doctor",
+                    title: "Popular Doctors",
                     color: AppColors.blueColor,
                     size: AppSizes.size18,
                   ),
@@ -101,11 +100,12 @@ class HomeView extends StatelessWidget {
                       return Container(
                         clipBehavior: Clip.hardEdge,
                         decoration: BoxDecoration(
-                            color: AppColors.bgDarkColor,
-                            borderRadius: BorderRadius.circular(12)),
+                          color: AppColors.bgDarkColor,
+                          borderRadius: BorderRadius.circular(12),
+                        ),
                         margin: const EdgeInsets.only(right: 8),
                         height: 100,
-                        width: 100,
+                        width: 150,
                         child: Column(
                           children: [
                             Container(

@@ -1,3 +1,4 @@
+import 'package:aplikasi_booking_dokter/app/data/consts/consts.dart';
 import 'package:flutter/material.dart';
 
 class CustomTextfield extends StatefulWidget {
@@ -20,26 +21,29 @@ class _CustomTextfieldState extends State<CustomTextfield> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      cursorColor: AppColors.blueColor,
       decoration: InputDecoration(
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: widget.borderColor,
-            ),
+        isDense: true,
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: widget.borderColor,
           ),
-          enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: widget.borderColor,
-            ),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: widget.borderColor,
           ),
-          border: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: widget.borderColor,
-            ),
+        ),
+        border: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: widget.borderColor,
           ),
-          hintText: widget.hint,
-          hintStyle: TextStyle(
-            color: widget.textColor,
-          )),
+        ),
+        hintText: widget.hint,
+        hintStyle: TextStyle(
+          color: widget.textColor,
+        ),
+      ),
     );
   }
 }
