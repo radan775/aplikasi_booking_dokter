@@ -157,7 +157,9 @@ class HomeView extends StatelessWidget {
                                   color: AppColors.whiteColor,
                                 ),
                                 5.heightBox,
-                                AppStyles.normal(title: "Lab Test")
+                                AppStyles.normal(
+                                    title: "Lab Test",
+                                    color: AppColors.whiteColor)
                               ],
                             ),
                           )),

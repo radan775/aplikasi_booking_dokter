@@ -1,8 +1,8 @@
 import 'package:aplikasi_booking_dokter/app/data/consts/colors.dart';
-import 'package:aplikasi_booking_dokter/app/modules/category_view/category_view.dart';
+import 'package:aplikasi_booking_dokter/app/modules/category/views/category_view.dart';
 import 'package:aplikasi_booking_dokter/app/modules/home/views/home_view.dart';
 import 'package:aplikasi_booking_dokter/app/modules/login/views/login_view.dart';
-import 'package:aplikasi_booking_dokter/app/modules/setting_view/setting_view.dart';
+import 'package:aplikasi_booking_dokter/app/modules/setting/views/setting_view.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
