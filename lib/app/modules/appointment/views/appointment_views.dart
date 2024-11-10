@@ -1,4 +1,4 @@
-import 'package:aplikasi_booking_dokter/app/modules/appointment/views/appointment_detail_view.dart';
+import 'package:aplikasi_booking_dokter/app/modules/appointment/detail/appointment_detail_view.dart';
 import 'package:get/get.dart';
 
 import '../../../data/consts/consts.dart';
