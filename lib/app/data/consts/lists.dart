@@ -1,3 +1,4 @@
+import 'package:aplikasi_booking_dokter/app/data/consts/consts.dart';
 import 'package:aplikasi_booking_dokter/app/data/consts/images.dart';
 import 'package:aplikasi_booking_dokter/app/data/consts/strings.dart';
 
@@ -17,4 +18,16 @@ var iconsTitleList = [
   AppStrings.lungs,
   AppStrings.heart,
   AppStrings.kidney,
+];
+
+var settingsList = [
+  AppStrings.changePassword,
+  AppStrings.termsCondition,
+  AppStrings.signout,
+];
+
+var settingsListIcon = [
+  Icons.lock,
+  Icons.note,
+  Icons.logout,
 ];

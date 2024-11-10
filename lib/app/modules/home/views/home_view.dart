@@ -1,6 +1,8 @@
 import 'package:aplikasi_booking_dokter/app/data/consts/consts.dart';
 import 'package:aplikasi_booking_dokter/app/data/consts/lists.dart';
+import 'package:aplikasi_booking_dokter/app/modules/doctor_profile/views/doctor_profile_view.dart';
 import 'package:aplikasi_booking_dokter/app/res/components/custom_textfield.dart';
+import 'package:get/get.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -97,33 +99,38 @@ class HomeView extends StatelessWidget {
                     scrollDirection: Axis.horizontal,
                     itemCount: 3,
                     itemBuilder: (BuildContext context, int index) {
-                      return Container(
-                        clipBehavior: Clip.hardEdge,
-                        decoration: BoxDecoration(
-                          color: AppColors.bgDarkColor,
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        margin: const EdgeInsets.only(right: 8),
-                        height: 100,
-                        width: 150,
-                        child: Column(
-                          children: [
-                            Container(
-                              width: 150,
-                              alignment: Alignment.center,
-                              color: AppColors.blueColor,
-                              child: Image.asset(
-                                AppAssets.imgSignup,
-                                width: 100,
-                                fit: BoxFit.cover,
+                      return GestureDetector(
+                        onTap: () {
+                          Get.to(() => const DoctorProfileView());
+                        },
+                        child: Container(
+                          clipBehavior: Clip.hardEdge,
+                          decoration: BoxDecoration(
+                            color: AppColors.bgDarkColor,
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          margin: const EdgeInsets.only(right: 8),
+                          height: 100,
+                          width: 150,
+                          child: Column(
+                            children: [
+                              Container(
+                                width: 150,
+                                alignment: Alignment.center,
+                                color: AppColors.blueColor,
+                                child: Image.asset(
+                                  AppAssets.imgSignup,
+                                  width: 100,
+                                  fit: BoxFit.cover,
+                                ),
                               ),
-                            ),
-                            5.heightBox,
-                            AppStyles.normal(title: "Doctor Name"),
-                            5.heightBox,
-                            AppStyles.normal(
-                                title: "Category", color: Colors.black54),
-                          ],
+                              5.heightBox,
+                              AppStyles.normal(title: "Doctor Name"),
+                              5.heightBox,
+                              AppStyles.normal(
+                                  title: "Category", color: Colors.black54),
+                            ],
+                          ),
                         ),
                       );
                     },

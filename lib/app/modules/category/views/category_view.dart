@@ -1,5 +1,7 @@
 import 'package:aplikasi_booking_dokter/app/data/consts/consts.dart';
 import 'package:aplikasi_booking_dokter/app/data/consts/lists.dart';
+import 'package:aplikasi_booking_dokter/app/modules/category/detail/category_detail_view.dart';
+import 'package:get/get.dart';
 
 class CategoryView extends StatelessWidget {
   const CategoryView({super.key});
@@ -28,7 +30,9 @@ class CategoryView extends StatelessWidget {
           itemCount: iconsList.length,
           itemBuilder: (BuildContext context, int index) {
             return GestureDetector(
-              onTap: () {},
+              onTap: () {
+                Get.to(() => const CategoryDetailView());
+              },
               child: Container(
                 padding: EdgeInsets.all(12),
                 decoration: BoxDecoration(
