@@ -14,9 +14,21 @@ class AppStrings {
       confirmPassword = "Confirm Password",
       forgetPassword = "Forget Password?",
       login = "Login",
+      category = "Category",
+      doctor = "Doctor Login",
+      settings = "Settings",
       search = "Search doctor",
       signup = "Signup",
       welcome = "Welcome",
       alreadyHaveAccount = "Already have an account?",
-      dontHaveAccount = "Don't have an account?";
+      dontHaveAccount = "Don't have an account?",
+      body = "Body",
+      ear = "Ear",
+      liver = "Liver",
+      lungs = "Lungs",
+      heart = "Heart",
+      kidney = "Kidney",
+      changePassword = "Change Password",
+      termsCondition = "Terms & Condition",
+      signout = "SignOut";
 }
