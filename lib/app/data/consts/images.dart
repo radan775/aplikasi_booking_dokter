@@ -9,6 +9,6 @@ class AppAssets {
       icStomach = "assets/icons/ic_stomach.png",
       icTooth = "assets/icons/ic_tooth.png",
       imgLogin = "assets/images/img_login.png",
-      imgSignup = "assets/images/img_signup.png";
-  // kurang img splash background dan img welcome
+      imgSignup = "assets/images/img_signup.png",
+      imgLogo = "assets/images/imgLogo.png";
 }

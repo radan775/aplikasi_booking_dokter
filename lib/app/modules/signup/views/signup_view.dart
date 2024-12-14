@@ -43,7 +43,9 @@ class SignupView extends StatelessWidget {
                   20.heightBox,
                   CustomButton(
                     buttonText: AppStrings.signup,
-                    onTap: () {},
+                    onTap: () {
+                      print("SIGNUP DITEKAN");
+                    },
                   ),
                   SizedBox(height: 20),
                   Row(
