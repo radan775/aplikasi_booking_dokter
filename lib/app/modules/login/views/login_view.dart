@@ -1,8 +1,7 @@
 import 'package:aplikasi_booking_dokter/app/data/consts/consts.dart';
-import 'package:aplikasi_booking_dokter/app/modules/home/views/home.dart';
-import 'package:aplikasi_booking_dokter/app/modules/signup/views/signup_view.dart';
 import 'package:aplikasi_booking_dokter/app/res/components/custom_button.dart';
 import 'package:aplikasi_booking_dokter/app/res/components/custom_textfield.dart';
+import 'package:aplikasi_booking_dokter/app/routes/app_pages.dart';
 import 'package:get/get.dart';
 
 class LoginView extends StatelessWidget {
@@ -42,13 +41,18 @@ class LoginView extends StatelessWidget {
                   SizedBox(height: 20),
                   Align(
                     alignment: Alignment.centerRight,
-                    child: AppStyles.normal(title: AppStrings.forgetPassword),
+                    child: InkWell(
+                      onTap: () {
+                        Get.toNamed(Routes.FORGET_PASSWORD);
+                      },
+                      child: AppStyles.normal(title: AppStrings.forgetPassword),
+                    ),
                   ),
                   SizedBox(height: 20),
                   CustomButton(
                     buttonText: AppStrings.login,
                     onTap: () {
-                      Get.to(() => const Home());
+                      Get.toNamed(Routes.BOTTOM_NAVBAR);
                     },
                   ),
                   SizedBox(height: 20),
@@ -59,7 +63,7 @@ class LoginView extends StatelessWidget {
                       8.widthBox,
                       GestureDetector(
                         onTap: () {
-                          Get.to(() => const SignupView());
+                          Get.toNamed(Routes.SIGNUP);
                         },
                         child: AppStyles.bold(title: AppStrings.signup),
                       ),

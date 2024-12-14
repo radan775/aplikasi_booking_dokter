@@ -1,6 +1,4 @@
 import 'package:aplikasi_booking_dokter/app/data/consts/consts.dart';
-import 'package:aplikasi_booking_dokter/app/data/consts/images.dart';
-import 'package:aplikasi_booking_dokter/app/data/consts/strings.dart';
 
 var iconsList = [
   AppAssets.icBody,
@@ -12,6 +10,7 @@ var iconsList = [
 ];
 
 var iconsTitleList = [
+  AppStrings.all,
   AppStrings.body,
   AppStrings.ear,
   AppStrings.liver,

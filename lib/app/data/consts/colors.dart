@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:aplikasi_booking_dokter/app/data/consts/consts.dart';
 
 class AppColors {
