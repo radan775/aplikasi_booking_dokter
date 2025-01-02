@@ -10,6 +10,8 @@ class CustomTextfield extends StatefulWidget {
   final TextInputType inputType;
   final bool obscureText;
   final IconData? icon;
+  final bool enabled;
+  final List<TextInputFormatter>? inputFormatters; // Tambahkan parameter baru
 
   const CustomTextfield({
     super.key,
@@ -20,6 +22,8 @@ class CustomTextfield extends StatefulWidget {
     this.inputType = TextInputType.text,
     this.obscureText = false,
     this.icon,
+    this.enabled = true,
+    this.inputFormatters, // Optional parameter
   });
 
   @override
@@ -37,19 +41,36 @@ class _CustomTextfieldState extends State<CustomTextfield> {
 
   @override
   Widget build(BuildContext context) {
+    // Gabungkan input formatters default dengan custom input formatters
+    List<TextInputFormatter> combinedFormatters = [];
+
+    // Tambahkan formatter digits only untuk input number
+    if (widget.inputType == TextInputType.number) {
+      combinedFormatters.add(FilteringTextInputFormatter.digitsOnly);
+    }
+
+    // Tambahkan custom input formatters jika ada
+    if (widget.inputFormatters != null) {
+      combinedFormatters.addAll(widget.inputFormatters!);
+    }
+
     return TextFormField(
       controller: widget.textController,
       keyboardType: widget.inputType,
       cursorColor: AppColors.blueColor,
       obscureText: _isObscured,
+      enabled: widget.enabled,
       style: TextStyle(
-        color: widget.textColor,
+        color: widget.enabled ? widget.textColor : Colors.grey.withOpacity(0.7),
       ),
-      inputFormatters: widget.inputType == TextInputType.number
-          ? [FilteringTextInputFormatter.digitsOnly]
-          : [],
+      inputFormatters: combinedFormatters, // Gunakan combined formatters
       decoration: InputDecoration(
         isDense: true,
+        disabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: widget.borderColor.withOpacity(0.5),
+          ),
+        ),
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(
             color: widget.borderColor,
@@ -65,15 +86,17 @@ class _CustomTextfieldState extends State<CustomTextfield> {
             color: widget.borderColor,
           ),
         ),
-        labelText: widget.hint, // Ubah dari hintText menjadi labelText
+        labelText: widget.hint,
         labelStyle: TextStyle(
-          color: widget.textColor.withOpacity(0.5),
+          color: widget.enabled
+              ? widget.textColor.withOpacity(0.5)
+              : Colors.grey.withOpacity(0.5),
         ),
-        floatingLabelBehavior: FloatingLabelBehavior.auto, // Aktifkan animasi
+        floatingLabelBehavior: FloatingLabelBehavior.auto,
         prefixIcon: widget.icon != null
             ? Icon(
                 widget.icon,
-                color: widget.borderColor,
+                color: widget.enabled ? widget.borderColor : Colors.grey,
               )
             : null,
         suffixIcon: widget.obscureText
@@ -88,7 +111,12 @@ class _CustomTextfieldState extends State<CustomTextfield> {
                   });
                 },
               )
-            : null,
+            : widget.enabled
+                ? null
+                : Icon(
+                    Icons.lock_outline,
+                    color: Colors.grey,
+                  ),
       ),
     );
   }

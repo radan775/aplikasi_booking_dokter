@@ -1,6 +1,5 @@
 import 'package:aplikasi_booking_dokter/app/data/consts/consts.dart';
 import 'package:aplikasi_booking_dokter/app/modules/detail_data_pasien/controllers/detail_data_pasien_controller.dart';
-import 'package:aplikasi_booking_dokter/app/routes/app_pages.dart';
 import 'package:get/get.dart';
 
 class DetailDataPasienView extends GetView<DetailDataPasienController> {
@@ -37,125 +36,212 @@ class DetailDataPasienView extends GetView<DetailDataPasienController> {
               ),
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      "Dokter pilihan anda",
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-                    Row(
+                child: Obx(() {
+                  if (controller.selectedSchedule["type"] == 'doctor') {
+                    if (controller.selectedDoctorData.value.isEmpty &&
+                        controller.selectedClinicData.value.isEmpty) {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        CircleAvatar(
-                          radius: 40,
-                          backgroundImage:
-                              NetworkImage(controller.doctorData['image']!),
+                        const Text(
+                          "Dokter pilihan anda",
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                        const SizedBox(width: 16),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                        const SizedBox(height: 16),
+                        Row(
                           children: [
-                            Text(
-                              '${controller.doctorData['name']}',
-                              style: const TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
+                            CircleAvatar(
+                              radius: 40,
+                              backgroundImage: NetworkImage(
+                                controller.selectedDoctorData.value['image'],
                               ),
                             ),
-                            const SizedBox(height: 8),
-                            Text(
-                              '${controller.doctorData['specialty']}',
-                              style: const TextStyle(
-                                fontSize: 14,
-                                color: Colors.grey,
+                            const SizedBox(width: 16),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  '${controller.selectedDoctorData.value['name']}',
+                                  style: const TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                const SizedBox(height: 8),
+                                Text(
+                                  '${controller.selectedDoctorData.value['specialty']}',
+                                  style: const TextStyle(
+                                    fontSize: 14,
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 12),
+                        const Divider(),
+                        const Text(
+                          "Lokasi dan jadwal praktik",
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        Row(
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: Image.network(
+                                '${controller.selectedClinicData.value['clinicImage']}',
+                                width: 80,
+                                height: 80,
+                                fit: BoxFit.cover,
+                                errorBuilder: (context, error, stackTrace) =>
+                                    Container(
+                                  width: 80,
+                                  height: 80,
+                                  color: Colors.grey,
+                                  child: const Icon(
+                                    Icons.image_not_supported,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(width: 16),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    '${controller.selectedClinicData.value['clinicName']}',
+                                    style: const TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Text(
+                                    "${controller.selectedClinicData.value['scheduleDay']}, ${controller.selectedClinicData.value['scheduleDate']}",
+                                    style: const TextStyle(
+                                      fontSize: 14,
+                                      color: Colors.grey,
+                                    ),
+                                  ),
+                                  Text(
+                                    '${controller.selectedClinicData.value['scheduleTime']}',
+                                    style: const TextStyle(
+                                      fontSize: 14,
+                                      color: Colors.grey,
+                                    ),
+                                  ),
+                                  Text(
+                                    "Biaya: Rp${controller.selectedClinicData.value['fee']}",
+                                    style: const TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                           ],
                         ),
                       ],
-                    ),
-                    const SizedBox(height: 12),
-                    const Divider(),
-                    const Text(
-                      "Lokasi dan jadwal praktik",
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(height: 8),
-                    Row(
+                    );
+                  } else {
+                    if (controller.selectedClinicData.value.isEmpty) {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(10),
-                          child: Image.network(
-                            '${controller.clinicData['clinicImage']}',
-                            width: 80,
-                            height: 80,
-                            fit: BoxFit.cover,
-                            errorBuilder: (context, error, stackTrace) =>
-                                Container(
-                              width: 80,
-                              height: 80,
-                              color: Colors.grey,
-                              child: const Icon(
-                                Icons.image_not_supported,
-                                color: Colors.white,
+                        const Text(
+                          "Lokasi dan jadwal praktik",
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        Row(
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: Image.network(
+                                '${controller.selectedClinicData.value['clinicImage']}',
+                                width: 80,
+                                height: 80,
+                                fit: BoxFit.cover,
+                                errorBuilder: (context, error, stackTrace) =>
+                                    Container(
+                                  width: 80,
+                                  height: 80,
+                                  color: Colors.grey,
+                                  child: const Icon(
+                                    Icons.image_not_supported,
+                                    color: Colors.white,
+                                  ),
+                                ),
                               ),
                             ),
-                          ),
-                        ),
-                        const SizedBox(width: 16),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                '${controller.clinicData['clinicName']}',
-                                style: const TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                            const SizedBox(width: 16),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    '${controller.selectedClinicData.value['clinicName']}',
+                                    style: const TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Text(
+                                    "${controller.selectedClinicData.value['scheduleDay']}, ${controller.selectedClinicData.value['scheduleDate']}",
+                                    style: const TextStyle(
+                                      fontSize: 14,
+                                      color: Colors.grey,
+                                    ),
+                                  ),
+                                  Text(
+                                    '${controller.selectedClinicData.value['scheduleTime']}',
+                                    style: const TextStyle(
+                                      fontSize: 14,
+                                      color: Colors.grey,
+                                    ),
+                                  ),
+                                  Text(
+                                    "Biaya: Rp${controller.selectedClinicData.value['fee']}",
+                                    style: const TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
                               ),
-                              const SizedBox(height: 8),
-                              Text(
-                                "${controller.clinicData['scheduleDay']}, ${controller.clinicData['scheduleDate']}",
-                                style: const TextStyle(
-                                  fontSize: 14,
-                                  color: Colors.grey,
-                                ),
-                              ),
-                              const SizedBox(height: 8),
-                              Text(
-                                '${controller.clinicData['scheduleTime']}',
-                                style: const TextStyle(
-                                  fontSize: 14,
-                                  color: Colors.grey,
-                                ),
-                              ),
-                              const SizedBox(height: 8),
-                              Text(
-                                "Biaya: Rp${controller.clinicData['fee']}",
-                                style: const TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ],
-                    ),
-                    const SizedBox(height: 8),
-                  ],
-                ),
+                    );
+                  }
+                }),
               ),
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 8),
             Card(
               elevation: 5,
               shape: RoundedRectangleBorder(
@@ -182,7 +268,6 @@ class DetailDataPasienView extends GetView<DetailDataPasienController> {
                         color: Colors.grey,
                       ),
                     ),
-                    const SizedBox(height: 16),
 
                     // Apakah pasien sudah berobat
                     const Text(
@@ -252,7 +337,7 @@ class DetailDataPasienView extends GetView<DetailDataPasienController> {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 16),
+                    const SizedBox(height: 10),
 
                     // Metode pembayaran
                     const Text(
@@ -328,11 +413,65 @@ class DetailDataPasienView extends GetView<DetailDataPasienController> {
                       ],
                     ),
                     const SizedBox(height: 16),
-
-                    // Tombol Selesai
                     ElevatedButton(
                       onPressed: () {
-                        print("Selesai dan buat janji");
+                        // Tampilkan dialog konfirmasi
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              title: Text(
+                                'Konfirmasi Pemesanan',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: AppColors.blueColor,
+                                ),
+                              ),
+                              content: Text(
+                                'Apakah semua data sudah benar?',
+                                style: TextStyle(
+                                  color: Colors.grey[800],
+                                ),
+                              ),
+                              actions: [
+                                // Tombol Belum
+                                TextButton(
+                                  onPressed: () {
+                                    // Tutup dialog
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: Text(
+                                    'Belum',
+                                    style: TextStyle(
+                                      color: Colors.red,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                                // Tombol Ya
+                                ElevatedButton(
+                                  onPressed: () {
+                                    // Tutup dialog
+                                    Navigator.of(context).pop();
+
+                                    // Panggil method selesaikanPemesanan
+                                    controller.selesaikanPemesanan();
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: AppColors.blueColor,
+                                  ),
+                                  child: Text(
+                                    'Ya',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            );
+                          },
+                        );
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.blueColor,

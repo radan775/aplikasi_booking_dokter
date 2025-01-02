@@ -2,6 +2,8 @@ import 'package:aplikasi_booking_dokter/app/modules/about/bindings/about_binding
 import 'package:aplikasi_booking_dokter/app/modules/about/views/about_view.dart';
 import 'package:aplikasi_booking_dokter/app/modules/berita/bindings/berita_binding.dart';
 import 'package:aplikasi_booking_dokter/app/modules/berita/views/berita_view.dart';
+import 'package:aplikasi_booking_dokter/app/modules/booking_berhasil/bindings/booking_berhasil_binding.dart';
+import 'package:aplikasi_booking_dokter/app/modules/booking_berhasil/views/booking_berhasil_view.dart';
 import 'package:aplikasi_booking_dokter/app/modules/bottom_navbar/bindings/navbar_bottom_binding.dart';
 import 'package:aplikasi_booking_dokter/app/modules/bottom_navbar/views/navbar_bottom_view.dart';
 import 'package:aplikasi_booking_dokter/app/modules/change_password/bindings/change_password_binding.dart';
@@ -167,6 +169,11 @@ class AppPages {
       name: _Paths.CHANGE_PROFILE,
       page: () => ChangeProfileView(),
       binding: ChangeProfileBinding(),
+    ),
+    GetPage(
+      name: _Paths.BOOKING_BERHASIL,
+      page: () => BookingBerhasilView(),
+      binding: BookingBerhasilBinding(),
     ),
   ];
 }

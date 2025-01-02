@@ -1,7 +1,6 @@
 import 'package:aplikasi_booking_dokter/app/data/consts/consts.dart';
 import 'package:aplikasi_booking_dokter/app/modules/detail_pasien/controllers/detail_pasien_controller.dart';
 import 'package:aplikasi_booking_dokter/app/res/components/custom_textfield.dart';
-import 'package:aplikasi_booking_dokter/app/routes/app_pages.dart';
 import 'package:get/get.dart';
 
 class DetailPasienView extends GetView<DetailPasienController> {
@@ -65,6 +64,8 @@ class DetailPasienView extends GetView<DetailPasienController> {
                       child: CustomTextfield(
                         hint: "Tanggal/Bulan/Tahun",
                         textController: controller.tanggalController,
+                        inputType: TextInputType.number,
+                        enabled: false,
                       ),
                     ),
                     IconButton(
@@ -175,7 +176,7 @@ class DetailPasienView extends GetView<DetailPasienController> {
                     ),
                   ),
                   onPressed: () {
-                    Get.toNamed(Routes.DETAIL_DATA_PASIEN);
+                    controller.simpanDataPasien();
                   },
                   child: const Center(
                     child: Text(

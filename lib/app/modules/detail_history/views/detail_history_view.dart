@@ -205,6 +205,8 @@ class DetailHistoryView extends GetView<DetailHistoryController> {
                         controller.historyData['hasVisited']
                             ? "Pernah"
                             : "Belum Pernah"),
+                    buildDetailRow(
+                        "Code pemesanan", controller.historyData['code']),
                   ],
                 ),
               ),

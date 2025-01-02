@@ -26,6 +26,7 @@ abstract class Routes {
   static const NOTIFICATION = _Paths.NOTIFICATION;
   static const CHANGE_PASSWORD = _Paths.CHANGE_PASSWORD;
   static const CHANGE_PROFILE = _Paths.CHANGE_PROFILE;
+  static const BOOKING_BERHASIL = _Paths.BOOKING_BERHASIL;
 }
 
 abstract class _Paths {
@@ -53,4 +54,5 @@ abstract class _Paths {
   static const NOTIFICATION = '/notification';
   static const CHANGE_PASSWORD = '/change-password';
   static const CHANGE_PROFILE = '/change-profile';
+  static const BOOKING_BERHASIL = '/booking-berhasil';
 }

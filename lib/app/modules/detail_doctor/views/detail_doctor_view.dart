@@ -1,4 +1,3 @@
-import 'package:aplikasi_booking_dokter/app/routes/app_pages.dart';
 import 'package:get/get.dart';
 import 'package:aplikasi_booking_dokter/app/data/consts/consts.dart';
 import 'package:aplikasi_booking_dokter/app/modules/detail_doctor/controllers/detail_doctor_controller.dart';
@@ -224,6 +223,8 @@ class DetailDoctorView extends GetView<DetailDoctorController> {
                                           dayName,
                                           startTime,
                                           endTime,
+                                          nextDate,
+                                          doctorFee,
                                         );
                                       },
                                       trailing: isSelected
@@ -271,7 +272,8 @@ class DetailDoctorView extends GetView<DetailDoctorController> {
         padding: const EdgeInsets.all(12.0),
         child: ElevatedButton(
           onPressed: () {
-            Get.toNamed(Routes.DETAIL_PEMESAN);
+            // Cek apakah schedule sudah dipilih
+            controller.handleBuatJanji();
           },
           style: ElevatedButton.styleFrom(
             padding: const EdgeInsets.symmetric(vertical: 16),
