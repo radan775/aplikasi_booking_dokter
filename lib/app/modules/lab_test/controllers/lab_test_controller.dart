@@ -36,12 +36,13 @@ class LabTestController extends GetxController {
 
   Future<void> fetchLabTests() async {
     try {
-      isLoading.value = true; // Set loading status
+      isLoading.value = true;
       final querySnapshot = await _firestore.collection('labTests').get();
       final List<Map<String, dynamic>> loadedLabTests =
           querySnapshot.docs.map((doc) {
         final data = doc.data();
         return {
+          "id": doc.id,
           "hospital": data['hospital'] ?? '',
           "test": data['test'] ?? '',
           "location": data['location'] ??
@@ -92,11 +93,10 @@ class LabTestController extends GetxController {
     final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
     try {
-      // Ambil semua dokumen dari koleksi "labTests"
       final querySnapshot = await firestore.collection('labTests').get();
 
       for (var doc in querySnapshot.docs) {
-        final labTestId = doc.id; // ID dokumen labTest
+        final labTestId = doc.id;
 
         // Tambahkan field "description" dan "address" ke setiap dokumen
         await firestore.collection('labTests').doc(labTestId).update({

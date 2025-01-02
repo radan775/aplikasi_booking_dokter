@@ -203,7 +203,7 @@ class DetailDataPasienView extends GetView<DetailDataPasienController> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    '${controller.selectedClinicData.value['clinicName']}',
+                                    '${controller.selectedClinicData.value['name']}',
                                     style: const TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.bold,
@@ -233,6 +233,26 @@ class DetailDataPasienView extends GetView<DetailDataPasienController> {
                                 ],
                               ),
                             ),
+                          ],
+                        ),
+                        SizedBox(height: 6),
+                        Row(
+                          children: [
+                            Text(
+                              "Tes: ",
+                              style: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.normal,
+                              ),
+                            ),
+                            Text(
+                              controller.selectedClinicData.value['test'],
+                              style: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.normal,
+                                color: AppColors.blueColor,
+                              ),
+                            )
                           ],
                         ),
                       ],

@@ -1,5 +1,3 @@
-import 'package:aplikasi_booking_dokter/app/routes/app_pages.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:aplikasi_booking_dokter/app/data/consts/consts.dart';
 import 'package:aplikasi_booking_dokter/app/modules/detail_lab_test/controllers/detail_lab_test_controller.dart';
@@ -184,53 +182,69 @@ class DetailLabTestView extends GetView<DetailLabTestController> {
               ),
             ),
             const Divider(),
-            ElevatedButton(
-              onPressed: () async {
-                DateTime? selectedDate = await showDatePicker(
-                  context: Get.context!,
-                  initialDate: DateTime.now(),
-                  firstDate: DateTime.now(),
-                  lastDate: DateTime.now().add(const Duration(days: 300)),
-                  helpText: "Pilih Tanggal Janji",
-                  builder: (context, child) {
-                    return Theme(
-                      data: Theme.of(context).copyWith(
-                        colorScheme: ColorScheme.light(
-                          primary: AppColors.blueColor,
-                          onPrimary: Colors.white,
-                          onSurface: Colors.black,
+            Obx(() {
+              // Jika belum memilih tanggal, tampilkan tombol
+              if (controller.selectedDateText.value.isEmpty) {
+                return ElevatedButton(
+                  onPressed: () => controller.pickDate(),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.transparent,
+                    elevation: 0,
+                    minimumSize: const Size(double.infinity, 45),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      side: BorderSide(
+                        color: AppColors.blueColor,
+                        width: 1.5,
+                      ),
+                    ),
+                  ),
+                  child: const Text(
+                    "Pilih Tanggal",
+                    style: TextStyle(
+                      color: AppColors.blueColor,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                );
+              }
+
+              // Jika sudah memilih tanggal, tampilkan container dengan tanggal dan tombol ganti
+              return Container(
+                width: double.infinity,
+                padding:
+                    const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                decoration: BoxDecoration(
+                  border: Border.all(color: AppColors.blueColor, width: 1.5),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      controller.selectedDateText.value,
+                      style: TextStyle(
+                        color: AppColors.blueColor,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () => controller.pickDate(),
+                      child: Text(
+                        "Ganti Tanggal",
+                        style: TextStyle(
+                          color: Colors.red,
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
-                      child: child!,
-                    );
-                  },
-                );
-
-                if (selectedDate != null) {
-                  print("Tanggal dipilih: ${selectedDate.toLocal()}");
-                }
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.transparent,
-                elevation: 0,
-                minimumSize: const Size(double.infinity, 45),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
-                  side: BorderSide(
-                    color: AppColors.blueColor,
-                    width: 1.5,
-                  ),
+                    ),
+                  ],
                 ),
-              ),
-              child: const Text(
-                "Pilih Tanggal",
-                style: TextStyle(
-                  color: AppColors.blueColor,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
+              );
+            }),
             const SizedBox(height: 16),
             ...List.generate(
               (labTestData['schedule'] as List?)?.length ?? 0,
@@ -266,7 +280,8 @@ class DetailLabTestView extends GetView<DetailLabTestController> {
                       ),
                       ElevatedButton(
                         onPressed: () {
-                          Get.toNamed(Routes.DETAIL_PEMESAN);
+                          controller.buatJanji(
+                              schedule['start'], schedule['end']);
                           print(
                               "Buat Janji untuk ${schedule['type']} (${schedule['start']} - ${schedule['end']})");
                         },

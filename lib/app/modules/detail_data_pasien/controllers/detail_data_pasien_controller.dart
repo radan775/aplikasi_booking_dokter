@@ -32,8 +32,11 @@ class DetailDataPasienController extends GetxController {
       await fetchDoctorData(selectedSchedule['doctorId']);
       await fetchClinicData(
           selectedSchedule['doctorId'], selectedSchedule['clinicId']);
+    } else {
+      await fetchLabTestData(selectedSchedule['clinicId']);
     }
     generateKodePemesanan();
+    print(selectedSchedule);
   }
 
   Future<void> fetchUserData(String userId) async {
@@ -53,6 +56,29 @@ class DetailDataPasienController extends GetxController {
       }
     } catch (e) {
       print('Error fetching user data: $e');
+    }
+  }
+
+  Future<void> fetchLabTestData(String labTestId) async {
+    try {
+      DocumentSnapshot labTestDoc =
+          await _firestore.collection('labTests').doc(labTestId).get();
+      if (labTestDoc.exists) {
+        selectedClinicData.value = {
+          "name": labTestDoc['hospital'] ?? 'Nama Lab Test Tidak Tersedia',
+          "test": labTestDoc['test'] ?? 'Kategori Tidak Diketahui',
+          "clinicImage":
+              labTestDoc['image'] ?? 'https://placehold.jp/150x150.png',
+          "scheduleDay": selectedSchedule['day'] ?? 'Hari Tidak Diketahui',
+          "scheduleDate": selectedSchedule['date'] ?? 'Tanggal Tidak Diketahui',
+          "scheduleTime":
+              "${selectedSchedule['startTime']} - ${selectedSchedule['endTime']}",
+          'fee': labTestDoc['price'] ?? 0,
+          "clinicAddress": labTestDoc['address'] ?? 'Alamat Tidak Tersedia',
+        };
+      }
+    } catch (e) {
+      print('Error fetching lab test data: $e');
     }
   }
 
@@ -104,7 +130,6 @@ class DetailDataPasienController extends GetxController {
 
   Future<void> updateUserData() async {
     try {
-      // Ambil userId dari GetStorage
       String? userId = _storage.read('userId');
 
       if (userId == null) {
@@ -118,7 +143,6 @@ class DetailDataPasienController extends GetxController {
         return;
       }
 
-      // Buat map historyData yang sama untuk keduanya
       Map<String, dynamic> historyData = {
         // Data umum untuk semua tipe
         "selectedDay": selectedSchedule['day'],
@@ -137,7 +161,6 @@ class DetailDataPasienController extends GetxController {
         "type": selectedSchedule['type'],
       };
 
-      // Tambahkan data spesifik untuk dokter jika tipe adalah dokter
       if (selectedSchedule['type'] == 'doctor') {
         historyData.addAll({
           "doctorImage": selectedDoctorData.value['image'],
@@ -148,15 +171,13 @@ class DetailDataPasienController extends GetxController {
           "clinicAddress": selectedClinicData.value['clinicAddress'] ?? '',
         });
       } else {
-        // Tambahkan data spesifik untuk lab test
         historyData.addAll({
-          "clinicName": selectedClinicData.value['clinicName'],
+          "clinicName": selectedClinicData.value['name'],
           "clinicImage": selectedClinicData.value['clinicImage'],
           "clinicAddress": selectedClinicData.value['clinicAddress'] ?? '',
         });
       }
 
-      // Simpan ke Firestore
       await _firestore
           .collection('users')
           .doc(userId)

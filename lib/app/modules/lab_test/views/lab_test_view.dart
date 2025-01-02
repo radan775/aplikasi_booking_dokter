@@ -268,7 +268,6 @@ class LabTestView extends GetView<LabTestController> {
                                       onPressed: () {
                                         Get.toNamed(Routes.DETAIL_LAB_TEST,
                                             arguments: labTest);
-                                        print("Data ${labTest}");
                                       },
                                       style: ElevatedButton.styleFrom(
                                         backgroundColor: Colors.blue,

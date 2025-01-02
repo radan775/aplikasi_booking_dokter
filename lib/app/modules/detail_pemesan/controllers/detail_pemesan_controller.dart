@@ -28,6 +28,8 @@ class DetailPemesanController extends GetxController {
       await fetchDoctorData(selectedSchedule['doctorId']);
       await fetchClinicData(
           selectedSchedule['doctorId'], selectedSchedule['clinicId']);
+    } else {
+      await fetchLabTestData(selectedSchedule['clinicId']);
     }
   }
 
@@ -48,6 +50,28 @@ class DetailPemesanController extends GetxController {
       }
     } catch (e) {
       print('Error fetching user data: $e');
+    }
+  }
+
+  Future<void> fetchLabTestData(String labTestId) async {
+    try {
+      DocumentSnapshot labTestDoc =
+          await _firestore.collection('labTests').doc(labTestId).get();
+      if (labTestDoc.exists) {
+        selectedClinicData.value = {
+          "name": labTestDoc['hospital'] ?? 'Nama Lab Test Tidak Tersedia',
+          "test": labTestDoc['test'] ?? 'Kategori Tidak Diketahui',
+          "clinicImage":
+              labTestDoc['image'] ?? 'https://placehold.jp/150x150.png',
+          "scheduleDay": selectedSchedule['day'] ?? 'Hari Tidak Diketahui',
+          "scheduleDate": selectedSchedule['date'] ?? 'Tanggal Tidak Diketahui',
+          "scheduleTime":
+              "${selectedSchedule['startTime']} - ${selectedSchedule['endTime']}",
+          'fee': labTestDoc['price'] ?? 0
+        };
+      }
+    } catch (e) {
+      print('Error fetching lab test data: $e');
     }
   }
 

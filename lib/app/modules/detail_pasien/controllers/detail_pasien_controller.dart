@@ -98,7 +98,6 @@ class DetailPasienController extends GetxController {
         'alamat': alamatController.text,
       };
 
-      // Buat salinan baru dari selectedSchedule
       var updatedSchedule = Map<String, dynamic>.from(selectedSchedule);
       updatedSchedule['pasien'] = dataPasien;
 

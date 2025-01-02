@@ -12,6 +12,7 @@ class DetailDoctorController extends GetxController {
   void onInit() {
     super.onInit();
     doctorData = Get.arguments ?? {};
+    print(doctorData);
   }
 
   void selectSchedule(String doctorId, String clinicId, String day,
