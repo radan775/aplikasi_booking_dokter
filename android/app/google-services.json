@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1031627054377",
+    "project_id": "booking-dokter-online",
+    "storage_bucket": "booking-dokter-online.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1031627054377:android:20e02593a05a7afe06ab38",
+        "android_client_info": {
+          "package_name": "com.booking.dokter.aplikasi_booking_dokter"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAtLK4BOucU_bbzKbSeySgNXWUxKiig2so"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
