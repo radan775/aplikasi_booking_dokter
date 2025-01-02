@@ -1,83 +1,113 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 class HistoryController extends GetxController {
-  final List<Map<String, dynamic>> doctors = [
-    {
-      "name": "Dr. John Doe",
-      "specialty": "Mulut",
-      "clinic": "Klinik Dokter Sehat",
-      "fee": "Rp150.000",
-      "image":
-          "https://i.pinimg.com/736x/06/b1/85/06b185e5b2322f1ab0557db59b554cd5.jpg",
-      "date": "2024-04-15",
-      "code": "DOC-42026",
-    },
-    {
-      "name": "Dr. Jane Smith",
-      "specialty": "THT",
-      "clinic": "Klinik Ceria",
-      "fee": "Rp200.000",
-      "image":
-          "https://easy-peasy.ai/cdn-cgi/image/quality=80,format=auto,width=700/https://fdczvxmwwjwpwbeeqcth.supabase.co/storage/v1/object/public/images/fffd9126-dda4-430c-a18d-fb33c6493c57/de210368-9622-4654-b8c7-a7f24673cb00.png",
-      "date": "2024-06-07",
-      "code": "DOC-34737",
-    },
-  ];
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final _storage = GetStorage();
 
-  final List<Map<String, dynamic>> labTests = [
-    {
-      "hospital": "RS Mitra Keluarga",
-      "test": "Swab PCR",
-      "location": {"district": "Cakung", "city": "Jakarta Timur"},
-      "price": "Rp900.000",
-      "image":
-          "https://img.freepik.com/free-vector/hospital-building_23-2148161322.jpg",
-      "date": "2024-01-09",
-      "code": "LAB-17619",
-    },
-    {
-      "hospital": "RS Hermina",
-      "test": "Tes Darah Lengkap",
-      "location": {"district": "Depok", "city": "Jawa Barat"},
-      "price": "Rp450.000",
-      "image":
-          "https://img.freepik.com/premium-vector/flat-hospital-building-illustration_1200-572.jpg",
-      "date": "2024-09-23",
-      "code": "LAB-15083",
-    },
-    {
-      "hospital": "RS Awal Bros",
-      "test": "Cek Kolesterol",
-      "location": {"district": "Bekasi Selatan", "city": "Bekasi"},
-      "price": "Rp300.000",
-      "image":
-          "https://img.freepik.com/premium-vector/modern-hospital-clinic-building_133260-284.jpg",
-      "date": "2024-08-26",
-      "code": "LAB-86153",
-    },
-  ];
-
-  late final List<Map<String, dynamic>> historyList;
+  RxBool isLoading = false.obs;
+  RxList<Map<String, dynamic>> historyList = <Map<String, dynamic>>[].obs;
 
   @override
-  void onInit() {
+  Future<void> onInit() async {
     super.onInit();
 
-    // Gabungkan doctors dan labTests ke dalam historyList
-    historyList = [
-      ...doctors.map((doctor) => {
-            "type": "doctor",
-            ...doctor,
-          }),
-      ...labTests.map((labTest) => {
-            "type": "labTest",
-            ...labTest,
-          }),
-    ];
+    await fetchHistory();
   }
 
-  String _generateCode(String prefix) {
-    final random = DateTime.now().millisecondsSinceEpoch.remainder(100000);
-    return "$prefix-${random.toString().padLeft(5, '0')}";
+  Future<void> fetchHistory() async {
+    try {
+      isLoading.value = true;
+      String? userId = _storage.read('userId');
+
+      if (userId == null) {
+        print('User ID tidak ditemukan');
+        isLoading.value = false;
+        return;
+      }
+
+      final historySnapshot = await _firestore
+          .collection('users')
+          .doc(userId)
+          .collection('history')
+          .get();
+
+      historyList.value = historySnapshot.docs.map((doc) {
+        Map<String, dynamic> data = doc.data();
+        data['code'] = doc.id;
+        return data;
+      }).toList();
+
+      historyList.sort((a, b) {
+        DateTime dateA = _parseDate(a['selectedDate'] ?? '');
+        DateTime dateB = _parseDate(b['selectedDate'] ?? '');
+        return dateB.compareTo(dateA);
+      });
+    } catch (e) {
+      print('Error fetching history: $e');
+      Get.snackbar(
+        'Error',
+        'Gagal mengambil riwayat',
+        snackPosition: SnackPosition.BOTTOM,
+      );
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
+  DateTime _parseDate(String dateString) {
+    try {
+      final months = {
+        'Januari': 1,
+        'Februari': 2,
+        'Maret': 3,
+        'April': 4,
+        'Mei': 5,
+        'Juni': 6,
+        'Juli': 7,
+        'Agustus': 8,
+        'September': 9,
+        'Oktober': 10,
+        'November': 11,
+        'Desember': 12,
+      };
+      List<String> parts = dateString.split(' ');
+
+      if (parts.length == 4) {
+        // Hapus koma dari hari
+        String dayStr = parts[1].replaceAll(',', '');
+
+        int day = int.parse(dayStr);
+        int month = months[parts[2]] ?? 1;
+        int year = int.parse(parts[3]);
+
+        return DateTime(year, month, day);
+      }
+      // Cek format: "15 Januari 2024"
+      else if (parts.length == 3) {
+        int day = int.parse(parts[0]);
+        int month = months[parts[1]] ?? 1;
+        int year = int.parse(parts[2]);
+
+        return DateTime(year, month, day);
+      }
+      // Format lain yang mungkin: "2024-01-15"
+      else if (parts.length == 1 && dateString.contains('-')) {
+        List<String> dateParts = dateString.split('-');
+        if (dateParts.length == 3) {
+          int year = int.parse(dateParts[0]);
+          int month = int.parse(dateParts[1]);
+          int day = int.parse(dateParts[2]);
+          return DateTime(year, month, day);
+        }
+      }
+
+      print('Format tanggal tidak dikenali: $dateString');
+      return DateTime.now();
+    } catch (e) {
+      print('Error parsing date: $e');
+      return DateTime.now();
+    }
   }
 }

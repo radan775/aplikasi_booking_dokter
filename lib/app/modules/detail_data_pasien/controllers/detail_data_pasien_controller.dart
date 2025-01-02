@@ -175,6 +175,7 @@ class DetailDataPasienController extends GetxController {
           "clinicName": selectedClinicData.value['name'],
           "clinicImage": selectedClinicData.value['clinicImage'],
           "clinicAddress": selectedClinicData.value['clinicAddress'] ?? '',
+          "clinicTest": selectedClinicData.value['test'],
         });
       }
 
