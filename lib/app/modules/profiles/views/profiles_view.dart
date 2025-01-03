@@ -1,8 +1,9 @@
-import 'package:aplikasi_booking_dokter/app/data/consts/consts.dart';
 import 'package:aplikasi_booking_dokter/app/data/consts/lists.dart';
-import 'package:aplikasi_booking_dokter/app/modules/profiles/controllers/profiles_controller.dart';
 import 'package:aplikasi_booking_dokter/app/routes/app_pages.dart';
 import 'package:get/get.dart';
+import 'package:flutter/material.dart';
+import 'package:aplikasi_booking_dokter/app/data/consts/consts.dart';
+import 'package:aplikasi_booking_dokter/app/modules/profiles/controllers/profiles_controller.dart';
 
 class ProfilesView extends GetView<ProfilesController> {
   const ProfilesView({super.key});
@@ -51,14 +52,25 @@ class ProfilesView extends GetView<ProfilesController> {
           ),
           const SizedBox(width: 16),
           Expanded(
-            // Gunakan Expanded untuk mengatur ruang agar fleksibel
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                AppStyles.bold(title: "Username", size: 18),
-                const SizedBox(height: 4),
-                AppStyles.normal(title: "user_email@gmail.com", size: 14),
-              ],
+            child: Obx(
+              () => Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  AppStyles.bold(
+                    title: controller.userName.value.isEmpty
+                        ? "Memuat Nama..."
+                        : controller.userName.value,
+                    size: 18,
+                  ),
+                  const SizedBox(height: 4),
+                  AppStyles.normal(
+                    title: controller.userEmail.value.isEmpty
+                        ? "Memuat Email..."
+                        : controller.userEmail.value,
+                    size: 14,
+                  ),
+                ],
+              ),
             ),
           ),
           IconButton(

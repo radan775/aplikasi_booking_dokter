@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:aplikasi_booking_dokter/app/data/consts/consts.dart';
 import 'package:aplikasi_booking_dokter/app/modules/about/controllers/about_controller.dart';
 
@@ -58,33 +57,19 @@ class AboutView extends GetView<AboutController> {
               ],
             ),
             const SizedBox(height: 8),
-            GestureDetector(
-              onTap: () async {
-                final url = Uri.parse("https://github.com/radan775");
-                if (await canLaunchUrl(url)) {
-                  await launchUrl(url, mode: LaunchMode.externalApplication);
-                } else {
-                  Get.snackbar(
-                    "Error",
-                    "Tidak dapat membuka tautan.",
-                    snackPosition: SnackPosition.BOTTOM,
-                  );
-                }
-              },
-              child: Row(
-                children: [
-                  const Icon(Icons.link, color: AppColors.blueColor),
-                  const SizedBox(width: 8),
-                  Text(
-                    "https://github.com/radan775",
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: AppColors.blueColor,
-                      decoration: TextDecoration.underline,
-                    ),
+            Row(
+              children: [
+                const Icon(Icons.link, color: AppColors.blueColor),
+                const SizedBox(width: 8),
+                Text(
+                  "https://github.com/radan775",
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: AppColors.blueColor,
+                    decoration: TextDecoration.underline,
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
             const SizedBox(height: 24),
             const Text(

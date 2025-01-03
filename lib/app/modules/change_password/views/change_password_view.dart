@@ -74,18 +74,72 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
             Center(
               child: Obx(
                 () => SizedBox(
-                  width:
-                      MediaQuery.of(context).size.width * 0.8, // Lebar ditambah
+                  width: MediaQuery.of(context).size.width * 0.8,
                   child: ElevatedButton(
                     onPressed: controller.isLoading.value
                         ? null
-                        : () async {
-                            await controller.changePassword();
+                        : () {
+                            // Tampilkan dialog konfirmasi
+                            showDialog(
+                              context: Get.context!,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: Text(
+                                    'Konfirmasi Ubah Password',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: AppColors.blueColor,
+                                    ),
+                                  ),
+                                  content: Text(
+                                    'Apakah Anda yakin ingin mengubah password?',
+                                    style: TextStyle(
+                                      color: Colors.grey[800],
+                                    ),
+                                  ),
+                                  actions: [
+                                    // Tombol Batal
+                                    TextButton(
+                                      onPressed: () {
+                                        // Tutup dialog
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: Text(
+                                        'Batal',
+                                        style: TextStyle(
+                                          color: Colors.red,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                    // Tombol Yakin
+                                    ElevatedButton(
+                                      onPressed: () {
+                                        // Tutup dialog
+                                        Navigator.of(context).pop();
+
+                                        // Panggil method change password
+                                        controller.changePassword();
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: AppColors.blueColor,
+                                      ),
+                                      child: Text(
+                                        'Yakin',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
                           },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.blueColor,
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 12), // Tinggi dikurangi
+                      padding: const EdgeInsets.symmetric(vertical: 12),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),
                       ),
