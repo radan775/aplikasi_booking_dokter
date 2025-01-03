@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:speech_to_text/speech_to_text.dart';
 
 class LabTestController extends GetxController {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -11,10 +13,13 @@ class LabTestController extends GetxController {
   RxList<Map<String, dynamic>> labTests = <Map<String, dynamic>>[].obs;
   RxBool isLoading = true.obs;
   RxString namalengkap = ''.obs;
-
   RxList<String> labTestTypes = <String>[].obs;
   RxString selectedLabTestType = ''.obs;
   RxList<Map<String, dynamic>> filteredLabTests = <Map<String, dynamic>>[].obs;
+  RxString searchQuery = ''.obs;
+  final searchController = TextEditingController();
+  final SpeechToText _speechToText = SpeechToText();
+  RxBool isListening = false.obs;
 
   @override
   Future<void> onInit() async {
@@ -23,7 +28,103 @@ class LabTestController extends GetxController {
     filteredLabTests.value = labTests;
   }
 
+  @override
+  void onClose() {
+    _speechToText.cancel();
+    super.onClose();
+  }
+
+  Future<void> startVoiceSearch() async {
+    // Minta izin mikropon
+    var status = await Permission.microphone.request();
+    if (status.isGranted) {
+      bool available = await _speechToText.initialize(
+        onStatus: (status) {
+          print('Speech status: $status');
+        },
+        onError: (error) {
+          print('Speech error: $error');
+          isListening.value = false;
+        },
+      );
+
+      if (available) {
+        isListening.value = true;
+        _speechToText.listen(
+          onResult: (result) {
+            // Set text ke search controller
+            searchController.text = result.recognizedWords;
+
+            // Lakukan pencarian
+            searchLabTests(result.recognizedWords);
+
+            // Hentikan listening jika sudah final
+            if (result.finalResult) {
+              stopVoiceSearch();
+            }
+          },
+          localeId: 'id_ID', // Gunakan bahasa Indonesia
+        );
+      }
+    } else {
+      Get.snackbar(
+        'Izin Ditolak',
+        'Izin menggunakan mikropon diperlukan',
+        snackPosition: SnackPosition.TOP,
+      );
+    }
+  }
+
+  // Method untuk menghentikan voice search
+  void stopVoiceSearch() {
+    _speechToText.stop();
+    isListening.value = false;
+  }
+
+  void searchLabTests(String query) {
+    searchQuery.value = query.toLowerCase();
+
+    if (query.isEmpty) {
+      // Jika query kosong, kembalikan ke kondisi sebelumnya
+      filteredLabTests.value = labTests;
+    } else {
+      // Filter berdasarkan nama rumah sakit, jenis test, alamat, atau lokasi
+      filteredLabTests.value = labTests.where((labTest) {
+        // Cek nama rumah sakit
+        bool matchHospital = labTest['hospital']
+            .toString()
+            .toLowerCase()
+            .contains(searchQuery.value);
+
+        // Cek jenis test
+        bool matchTest = labTest['test']
+            .toString()
+            .toLowerCase()
+            .contains(searchQuery.value);
+
+        // Cek alamat
+        bool matchAddress = labTest['address']
+            .toString()
+            .toLowerCase()
+            .contains(searchQuery.value);
+
+        bool matchLocation = labTest['location']['district']
+                .toString()
+                .toLowerCase()
+                .contains(searchQuery.value) ||
+            labTest['location']['city']
+                .toString()
+                .toLowerCase()
+                .contains(searchQuery.value);
+
+        return matchHospital || matchTest || matchAddress || matchLocation;
+      }).toList();
+    }
+  }
+
   void filterLabTestByTest(String test) {
+    searchController.clear();
+    searchQuery.value = '';
     if (selectedLabTestType.value == test) {
       // Jika specialty sama dengan yang sudah dipilih, reset filter
       selectedLabTestType.value = '';

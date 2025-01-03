@@ -1,8 +1,10 @@
 import 'package:aplikasi_booking_dokter/app/data/consts/consts.dart';
+import 'package:aplikasi_booking_dokter/app/data/consts/lotties.dart';
 import 'package:aplikasi_booking_dokter/app/modules/home/controllers/home_controller.dart';
 import 'package:aplikasi_booking_dokter/app/res/components/custom_textfield.dart';
 import 'package:aplikasi_booking_dokter/app/routes/app_pages.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 
 class HomeView extends GetView<HomeController> {
   const HomeView({super.key});
@@ -52,16 +54,35 @@ class HomeView extends GetView<HomeController> {
                       hint: AppStrings.searchDoctor,
                       borderColor: AppColors.whiteColor,
                       textColor: AppColors.whiteColor,
+                      textController: controller.searchController,
+                      onChanged: (value) {
+                        controller.searchDoctors(value);
+                      },
                     ),
                   ),
                   const SizedBox(width: 10),
-                  IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.search,
-                      color: Colors.white,
-                    ),
-                  ),
+                  // Tambahkan tombol mikropon
+                  Obx(() {
+                    return IconButton(
+                      icon: Icon(
+                        controller.isListening.value
+                            ? Icons.mic
+                            : Icons.mic_none,
+                        color: controller.isListening.value
+                            ? Colors.red
+                            : Colors.white,
+                      ),
+                      onPressed: () {
+                        if (controller.isListening.value) {
+                          // Jika sedang listening, hentikan
+                          controller.stopVoiceSearch();
+                        } else {
+                          // Mulai voice search
+                          controller.startVoiceSearch();
+                        }
+                      },
+                    );
+                  }),
                 ],
               ),
             ),
@@ -130,6 +151,39 @@ class HomeView extends GetView<HomeController> {
                 onRefresh: controller.fetchDoctors,
                 child: Obx(
                   () {
+                    if (controller.filteredDoctors.isEmpty) {
+                      return Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Lottie.asset(
+                              AppLotties.search_not_found,
+                              width: 200,
+                              height: 200,
+                              repeat: true,
+                              fit: BoxFit.contain,
+                            ),
+                            const SizedBox(height: 16),
+                            Text(
+                              "Hasil tidak ada",
+                              style: TextStyle(
+                                color: Colors.grey[600],
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            Text(
+                              "Coba kata kunci lain",
+                              style: TextStyle(
+                                color: Colors.grey[500],
+                                fontSize: 14,
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    }
                     return ListView.builder(
                       padding: const EdgeInsets.all(10.0),
                       itemCount: controller.filteredDoctors.length,

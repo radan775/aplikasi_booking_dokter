@@ -3,18 +3,24 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:speech_to_text/speech_to_text.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class HomeController extends GetxController {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final GetStorage _storage = GetStorage();
 
   RxList<Map<String, dynamic>> doctors = <Map<String, dynamic>>[].obs;
-  RxBool isLoading = true.obs; // Status loading
+  RxBool isLoading = true.obs;
   RxString namalengkap = ''.obs;
 
   RxList<String> doctorTypes = <String>[].obs;
   RxString selectedDoctorType = ''.obs;
   RxList<Map<String, dynamic>> filteredDoctors = <Map<String, dynamic>>[].obs;
+  RxString searchQuery = ''.obs;
+  final searchController = TextEditingController();
+  final SpeechToText _speechToText = SpeechToText();
+  RxBool isListening = false.obs;
 
   @override
   Future<void> onInit() async {
@@ -23,7 +29,102 @@ class HomeController extends GetxController {
     filteredDoctors.value = doctors;
   }
 
+  @override
+  void onClose() {
+    _speechToText.cancel();
+    super.onClose();
+  }
+
+  Future<void> startVoiceSearch() async {
+    // Minta izin mikropon
+    var status = await Permission.microphone.request();
+    if (status.isGranted) {
+      bool available = await _speechToText.initialize(
+        onStatus: (status) {
+          print('Speech status: $status');
+        },
+        onError: (error) {
+          print('Speech error: $error');
+          isListening.value = false;
+        },
+      );
+
+      if (available) {
+        isListening.value = true;
+        _speechToText.listen(
+          onResult: (result) {
+            // Set text ke search controller
+            searchController.text = result.recognizedWords;
+
+            // Lakukan pencarian
+            searchDoctors(result.recognizedWords);
+
+            // Hentikan listening jika sudah final
+            if (result.finalResult) {
+              stopVoiceSearch();
+            }
+          },
+          localeId: 'id_ID', // Gunakan bahasa Indonesia
+        );
+      }
+    } else {
+      Get.snackbar(
+        'Izin Ditolak',
+        'Izin menggunakan mikropon diperlukan',
+        snackPosition: SnackPosition.TOP,
+      );
+    }
+  }
+
+  void stopVoiceSearch() {
+    _speechToText.stop();
+    isListening.value = false;
+  }
+
+  void searchDoctors(String query) {
+    searchQuery.value = query.toLowerCase();
+
+    if (query.isEmpty) {
+      filteredDoctors.value = doctors;
+    } else {
+      filteredDoctors.value = doctors.where((doctor) {
+        // Cek nama dokter
+        bool matchName =
+            doctor['name'].toString().toLowerCase().contains(searchQuery.value);
+
+        // Cek spesialisasi
+        bool matchSpecialty = doctor['specialty']
+            .toString()
+            .toLowerCase()
+            .contains(searchQuery.value);
+
+        // Cek alamat klinik
+        bool matchClinicAddress = doctor['clinics'].any((clinic) =>
+            clinic['address']
+                .toString()
+                .toLowerCase()
+                .contains(searchQuery.value) ||
+            clinic['clinicName']
+                .toString()
+                .toLowerCase()
+                .contains(searchQuery.value) ||
+            clinic['district']
+                .toString()
+                .toLowerCase()
+                .contains(searchQuery.value) ||
+            clinic['city']
+                .toString()
+                .toLowerCase()
+                .contains(searchQuery.value));
+
+        return matchName || matchSpecialty || matchClinicAddress;
+      }).toList();
+    }
+  }
+
   void filterDoctorsBySpecialty(String specialty) {
+    searchController.clear();
+    searchQuery.value = '';
     if (selectedDoctorType.value == specialty) {
       // Jika specialty sama dengan yang sudah dipilih, reset filter
       selectedDoctorType.value = '';

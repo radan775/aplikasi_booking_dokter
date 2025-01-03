@@ -1,8 +1,10 @@
 import 'package:aplikasi_booking_dokter/app/data/consts/consts.dart';
+import 'package:aplikasi_booking_dokter/app/data/consts/lotties.dart';
 import 'package:aplikasi_booking_dokter/app/modules/lab_test/controllers/lab_test_controller.dart';
 import 'package:aplikasi_booking_dokter/app/res/components/custom_textfield.dart';
 import 'package:aplikasi_booking_dokter/app/routes/app_pages.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 
 class LabTestView extends GetView<LabTestController> {
   const LabTestView({super.key});
@@ -55,16 +57,34 @@ class LabTestView extends GetView<LabTestController> {
                       hint: AppStrings.searchHospital,
                       borderColor: AppColors.whiteColor,
                       textColor: AppColors.whiteColor,
+                      textController: controller.searchController,
+                      onChanged: (value) {
+                        // Panggil method search
+                        controller.searchLabTests(value);
+                      },
                     ),
                   ),
                   const SizedBox(width: 10),
-                  IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.search,
-                      color: Colors.white,
-                    ),
-                  ),
+                  Obx(() {
+                    return IconButton(
+                      icon: Icon(
+                        controller.isListening.value
+                            ? Icons.mic
+                            : Icons.mic_none,
+                        color: controller.isListening.value
+                            ? Colors.red
+                            : Colors.white,
+                      ),
+                      onPressed: () {
+                        if (controller.isListening.value) {
+                          controller.stopVoiceSearch();
+                        } else {
+                          // Mulai voice search
+                          controller.startVoiceSearch();
+                        }
+                      },
+                    );
+                  }),
                 ],
               ),
             ),
@@ -94,8 +114,6 @@ class LabTestView extends GetView<LabTestController> {
                               return GestureDetector(
                                 onTap: () {
                                   controller.filterLabTestByTest(test);
-                                  print(
-                                      "${controller.labTestTypes[index]} dipilih!");
                                 },
                                 child: Container(
                                   margin: const EdgeInsets.only(right: 8),
@@ -130,180 +148,214 @@ class LabTestView extends GetView<LabTestController> {
             Expanded(
               child: RefreshIndicator(
                 onRefresh: controller.fetchLabTests,
-                child: ListView.builder(
-                  padding: const EdgeInsets.only(
-                      left: 10.0, right: 10.0, top: 5.0, bottom: 5.0),
-                  itemCount: controller.filteredLabTests.length,
-                  itemBuilder: (context, index) {
-                    final labTest = controller.filteredLabTests[index];
-                    return Padding(
-                      padding: const EdgeInsets.only(bottom: 5.0),
-                      child: InkWell(
-                        onTap: () {
-                          Get.toNamed(Routes.DETAIL_LAB_TEST,
-                              arguments: labTest);
-                        },
-                        child: Card(
-                          elevation: 3,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
+                child: Obx(() {
+                  if (controller.filteredLabTests.isEmpty) {
+                    return Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Lottie.asset(
+                            AppLotties.search_not_found,
+                            width: 250,
+                            height: 250,
+                            fit: BoxFit.contain,
                           ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Row(
-                                  children: [
-                                    // Gambar rumah sakit
-                                    ClipRRect(
-                                      borderRadius: BorderRadius.circular(12),
-                                      child: Image.network(
-                                        labTest["image"],
-                                        width: 70,
-                                        height: 70,
-                                        fit: BoxFit.cover,
-                                        errorBuilder:
-                                            (context, error, stackTrace) {
-                                          return Container(
-                                            width: 70,
-                                            height: 70,
-                                            color: Colors.blue,
-                                            child: const Icon(
-                                              Icons.image_not_supported,
-                                              color: Colors.white,
-                                            ),
-                                          );
-                                        },
+                          const SizedBox(height: 16),
+                          Text(
+                            "Hasil tidak ada",
+                            style: TextStyle(
+                              color: Colors.grey[600],
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                          Text(
+                            "Coba kata kunci lain",
+                            style: TextStyle(
+                              color: Colors.grey[500],
+                              fontSize: 14,
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  }
+                  return ListView.builder(
+                    padding: const EdgeInsets.only(
+                        left: 10.0, right: 10.0, top: 5.0, bottom: 5.0),
+                    itemCount: controller.filteredLabTests.length,
+                    itemBuilder: (context, index) {
+                      final labTest = controller.filteredLabTests[index];
+                      return Padding(
+                        padding: const EdgeInsets.only(bottom: 5.0),
+                        child: InkWell(
+                          onTap: () {
+                            Get.toNamed(Routes.DETAIL_LAB_TEST,
+                                arguments: labTest);
+                          },
+                          child: Card(
+                            elevation: 3,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    children: [
+                                      // Gambar rumah sakit
+                                      ClipRRect(
+                                        borderRadius: BorderRadius.circular(12),
+                                        child: Image.network(
+                                          labTest["image"],
+                                          width: 70,
+                                          height: 70,
+                                          fit: BoxFit.cover,
+                                          errorBuilder:
+                                              (context, error, stackTrace) {
+                                            return Container(
+                                              width: 70,
+                                              height: 70,
+                                              color: Colors.blue,
+                                              child: const Icon(
+                                                Icons.image_not_supported,
+                                                color: Colors.white,
+                                              ),
+                                            );
+                                          },
+                                        ),
                                       ),
-                                    ),
-                                    const SizedBox(width: 10),
-                                    // Informasi rumah sakit
-                                    Expanded(
-                                      child: Column(
+                                      const SizedBox(width: 10),
+                                      // Informasi rumah sakit
+                                      Expanded(
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            // Nama Rumah Sakit
+                                            Row(
+                                              children: [
+                                                Icon(
+                                                  Icons.local_hospital,
+                                                  size: 20,
+                                                  color: Colors.green,
+                                                ),
+                                                const SizedBox(width: 6),
+                                                Expanded(
+                                                  child: AppStyles.bold(
+                                                    title: labTest["hospital"],
+                                                    size: AppSizes.size18,
+                                                    color: Colors.black,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            const SizedBox(height: 8),
+
+                                            // Jenis Tes
+                                            Row(
+                                              children: [
+                                                Icon(
+                                                  Icons.science,
+                                                  size: 18,
+                                                  color: Colors.grey[700],
+                                                ),
+                                                const SizedBox(width: 6),
+                                                Expanded(
+                                                  child: AppStyles.normal(
+                                                    title: labTest["test"],
+                                                    size: AppSizes.size14,
+                                                    color: Colors.grey[700]!,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            const SizedBox(height: 4),
+
+                                            // Lokasi
+                                            Row(
+                                              children: [
+                                                Icon(
+                                                  Icons.map_outlined,
+                                                  size: 18,
+                                                  color: Colors.redAccent,
+                                                ),
+                                                const SizedBox(width: 6),
+                                                Expanded(
+                                                  child: AppStyles.normal(
+                                                    title:
+                                                        "${labTest['location']['district']}, ${labTest['location']['city']}",
+                                                    size: AppSizes.size14,
+                                                    color: Colors.grey[700]!,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                  const SizedBox(height: 8),
+                                  Divider(
+                                    thickness: 1,
+                                    color: Colors.grey[300],
+                                  ),
+                                  const SizedBox(height: 8),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Column(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          // Nama Rumah Sakit
-                                          Row(
-                                            children: [
-                                              Icon(
-                                                Icons.local_hospital,
-                                                size: 20,
-                                                color: Colors.green,
-                                              ),
-                                              const SizedBox(width: 6),
-                                              Expanded(
-                                                child: AppStyles.bold(
-                                                  title: labTest["hospital"],
-                                                  size: AppSizes.size18,
-                                                  color: Colors.black,
-                                                ),
-                                              ),
-                                            ],
+                                          AppStyles.normal(
+                                            title: "Estimated Fee",
+                                            size: AppSizes.size14,
+                                            color: Colors.grey[700]!,
                                           ),
-                                          const SizedBox(height: 8),
-
-                                          // Jenis Tes
-                                          Row(
-                                            children: [
-                                              Icon(
-                                                Icons.science,
-                                                size: 18,
-                                                color: Colors.grey[700],
-                                              ),
-                                              const SizedBox(width: 6),
-                                              Expanded(
-                                                child: AppStyles.normal(
-                                                  title: labTest["test"],
-                                                  size: AppSizes.size14,
-                                                  color: Colors.grey[700]!,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          const SizedBox(height: 4),
-
-                                          // Lokasi
-                                          Row(
-                                            children: [
-                                              Icon(
-                                                Icons.map_outlined,
-                                                size: 18,
-                                                color: Colors.redAccent,
-                                              ),
-                                              const SizedBox(width: 6),
-                                              Expanded(
-                                                child: AppStyles.normal(
-                                                  title:
-                                                      "${labTest['location']['district']}, ${labTest['location']['city']}",
-                                                  size: AppSizes.size14,
-                                                  color: Colors.grey[700]!,
-                                                ),
-                                              ),
-                                            ],
+                                          AppStyles.bold(
+                                            title: controller.formatFee(
+                                                labTest['currency'],
+                                                labTest['price']),
+                                            size: AppSizes.size16,
+                                            color: Colors.black,
                                           ),
                                         ],
                                       ),
-                                    )
-                                  ],
-                                ),
-                                const SizedBox(height: 8),
-                                Divider(
-                                  thickness: 1,
-                                  color: Colors.grey[300],
-                                ),
-                                const SizedBox(height: 8),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        AppStyles.normal(
-                                          title: "Estimated Fee",
+                                      ElevatedButton(
+                                        onPressed: () {
+                                          Get.toNamed(Routes.DETAIL_LAB_TEST,
+                                              arguments: labTest);
+                                        },
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: Colors.blue,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(12),
+                                          ),
+                                        ),
+                                        child: AppStyles.normal(
+                                          title: "Book Test",
                                           size: AppSizes.size14,
-                                          color: Colors.grey[700]!,
-                                        ),
-                                        AppStyles.bold(
-                                          title: controller.formatFee(
-                                              labTest['currency'],
-                                              labTest['price']),
-                                          size: AppSizes.size16,
-                                          color: Colors.black,
-                                        ),
-                                      ],
-                                    ),
-                                    ElevatedButton(
-                                      onPressed: () {
-                                        Get.toNamed(Routes.DETAIL_LAB_TEST,
-                                            arguments: labTest);
-                                      },
-                                      style: ElevatedButton.styleFrom(
-                                        backgroundColor: Colors.blue,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(12),
+                                          color: Colors.white,
                                         ),
                                       ),
-                                      child: AppStyles.normal(
-                                        title: "Book Test",
-                                        size: AppSizes.size14,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    );
-                  },
-                ),
+                      );
+                    },
+                  );
+                }),
               ),
             ),
           ],

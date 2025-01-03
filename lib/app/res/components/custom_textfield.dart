@@ -10,7 +10,10 @@ class CustomTextfield extends StatefulWidget {
   final bool obscureText;
   final IconData? icon;
   final bool enabled;
-  final List<TextInputFormatter>? inputFormatters; // Tambahkan parameter baru
+  final List<TextInputFormatter>? inputFormatters;
+
+  // Tambahkan parameter onChanged
+  final void Function(String)? onChanged;
 
   const CustomTextfield({
     super.key,
@@ -22,7 +25,8 @@ class CustomTextfield extends StatefulWidget {
     this.obscureText = false,
     this.icon,
     this.enabled = true,
-    this.inputFormatters, // Optional parameter
+    this.inputFormatters,
+    this.onChanged, // Optional parameter untuk onChanged
   });
 
   @override
@@ -59,10 +63,14 @@ class _CustomTextfieldState extends State<CustomTextfield> {
       cursorColor: AppColors.blueColor,
       obscureText: _isObscured,
       enabled: widget.enabled,
+
+      // Tambahkan onChanged
+      onChanged: widget.onChanged,
+
       style: TextStyle(
         color: widget.enabled ? widget.textColor : Colors.grey.withOpacity(0.7),
       ),
-      inputFormatters: combinedFormatters, // Gunakan combined formatters
+      inputFormatters: combinedFormatters,
       decoration: InputDecoration(
         isDense: true,
         disabledBorder: OutlineInputBorder(
