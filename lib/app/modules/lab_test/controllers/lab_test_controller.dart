@@ -5,6 +5,8 @@ import 'package:intl/intl.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:speech_to_text/speech_to_text.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:geocoding/geocoding.dart';
 
 class LabTestController extends GetxController {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -20,11 +22,13 @@ class LabTestController extends GetxController {
   final searchController = TextEditingController();
   final SpeechToText _speechToText = SpeechToText();
   RxBool isListening = false.obs;
+  RxString userAddress = 'Mencari lokasi...'.obs;
 
   @override
   Future<void> onInit() async {
     super.onInit();
     await fetchLabTests();
+    await getCurrentLocation();
     filteredLabTests.value = labTests;
   }
 
@@ -32,6 +36,74 @@ class LabTestController extends GetxController {
   void onClose() {
     _speechToText.cancel();
     super.onClose();
+  }
+
+  Future<void> getCurrentLocation() async {
+    try {
+      // Periksa izin lokasi
+      LocationPermission permission = await Geolocator.checkPermission();
+      if (permission == LocationPermission.denied) {
+        permission = await Geolocator.requestPermission();
+      }
+
+      if (permission == LocationPermission.whileInUse ||
+          permission == LocationPermission.always) {
+        // Dapatkan posisi saat ini
+        Position position = await Geolocator.getCurrentPosition(
+          desiredAccuracy: LocationAccuracy.high,
+        );
+
+        // Konversi koordinat ke alamat
+        await convertCoordinatesToAddress(position);
+      } else {
+        userAddress.value = 'Izin lokasi ditolak';
+      }
+    } catch (e) {
+      userAddress.value = 'Gagal mendapatkan lokasi';
+      print("Error getting location: $e");
+    }
+  }
+
+  Future<void> convertCoordinatesToAddress(Position position) async {
+    try {
+      List<Placemark> placemarks = await placemarkFromCoordinates(
+        position.latitude,
+        position.longitude,
+      );
+
+      if (placemarks.isNotEmpty) {
+        Placemark place = placemarks[0];
+
+        // Susun alamat dengan format yang lebih ringkas
+        String address = '';
+
+        if (place.subLocality != null && place.subLocality!.isNotEmpty) {
+          address += '${place.subLocality}, ';
+        }
+
+        if (place.locality != null && place.locality!.isNotEmpty) {
+          address += '${place.locality}, ';
+        }
+
+        if (place.subAdministrativeArea != null &&
+            place.subAdministrativeArea!.isNotEmpty) {
+          address += '${place.subAdministrativeArea}, ';
+        }
+
+        if (place.administrativeArea != null &&
+            place.administrativeArea!.isNotEmpty) {
+          address += place.administrativeArea!;
+        }
+
+        userAddress.value =
+            address.isNotEmpty ? address : 'Lokasi tidak dikenali';
+      } else {
+        userAddress.value = 'Alamat tidak ditemukan';
+      }
+    } catch (e) {
+      userAddress.value = 'Gagal menerjemahkan lokasi';
+      print("Error converting coordinates: $e");
+    }
   }
 
   Future<void> startVoiceSearch() async {

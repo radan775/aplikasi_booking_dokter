@@ -15,11 +15,23 @@ class HomeView extends GetView<HomeController> {
       appBar: AppBar(
         backgroundColor: AppColors.blueColor,
         elevation: 0.0,
-        title: Obx(() => AppStyles.bold(
-              title: "${AppStrings.welcome} ${controller.namalengkap.value}",
-              color: AppColors.whiteColor,
-              size: AppSizes.size18,
-            )),
+        title: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Obx(() => AppStyles.bold(
+                  title:
+                      "${AppStrings.welcome} ${controller.namalengkap.value}",
+                  color: AppColors.whiteColor,
+                  size: AppSizes.size18,
+                )),
+            Obx(() => AppStyles.normal(
+                  title: controller.userAddress.value,
+                  color: AppColors.whiteColor.withOpacity(0.8),
+                  size: AppSizes.size12,
+                )),
+          ],
+        ),
         actions: [
           IconButton(
             icon: Icon(Icons.notifications, color: AppColors.whiteColor),
