@@ -1,5 +1,8 @@
 import 'package:aplikasi_booking_dokter/app/modules/about/bindings/about_binding.dart';
 import 'package:aplikasi_booking_dokter/app/modules/about/views/about_view.dart';
+import 'package:aplikasi_booking_dokter/app/modules/add_doctor/bindings/add_doctor_binding.dart';
+import 'package:aplikasi_booking_dokter/app/modules/add_doctor/views/add_clinic_view.dart';
+import 'package:aplikasi_booking_dokter/app/modules/add_doctor/views/add_doctor_view.dart';
 import 'package:aplikasi_booking_dokter/app/modules/add_lab_test/bindings/add_lab_test_binding.dart';
 import 'package:aplikasi_booking_dokter/app/modules/add_lab_test/views/add_lab_test_view.dart';
 import 'package:aplikasi_booking_dokter/app/modules/add_news/bindings/add_news_binding.dart';
@@ -188,6 +191,15 @@ class AppPages {
       name: _Paths.ADD_LAB_TEST,
       page: () => AddLabTestView(),
       binding: AddLabTestBinding(),
-    )
+    ),
+    GetPage(
+      name: _Paths.ADD_DOCTOR,
+      page: () => AddDoctorView(),
+      binding: AddDoctorBinding(),
+    ),
+    GetPage(
+      name: _Paths.ADD_DOCTOR_CLINIC,
+      page: () => AddClinicView(),
+    ),
   ];
 }

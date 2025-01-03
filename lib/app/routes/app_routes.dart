@@ -29,6 +29,8 @@ abstract class Routes {
   static const BOOKING_BERHASIL = _Paths.BOOKING_BERHASIL;
   static const ADD_NEWS = _Paths.ADD_NEWS;
   static const ADD_LAB_TEST = _Paths.ADD_LAB_TEST;
+  static const ADD_DOCTOR = _Paths.ADD_DOCTOR;
+  static const ADD_DOCTOR_CLINIC = _Paths.ADD_DOCTOR_CLINIC;
 }
 
 abstract class _Paths {
@@ -59,4 +61,6 @@ abstract class _Paths {
   static const BOOKING_BERHASIL = '/booking-berhasil';
   static const ADD_NEWS = '/add-news';
   static const ADD_LAB_TEST = '/add-lab-test';
+  static const ADD_DOCTOR = '/add-doctor';
+  static const ADD_DOCTOR_CLINIC = '/add-doctor-clinic';
 }
