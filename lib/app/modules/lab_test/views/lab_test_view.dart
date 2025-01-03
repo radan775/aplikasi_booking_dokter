@@ -13,11 +13,11 @@ class LabTestView extends GetView<LabTestController> {
       appBar: AppBar(
         backgroundColor: AppColors.blueColor,
         elevation: 0.0,
-        title: AppStyles.bold(
-          title: "${AppStrings.welcome} User",
-          color: AppColors.whiteColor,
-          size: AppSizes.size18,
-        ),
+        title: Obx(() => AppStyles.bold(
+              title: "${AppStrings.welcome} ${controller.namalengkap.value}",
+              color: AppColors.whiteColor,
+              size: AppSizes.size18,
+            )),
         actions: [
           IconButton(
             icon: Icon(Icons.notifications, color: AppColors.whiteColor),
@@ -81,37 +81,49 @@ class LabTestView extends GetView<LabTestController> {
                     color: AppColors.blueColor,
                   ),
                   SizedBox(
-                    height: 33, // Tinggi dari horizontal ListView
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: controller.labTestTypes.length,
-                      itemBuilder: (context, index) {
-                        return GestureDetector(
-                          onTap: () {
-                            print("${controller.labTestTypes[index]} dipilih!");
+                      height: 33,
+                      child: Obx(() {
+                        return ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: controller.labTestTypes.length,
+                          itemBuilder: (context, index) {
+                            return Obx(() {
+                              final test = controller.labTestTypes[index];
+                              final isSelected =
+                                  controller.selectedLabTestType.value == test;
+                              return GestureDetector(
+                                onTap: () {
+                                  controller.filterLabTestByTest(test);
+                                  print(
+                                      "${controller.labTestTypes[index]} dipilih!");
+                                },
+                                child: Container(
+                                  margin: const EdgeInsets.only(right: 8),
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 16,
+                                    vertical: 8,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: isSelected
+                                        ? AppColors.blueColor
+                                        : AppColors.blueColor.withOpacity(0.1),
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                  child: Center(
+                                    child: AppStyles.normal(
+                                      title: test,
+                                      size: AppSizes.size14,
+                                      color: isSelected
+                                          ? Colors.white
+                                          : AppColors.blueColor,
+                                    ),
+                                  ),
+                                ),
+                              );
+                            });
                           },
-                          child: Container(
-                            margin: const EdgeInsets.only(right: 8),
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 16,
-                              vertical: 8,
-                            ),
-                            decoration: BoxDecoration(
-                              color: AppColors.blueColor.withOpacity(0.1),
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: Center(
-                              child: AppStyles.normal(
-                                title: controller.labTestTypes[index],
-                                size: AppSizes.size14,
-                                color: AppColors.blueColor,
-                              ),
-                            ),
-                          ),
                         );
-                      },
-                    ),
-                  ),
+                      })),
                 ],
               ),
             ),
@@ -121,9 +133,9 @@ class LabTestView extends GetView<LabTestController> {
                 child: ListView.builder(
                   padding: const EdgeInsets.only(
                       left: 10.0, right: 10.0, top: 5.0, bottom: 5.0),
-                  itemCount: controller.labTests.length,
+                  itemCount: controller.filteredLabTests.length,
                   itemBuilder: (context, index) {
-                    final labTest = controller.labTests[index];
+                    final labTest = controller.filteredLabTests[index];
                     return Padding(
                       padding: const EdgeInsets.only(bottom: 5.0),
                       child: InkWell(

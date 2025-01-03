@@ -1,12 +1,16 @@
+import 'dart:io';
+
 import 'package:aplikasi_booking_dokter/app/data/consts/colors.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:image_picker/image_picker.dart';
 
 class ChangeProfileController extends GetxController {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final _storage = GetStorage();
+  final ImagePicker _picker = ImagePicker();
 
   final nameController = TextEditingController();
   final phoneController = TextEditingController();
@@ -18,11 +22,76 @@ class ChangeProfileController extends GetxController {
   var selectedGender = ''.obs;
   var isLoading = false.obs;
   RxBool isFormValid = false.obs;
+  Rx<File?> profileImage = Rx<File?>(null);
 
   @override
   void onInit() {
     super.onInit();
     fetchUserData();
+
+    loadProfileImage();
+  }
+
+  void showImageSourceDialog() {
+    Get.dialog(
+      AlertDialog(
+        title: Text('Pilih Sumber Foto'),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ListTile(
+              leading: Icon(Icons.camera_alt),
+              title: Text('Kamera'),
+              onTap: () {
+                Get.back(); // Tutup dialog
+                pickImage(ImageSource.camera);
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.photo_library),
+              title: Text('Galeri'),
+              onTap: () {
+                Get.back(); // Tutup dialog
+                pickImage(ImageSource.gallery);
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Future<void> pickImage(ImageSource source) async {
+    try {
+      final pickedFile = await _picker.pickImage(
+        source: source,
+        maxWidth: 500,
+        maxHeight: 500,
+        imageQuality: 80,
+      );
+
+      if (pickedFile != null) {
+        // Simpan file
+        File imageFile = File(pickedFile.path);
+        profileImage.value = imageFile;
+      }
+    } catch (e) {
+      // Tangani error
+      Get.snackbar(
+        'Error',
+        'Gagal mengambil foto: $e',
+        snackPosition: SnackPosition.TOP,
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+      );
+    }
+  }
+
+  void loadProfileImage() {
+    String? imagePath = _storage.read('fotoProfile');
+    if (imagePath != null) {
+      profileImage.value = File(imagePath);
+    }
   }
 
   Future<void> fetchUserData() async {
@@ -103,10 +172,11 @@ class ChangeProfileController extends GetxController {
       };
 
       await _firestore.collection('users').doc(userId).update(updateData);
+      _storage.write('fotoProfile', profileImage.value?.path);
       // Tutup loading
       Get.back();
       // Kembali ke halaman sebelumnya
-      Get.back();
+      Get.back(result: true);
       // Tampilkan snackbar sukses
       Get.snackbar(
         "Sukses",

@@ -13,11 +13,11 @@ class HomeView extends GetView<HomeController> {
       appBar: AppBar(
         backgroundColor: AppColors.blueColor,
         elevation: 0.0,
-        title: AppStyles.bold(
-          title: "${AppStrings.welcome} User",
-          color: AppColors.whiteColor,
-          size: AppSizes.size18,
-        ),
+        title: Obx(() => AppStyles.bold(
+              title: "${AppStrings.welcome} ${controller.namalengkap.value}",
+              color: AppColors.whiteColor,
+              size: AppSizes.size18,
+            )),
         actions: [
           IconButton(
             icon: Icon(Icons.notifications, color: AppColors.whiteColor),
@@ -83,29 +83,41 @@ class HomeView extends GetView<HomeController> {
                       scrollDirection: Axis.horizontal,
                       itemCount: controller.doctorTypes.length,
                       itemBuilder: (context, index) {
-                        return GestureDetector(
-                          onTap: () {
-                            print("${controller.doctorTypes[index]} selected!");
-                          },
-                          child: Container(
-                            margin: const EdgeInsets.only(right: 8),
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 16,
-                              vertical: 8,
-                            ),
-                            decoration: BoxDecoration(
-                              color: AppColors.blueColor.withOpacity(0.1),
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: Center(
-                              child: AppStyles.normal(
-                                title: controller.doctorTypes[index],
-                                size: AppSizes.size14,
-                                color: AppColors.blueColor,
+                        return Obx(() {
+                          final specialty = controller.doctorTypes[index];
+                          final isSelected =
+                              controller.selectedDoctorType.value == specialty;
+
+                          return GestureDetector(
+                            onTap: () {
+                              controller.filterDoctorsBySpecialty(specialty);
+                              print(
+                                  "${controller.doctorTypes[index]} selected!");
+                            },
+                            child: Container(
+                              margin: const EdgeInsets.only(right: 8),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 16,
+                                vertical: 8,
+                              ),
+                              decoration: BoxDecoration(
+                                color: isSelected
+                                    ? AppColors.blueColor
+                                    : AppColors.blueColor.withOpacity(0.1),
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: Center(
+                                child: AppStyles.normal(
+                                  title: specialty,
+                                  size: AppSizes.size14,
+                                  color: isSelected
+                                      ? Colors.white
+                                      : AppColors.blueColor,
+                                ),
                               ),
                             ),
-                          ),
-                        );
+                          );
+                        });
                       },
                     ),
                   ),
@@ -116,185 +128,190 @@ class HomeView extends GetView<HomeController> {
             Expanded(
               child: RefreshIndicator(
                 onRefresh: controller.fetchDoctors,
-                child: ListView.builder(
-                  padding: const EdgeInsets.all(10.0),
-                  itemCount: controller.doctors.length,
-                  itemBuilder: (context, index) {
-                    final doctor = controller.doctors[index];
-                    final firstClinic = doctor["clinics"].isNotEmpty
-                        ? doctor["clinics"][0]
-                        : null; // Klinik pertama
+                child: Obx(
+                  () {
+                    return ListView.builder(
+                      padding: const EdgeInsets.all(10.0),
+                      itemCount: controller.filteredDoctors.length,
+                      itemBuilder: (context, index) {
+                        final doctor = controller.filteredDoctors[index];
+                        final firstClinic = doctor["clinics"].isNotEmpty
+                            ? doctor["clinics"][0]
+                            : null; // Klinik pertama
 
-                    return Padding(
-                      padding: const EdgeInsets.only(bottom: 10.0),
-                      child: InkWell(
-                        onTap: () {
-                          Get.toNamed(
-                            Routes.DETAIL_DOCTOR,
-                            arguments: doctor,
-                          );
-                          print("Doctor ${doctor['name']} selected!");
-                        },
-                        child: Card(
-                          elevation: 3,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Row(
+                        return Padding(
+                          padding: const EdgeInsets.only(bottom: 10.0),
+                          child: InkWell(
+                            onTap: () {
+                              Get.toNamed(
+                                Routes.DETAIL_DOCTOR,
+                                arguments: doctor,
+                              );
+                              print("Doctor ${doctor['name']} selected!");
+                            },
+                            child: Card(
+                              elevation: 3,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(16.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    // Doctor Image
-                                    ClipOval(
-                                      child: Image.network(
-                                        doctor["image"],
-                                        width: 70,
-                                        height: 70,
-                                        fit: BoxFit.cover,
-                                        errorBuilder:
-                                            (context, error, stackTrace) {
-                                          return ClipOval(
-                                            child: Container(
-                                              width: 70,
-                                              height: 70,
-                                              color: Colors.blue,
-                                              child: const Icon(
-                                                Icons.person,
-                                                color: Colors.white,
-                                                size: 40,
-                                              ),
-                                            ),
-                                          );
-                                        },
-                                      ),
-                                    ),
-                                    const SizedBox(width: 10),
-                                    Expanded(
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          // Doctor Name
-                                          Row(
-                                            children: [
-                                              const Icon(
-                                                Icons.person,
-                                                color: Colors.blueAccent,
-                                                size: 20,
-                                              ),
-                                              const SizedBox(width: 8),
-                                              Expanded(
-                                                child: AppStyles.bold(
-                                                  title: doctor["name"],
-                                                  size: AppSizes.size18,
-                                                  color: Colors.black,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          const SizedBox(height: 8),
-                                          // Specialty
-                                          Row(
-                                            children: [
-                                              Icon(
-                                                Icons.local_hospital,
-                                                color: Colors.grey[700],
-                                                size: 18,
-                                              ),
-                                              const SizedBox(width: 8),
-                                              Expanded(
-                                                child: AppStyles.normal(
-                                                  title: doctor["specialty"],
-                                                  size: AppSizes.size14,
-                                                  color: Colors.grey[700]!,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          const SizedBox(height: 8),
-                                          Row(
-                                            children: [
-                                              const Icon(
-                                                Icons.location_on,
-                                                color: Colors.redAccent,
-                                                size: 18,
-                                              ),
-                                              const SizedBox(width: 8),
-                                              Expanded(
-                                                child: AppStyles.normal(
-                                                  title: firstClinic?[
-                                                          "clinicName"] ??
-                                                      "No Clinic Available",
-                                                  size: AppSizes.size14,
-                                                  color: Colors.grey[700]!,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                    )
-                                  ],
-                                ),
-                                const SizedBox(height: 8),
-                                Divider(
-                                  thickness: 1,
-                                  color: Colors.grey[300],
-                                ),
-                                const SizedBox(height: 8),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                    Row(
                                       children: [
-                                        AppStyles.normal(
-                                          title: "Estimated Fee",
-                                          size: AppSizes.size14,
-                                          color: Colors.grey[700]!,
+                                        // Doctor Image
+                                        ClipOval(
+                                          child: Image.network(
+                                            doctor["image"],
+                                            width: 70,
+                                            height: 70,
+                                            fit: BoxFit.cover,
+                                            errorBuilder:
+                                                (context, error, stackTrace) {
+                                              return ClipOval(
+                                                child: Container(
+                                                  width: 70,
+                                                  height: 70,
+                                                  color: Colors.blue,
+                                                  child: const Icon(
+                                                    Icons.person,
+                                                    color: Colors.white,
+                                                    size: 40,
+                                                  ),
+                                                ),
+                                              );
+                                            },
+                                          ),
                                         ),
-                                        AppStyles.bold(
-                                          title: controller.formatFee(
-                                              doctor["currency"],
-                                              doctor["fee"]),
-                                          size: AppSizes.size16,
-                                          color: Colors.black,
+                                        const SizedBox(width: 10),
+                                        Expanded(
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              // Doctor Name
+                                              Row(
+                                                children: [
+                                                  const Icon(
+                                                    Icons.person,
+                                                    color: Colors.blueAccent,
+                                                    size: 20,
+                                                  ),
+                                                  const SizedBox(width: 8),
+                                                  Expanded(
+                                                    child: AppStyles.bold(
+                                                      title: doctor["name"],
+                                                      size: AppSizes.size18,
+                                                      color: Colors.black,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                              const SizedBox(height: 8),
+                                              // Specialty
+                                              Row(
+                                                children: [
+                                                  Icon(
+                                                    Icons.local_hospital,
+                                                    color: Colors.grey[700],
+                                                    size: 18,
+                                                  ),
+                                                  const SizedBox(width: 8),
+                                                  Expanded(
+                                                    child: AppStyles.normal(
+                                                      title:
+                                                          doctor["specialty"],
+                                                      size: AppSizes.size14,
+                                                      color: Colors.grey[700]!,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                              const SizedBox(height: 8),
+                                              Row(
+                                                children: [
+                                                  const Icon(
+                                                    Icons.location_on,
+                                                    color: Colors.redAccent,
+                                                    size: 18,
+                                                  ),
+                                                  const SizedBox(width: 8),
+                                                  Expanded(
+                                                    child: AppStyles.normal(
+                                                      title: firstClinic?[
+                                                              "clinicName"] ??
+                                                          "No Clinic Available",
+                                                      size: AppSizes.size14,
+                                                      color: Colors.grey[700]!,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                    const SizedBox(height: 8),
+                                    Divider(
+                                      thickness: 1,
+                                      color: Colors.grey[300],
+                                    ),
+                                    const SizedBox(height: 8),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            AppStyles.normal(
+                                              title: "Estimated Fee",
+                                              size: AppSizes.size14,
+                                              color: Colors.grey[700]!,
+                                            ),
+                                            AppStyles.bold(
+                                              title: controller.formatFee(
+                                                  doctor["currency"],
+                                                  doctor["fee"]),
+                                              size: AppSizes.size16,
+                                              color: Colors.black,
+                                            ),
+                                          ],
+                                        ),
+                                        ElevatedButton(
+                                          onPressed: () {
+                                            Get.toNamed(
+                                              Routes.DETAIL_DOCTOR,
+                                              arguments: doctor,
+                                            );
+                                            print("Make Appointment clicked!");
+                                          },
+                                          style: ElevatedButton.styleFrom(
+                                            backgroundColor: Colors.blue,
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(12),
+                                            ),
+                                          ),
+                                          child: AppStyles.normal(
+                                            title: "Make Appointment",
+                                            size: AppSizes.size14,
+                                            color: Colors.white,
+                                          ),
                                         ),
                                       ],
                                     ),
-                                    ElevatedButton(
-                                      onPressed: () {
-                                        Get.toNamed(
-                                          Routes.DETAIL_DOCTOR,
-                                          arguments: doctor,
-                                        );
-                                        print("Make Appointment clicked!");
-                                      },
-                                      style: ElevatedButton.styleFrom(
-                                        backgroundColor: Colors.blue,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(12),
-                                        ),
-                                      ),
-                                      child: AppStyles.normal(
-                                        title: "Make Appointment",
-                                        size: AppSizes.size14,
-                                        color: Colors.white,
-                                      ),
-                                    ),
                                   ],
                                 ),
-                              ],
+                              ),
                             ),
                           ),
-                        ),
-                      ),
+                        );
+                      },
                     );
                   },
                 ),

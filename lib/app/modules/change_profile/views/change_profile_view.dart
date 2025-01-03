@@ -40,36 +40,25 @@ class ChangeProfileView extends GetView<ChangeProfileController> {
                       children: [
                         Stack(
                           children: [
-                            CircleAvatar(
-                              radius: 50,
-                              backgroundImage: AssetImage(
-                                AppAssets.imgSignup,
-                              ), // Placeholder image
-                            ),
-                            Positioned(
-                              bottom: 0,
-                              right: 0,
-                              child: CircleAvatar(
-                                radius: 16,
-                                backgroundColor: Colors.white,
-                                child: IconButton(
-                                  onPressed: () {
-                                    // Logic for changing photo
-                                  },
-                                  icon: const Icon(
-                                    Icons.camera_alt,
-                                    size: 16,
-                                    color: Colors.blueAccent,
-                                  ),
-                                ),
-                              ),
-                            ),
+                            Obx(() {
+                              // Tampilkan foto dari storage atau placeholder
+                              return CircleAvatar(
+                                radius: 50,
+                                backgroundImage: controller
+                                            .profileImage.value !=
+                                        null
+                                    ? FileImage(controller.profileImage.value!)
+                                    : AssetImage(AppAssets.imgSignup)
+                                        as ImageProvider,
+                              );
+                            }),
                           ],
                         ),
                         const SizedBox(height: 10),
                         TextButton.icon(
                           onPressed: () {
-                            // Tambahkan logika upload foto
+                            // Tampilkan dialog pilih sumber foto
+                            controller.showImageSourceDialog();
                           },
                           icon:
                               const Icon(Icons.edit, color: Colors.blueAccent),

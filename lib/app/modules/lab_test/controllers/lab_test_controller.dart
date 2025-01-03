@@ -1,28 +1,51 @@
+import 'package:aplikasi_booking_dokter/app/data/consts/consts.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class LabTestController extends GetxController {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final GetStorage _storage = GetStorage();
 
   RxList<Map<String, dynamic>> labTests = <Map<String, dynamic>>[].obs;
   RxBool isLoading = true.obs;
+  RxString namalengkap = ''.obs;
 
-  final List<String> labTestTypes = [
-    "Swab PCR",
-    "Tes Darah Lengkap",
-    "Cek Kolesterol",
-    "Tes Antigen",
-    "Cek Gula Darah",
-    "Cek Tekanan Darah",
-    "Cek Fungsi Ginjal"
-  ];
+  RxList<String> labTestTypes = <String>[].obs;
+  RxString selectedLabTestType = ''.obs;
+  RxList<Map<String, dynamic>> filteredLabTests = <Map<String, dynamic>>[].obs;
 
   @override
   Future<void> onInit() async {
     super.onInit();
     await fetchLabTests();
-    //await updateLabTestsData();
+    filteredLabTests.value = labTests;
+  }
+
+  void filterLabTestByTest(String test) {
+    if (selectedLabTestType.value == test) {
+      // Jika specialty sama dengan yang sudah dipilih, reset filter
+      selectedLabTestType.value = '';
+      filteredLabTests.value = labTests;
+    } else {
+      // Set specialty baru
+      selectedLabTestType.value = test;
+      // Filter dokter berdasarkan specialty
+      filteredLabTests.value =
+          labTests.where((labTest) => labTest['test'] == test).toList();
+    }
+  }
+
+  void extractUniqueLabTest() {
+    Set<String> uniqueSpecialties = {};
+    for (var test in labTests) {
+      String specialty = test['test'];
+      if (specialty.isNotEmpty) {
+        uniqueSpecialties.add(specialty);
+      }
+    }
+    labTestTypes.value = uniqueSpecialties.toList();
   }
 
   String formatFee(String currency, int fee) {
@@ -34,9 +57,36 @@ class LabTestController extends GetxController {
     return "$currency${formatter.format(fee)}";
   }
 
+  Future<void> fetchUserData() async {
+    try {
+      isLoading.value = true;
+      String? userId = _storage.read('userId');
+      if (userId == null) {
+        print('User ID tidak ditemukan');
+        return;
+      }
+
+      DocumentSnapshot userDoc =
+          await _firestore.collection('users').doc(userId).get();
+      if (userDoc.exists) {
+        Map<String, dynamic> userData = userDoc.data() as Map<String, dynamic>;
+        namalengkap.value = userData['namalengkap'] ?? '';
+      }
+    } catch (e) {
+      Get.snackbar(
+        'Error',
+        'Gagal mengambil data profil',
+        snackPosition: SnackPosition.TOP,
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+      );
+    }
+  }
+
   Future<void> fetchLabTests() async {
     try {
       isLoading.value = true;
+      await fetchUserData();
       final querySnapshot = await _firestore.collection('labTests').get();
       final List<Map<String, dynamic>> loadedLabTests =
           querySnapshot.docs.map((doc) {
@@ -81,7 +131,10 @@ class LabTestController extends GetxController {
         };
       }).toList();
 
-      labTests.value = loadedLabTests; // Simpan data ke RxList
+      labTests.value = loadedLabTests;
+      extractUniqueLabTest();
+      filterLabTestByTest(selectedLabTestType.value);
+      selectedLabTestType.value = '';
     } catch (e) {
       print("Error fetching lab tests: $e");
     } finally {

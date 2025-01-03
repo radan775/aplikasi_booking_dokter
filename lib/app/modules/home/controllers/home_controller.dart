@@ -1,32 +1,51 @@
+import 'package:aplikasi_booking_dokter/app/data/consts/consts.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class HomeController extends GetxController {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final GetStorage _storage = GetStorage();
 
   RxList<Map<String, dynamic>> doctors = <Map<String, dynamic>>[].obs;
   RxBool isLoading = true.obs; // Status loading
+  RxString namalengkap = ''.obs;
 
-  final List<String> doctorTypes = [
-    "Umum",
-    "Anak",
-    "THT",
-    "Gigi",
-    "Jantung",
-    "Kandungan",
-    "Saraf",
-    "Kulit",
-    "Mata",
-    "Bedah"
-  ];
+  RxList<String> doctorTypes = <String>[].obs;
+  RxString selectedDoctorType = ''.obs;
+  RxList<Map<String, dynamic>> filteredDoctors = <Map<String, dynamic>>[].obs;
 
   @override
   Future<void> onInit() async {
     super.onInit();
     await fetchDoctors();
+    filteredDoctors.value = doctors;
+  }
 
-    //await updateDoctorsData();
+  void filterDoctorsBySpecialty(String specialty) {
+    if (selectedDoctorType.value == specialty) {
+      // Jika specialty sama dengan yang sudah dipilih, reset filter
+      selectedDoctorType.value = '';
+      filteredDoctors.value = doctors;
+    } else {
+      // Set specialty baru
+      selectedDoctorType.value = specialty;
+      // Filter dokter berdasarkan specialty
+      filteredDoctors.value =
+          doctors.where((doctor) => doctor['specialty'] == specialty).toList();
+    }
+  }
+
+  void extractUniqueDoctorTypes() {
+    Set<String> uniqueSpecialties = {};
+    for (var doctor in doctors) {
+      String specialty = doctor['specialty'];
+      if (specialty.isNotEmpty) {
+        uniqueSpecialties.add(specialty);
+      }
+    }
+    doctorTypes.value = uniqueSpecialties.toList();
   }
 
   String formatFee(String currency, int fee) {
@@ -38,9 +57,36 @@ class HomeController extends GetxController {
     return "$currency${formatter.format(fee)}";
   }
 
+  Future<void> fetchUserData() async {
+    try {
+      isLoading.value = true;
+      String? userId = _storage.read('userId');
+      if (userId == null) {
+        print('User ID tidak ditemukan');
+        return;
+      }
+
+      DocumentSnapshot userDoc =
+          await _firestore.collection('users').doc(userId).get();
+      if (userDoc.exists) {
+        Map<String, dynamic> userData = userDoc.data() as Map<String, dynamic>;
+        namalengkap.value = userData['namalengkap'] ?? '';
+      }
+    } catch (e) {
+      Get.snackbar(
+        'Error',
+        'Gagal mengambil data profil',
+        snackPosition: SnackPosition.TOP,
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+      );
+    }
+  }
+
   Future<void> fetchDoctors() async {
     try {
-      isLoading.value = true; // Mulai proses loading
+      isLoading.value = true;
+      await fetchUserData();
 
       final querySnapshot = await _firestore.collection('doctors').get();
 
@@ -84,11 +130,14 @@ class HomeController extends GetxController {
         });
       }
 
-      doctors.value = loadedDoctors; // Simpan data ke RxList
+      doctors.value = loadedDoctors;
+      extractUniqueDoctorTypes();
+      filterDoctorsBySpecialty(selectedDoctorType.value);
+      selectedDoctorType.value = '';
     } catch (e) {
       print("Error fetching doctors: $e");
     } finally {
-      isLoading.value = false; // Proses selesai
+      isLoading.value = false;
     }
   }
 

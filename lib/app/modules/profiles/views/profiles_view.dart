@@ -1,7 +1,6 @@
 import 'package:aplikasi_booking_dokter/app/data/consts/lists.dart';
 import 'package:aplikasi_booking_dokter/app/routes/app_pages.dart';
 import 'package:get/get.dart';
-import 'package:flutter/material.dart';
 import 'package:aplikasi_booking_dokter/app/data/consts/consts.dart';
 import 'package:aplikasi_booking_dokter/app/modules/profiles/controllers/profiles_controller.dart';
 
@@ -11,29 +10,38 @@ class ProfilesView extends GetView<ProfilesController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: AppColors.blueColor,
-        elevation: 0.0,
-        title: AppStyles.bold(
-          title: AppStrings.profiles,
-          color: AppColors.whiteColor,
-          size: AppSizes.size18,
-        ),
-      ),
-      body: Column(
-        children: [
-          _buildUserProfile(),
-          const Divider(thickness: 1, color: Colors.grey),
-          const SizedBox(height: 20),
-          Expanded(
-            child: ListView.builder(
-              itemCount: controller.settingsList.length,
-              itemBuilder: (context, index) => _buildSettingsOption(index),
-            ),
+        appBar: AppBar(
+          backgroundColor: AppColors.blueColor,
+          elevation: 0.0,
+          title: AppStyles.bold(
+            title: AppStrings.profiles,
+            color: AppColors.whiteColor,
+            size: AppSizes.size18,
           ),
-        ],
-      ),
-    );
+        ),
+        body: RefreshIndicator(
+          onRefresh: () async => await controller.fetchUserData(),
+          child: Obx(() {
+            if (controller.isLoading.value) {
+              return const Center(child: CircularProgressIndicator());
+            }
+
+            return Column(
+              children: [
+                _buildUserProfile(),
+                const Divider(thickness: 1, color: Colors.grey),
+                const SizedBox(height: 20),
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: controller.settingsList.length,
+                    itemBuilder: (context, index) =>
+                        _buildSettingsOption(index),
+                  ),
+                ),
+              ],
+            );
+          }),
+        ));
   }
 
   Widget _buildUserProfile() {
@@ -48,7 +56,9 @@ class ProfilesView extends GetView<ProfilesController> {
         children: [
           CircleAvatar(
             radius: 30,
-            backgroundImage: AssetImage(AppAssets.imgSignup),
+            backgroundImage: controller.profileImage.value != null
+                ? FileImage(controller.profileImage.value!)
+                : AssetImage(AppAssets.imgSignup) as ImageProvider,
           ),
           const SizedBox(width: 16),
           Expanded(
@@ -74,8 +84,11 @@ class ProfilesView extends GetView<ProfilesController> {
             ),
           ),
           IconButton(
-            onPressed: () {
-              Get.toNamed(Routes.CHANGE_PROFILE);
+            onPressed: () async {
+              final result = await Get.toNamed(Routes.CHANGE_PROFILE);
+              if (result == true) {
+                await controller.fetchUserData();
+              }
             },
             icon: Icon(Icons.build, color: AppColors.blueColor),
             tooltip: "Edit Profile",
