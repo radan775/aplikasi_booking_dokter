@@ -42,6 +42,38 @@ class LabTestController extends GetxController {
 
   bool get isAdmin => userRole.value == 'admin';
 
+  Future<void> deleteLabTest(String documentId) async {
+    try {
+      // Hapus dokumen dari Firestore
+      await _firestore.collection('labTests').doc(documentId).delete();
+
+      // Hapus dari local list
+      labTests.removeWhere((labTest) => labTest['id'] == documentId);
+
+      // Update filtered list
+      filteredLabTests.removeWhere((labTest) => labTest['id'] == documentId);
+
+      // Ekstrak ulang tipe lab test
+      extractUniqueLabTest();
+
+      // Tampilkan snackbar sukses
+      Get.snackbar(
+        'Sukses',
+        'Lab Test berhasil dihapus',
+        backgroundColor: Colors.green,
+        colorText: Colors.white,
+      );
+    } catch (e) {
+      // Tampilkan error
+      Get.snackbar(
+        'Error',
+        'Gagal menghapus Lab Test: $e',
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+      );
+    }
+  }
+
   Future<void> getCurrentLocation() async {
     try {
       // Periksa izin lokasi
@@ -272,39 +304,14 @@ class LabTestController extends GetxController {
           "id": doc.id,
           "hospital": data['hospital'] ?? '',
           "test": data['test'] ?? '',
-          "location": data['location'] ??
-              {
-                "district": '',
-                "city": '',
-              },
+          "location": data['location'],
           "currency": data['currency'] ?? 'Rp',
           "price": data['price'] ?? 0,
           "image": data['image'] ?? '',
           "address": data['address'] ?? '',
           'description': data['description'] ?? '',
-          'operasionalHours': data['operasionalHours'] ??
-              {
-                'start': '08:00',
-                'end': '20:00',
-              },
-          'schedule': data['schedule'] ??
-              [
-                {
-                  'start': '08:00',
-                  'end': '10:00',
-                  'type': 'Pagi',
-                },
-                {
-                  'start': '13:00',
-                  'end': '15:00',
-                  'type': 'Siang',
-                },
-                {
-                  'start': '15:00',
-                  'end': '17:00',
-                  'type': 'Sore',
-                },
-              ],
+          'operasionalHours': data['operasionalHours'],
+          'schedule': data['schedule']
         };
       }).toList();
 
@@ -316,51 +323,6 @@ class LabTestController extends GetxController {
       print("Error fetching lab tests: $e");
     } finally {
       isLoading.value = false; // Proses selesai
-    }
-  }
-
-  Future<void> updateLabTestsData() async {
-    final FirebaseFirestore firestore = FirebaseFirestore.instance;
-
-    try {
-      final querySnapshot = await firestore.collection('labTests').get();
-
-      for (var doc in querySnapshot.docs) {
-        final labTestId = doc.id;
-
-        // Tambahkan field "description" dan "address" ke setiap dokumen
-        await firestore.collection('labTests').doc(labTestId).update({
-          "description":
-              "Deskripsi lengkap terkait tes ${doc['test'] ?? 'Lab'} yang dilakukan di ${doc['hospital'] ?? 'Rumah Sakit'}.",
-          "address":
-              "Jl. Contoh Alamat No. ${doc['hospital'] == 'RS Hermina' ? '45' : '12'}, ${doc['location']['district'] ?? 'Unknown'}, ${doc['location']['city'] ?? 'Unknown'}",
-          "operasionalHours": {
-            "start": "08:00",
-            "end": "20:00",
-          },
-          "schedule": [
-            {
-              "start": "08:00",
-              "end": "10:00",
-              "type": "Pagi",
-            },
-            {
-              "start": "13:00",
-              "end": "15:00",
-              "type": "Siang",
-            },
-            {
-              "start": "15:00",
-              "end": "17:00",
-              "type": "Sore",
-            }
-          ]
-        });
-      }
-
-      print("Data labTests berhasil diperbarui!");
-    } catch (e) {
-      print("Error updating labTests data: $e");
     }
   }
 }
