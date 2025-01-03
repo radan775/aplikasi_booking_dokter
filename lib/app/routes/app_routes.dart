@@ -27,6 +27,7 @@ abstract class Routes {
   static const CHANGE_PASSWORD = _Paths.CHANGE_PASSWORD;
   static const CHANGE_PROFILE = _Paths.CHANGE_PROFILE;
   static const BOOKING_BERHASIL = _Paths.BOOKING_BERHASIL;
+  static const ADD_NEWS = _Paths.ADD_NEWS;
 }
 
 abstract class _Paths {
@@ -55,4 +56,5 @@ abstract class _Paths {
   static const CHANGE_PASSWORD = '/change-password';
   static const CHANGE_PROFILE = '/change-profile';
   static const BOOKING_BERHASIL = '/booking-berhasil';
+  static const ADD_NEWS = '/add-news';
 }

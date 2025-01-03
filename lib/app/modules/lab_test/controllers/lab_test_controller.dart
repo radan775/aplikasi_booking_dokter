@@ -23,12 +23,14 @@ class LabTestController extends GetxController {
   final SpeechToText _speechToText = SpeechToText();
   RxBool isListening = false.obs;
   RxString userAddress = 'Mencari lokasi...'.obs;
+  RxString userRole = ''.obs;
 
   @override
   Future<void> onInit() async {
     super.onInit();
     await fetchLabTests();
     await getCurrentLocation();
+    userRole.value = _storage.read('role') ?? '';
     filteredLabTests.value = labTests;
   }
 
@@ -37,6 +39,8 @@ class LabTestController extends GetxController {
     _speechToText.cancel();
     super.onClose();
   }
+
+  bool get isAdmin => userRole.value == 'admin';
 
   Future<void> getCurrentLocation() async {
     try {

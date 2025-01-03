@@ -1,5 +1,7 @@
 import 'package:aplikasi_booking_dokter/app/modules/about/bindings/about_binding.dart';
 import 'package:aplikasi_booking_dokter/app/modules/about/views/about_view.dart';
+import 'package:aplikasi_booking_dokter/app/modules/add_news/bindings/add_news_binding.dart';
+import 'package:aplikasi_booking_dokter/app/modules/add_news/views/add_news_view.dart';
 import 'package:aplikasi_booking_dokter/app/modules/berita/bindings/berita_binding.dart';
 import 'package:aplikasi_booking_dokter/app/modules/berita/views/berita_view.dart';
 import 'package:aplikasi_booking_dokter/app/modules/booking_berhasil/bindings/booking_berhasil_binding.dart';
@@ -175,5 +177,10 @@ class AppPages {
       page: () => BookingBerhasilView(),
       binding: BookingBerhasilBinding(),
     ),
+    GetPage(
+      name: _Paths.ADD_NEWS,
+      page: () => AddNewsView(),
+      binding: AddNewsBinding(),
+    )
   ];
 }

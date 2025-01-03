@@ -45,66 +45,144 @@ class BeritaView extends GetView<BeritaController> {
             itemCount: controller.newsList.length,
             itemBuilder: (context, index) {
               final news = controller.newsList[index];
-              return InkWell(
-                onTap: () {
-                  Get.toNamed(Routes.INI_WEBVIEW, arguments: news['url']);
-                },
-                borderRadius: BorderRadius.circular(12), // Efek ripple
-                child: Card(
-                  margin: const EdgeInsets.only(bottom: 10.0),
-                  elevation: 3,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        // Gambar
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(8),
-                          child: Image.network(
-                            news['image']!,
-                            width: 80,
-                            height: 80,
-                            fit: BoxFit.cover,
-                            errorBuilder: (context, error, stackTrace) {
-                              return Container(
-                                width: 80,
-                                height: 80,
-                                color: Colors.grey,
-                                child: const Icon(
-                                  Icons.image_not_supported,
-                                  color: Colors.white,
-                                ),
-                              );
-                            },
-                          ),
-                        ),
-                        const SizedBox(width: 10),
-                        // Informasi Berita
-                        Expanded(
-                          child: Text(
-                            news['title']!,
-                            style: const TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
+              if (controller.isAdmin) {
+                return Dismissible(
+                  key: Key(news['id']),
+                  direction: DismissDirection.endToStart,
+                  confirmDismiss: (direction) async {
+                    // Tampilkan dialog konfirmasi
+                    return await showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Text('Hapus Berita'),
+                          content: Text(
+                              'Apakah Anda yakin ingin menghapus berita ini?'),
+                          actions: [
+                            TextButton(
+                              onPressed: () => Navigator.of(context).pop(false),
+                              child: Text('Batal'),
                             ),
-                            softWrap: true,
-                            maxLines: 3,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                      ],
+                            TextButton(
+                              onPressed: () => Navigator.of(context).pop(true),
+                              child: Text('Hapus'),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  },
+                  background: Container(
+                    color: Colors.red,
+                    alignment: Alignment.centerRight,
+                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    child: Icon(
+                      Icons.delete,
+                      color: Colors.white,
+                      size: 30,
                     ),
                   ),
-                ),
-              );
+                  onDismissed: (direction) {
+                    // Hapus berita
+                    controller.deleteNews(news['id']);
+                  },
+                  child: _buildNewsCard(news, context),
+                );
+              }
+              // Jika bukan admin, tampilkan card biasa
+              else {
+                return _buildNewsCard(news, context);
+              }
             },
           ),
         );
       }),
+      floatingActionButton: Obx(() {
+        if (controller.isAdmin) {
+          return FloatingActionButton.extended(
+            heroTag: 'add_news',
+            onPressed: () async {
+              final result = await Get.toNamed(Routes.ADD_NEWS);
+              if (result == true) {
+                await controller.fetchNewsFromFirestore();
+              }
+            },
+            backgroundColor: AppColors.blueColor,
+            icon: const Icon(
+              Icons.add,
+              color: Colors.white,
+            ),
+            label: Text(
+              'Tambah Berita',
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          );
+        } else {
+          return const SizedBox.shrink();
+        }
+      }),
+    );
+  }
+
+  Widget _buildNewsCard(Map<String, dynamic> news, BuildContext context) {
+    return InkWell(
+      onTap: () {
+        Get.toNamed(Routes.INI_WEBVIEW, arguments: news['url']);
+      },
+      borderRadius: BorderRadius.circular(12), // Efek ripple
+      child: Card(
+        margin: const EdgeInsets.only(bottom: 10.0),
+        elevation: 3,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              // Gambar
+              ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: Image.network(
+                  news['image']!,
+                  width: 80,
+                  height: 80,
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) {
+                    return Container(
+                      width: 80,
+                      height: 80,
+                      color: Colors.grey,
+                      child: const Icon(
+                        Icons.image_not_supported,
+                        color: Colors.white,
+                      ),
+                    );
+                  },
+                ),
+              ),
+              const SizedBox(width: 10),
+              // Informasi Berita
+              Expanded(
+                child: Text(
+                  news['title']!,
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  softWrap: true,
+                  maxLines: 3,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

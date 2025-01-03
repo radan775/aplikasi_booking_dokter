@@ -24,12 +24,14 @@ class HomeController extends GetxController {
   final SpeechToText _speechToText = SpeechToText();
   RxBool isListening = false.obs;
   RxString userAddress = 'Mencari lokasi...'.obs;
+  RxString userRole = ''.obs;
 
   @override
   Future<void> onInit() async {
     super.onInit();
     await fetchDoctors();
     await getCurrentLocation();
+    userRole.value = _storage.read('role') ?? '';
     filteredDoctors.value = doctors;
   }
 
@@ -38,6 +40,8 @@ class HomeController extends GetxController {
     _speechToText.cancel();
     super.onClose();
   }
+
+  bool get isAdmin => userRole.value == 'admin';
 
   Future<void> getCurrentLocation() async {
     try {

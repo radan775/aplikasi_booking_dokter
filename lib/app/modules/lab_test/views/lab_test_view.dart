@@ -373,6 +373,31 @@ class LabTestView extends GetView<LabTestController> {
           ],
         );
       }),
+      floatingActionButton: Obx(() {
+        if (controller.isAdmin) {
+          return FloatingActionButton.extended(
+            heroTag: 'add_lab_test',
+            onPressed: () {
+              print("Floating Action Button clicked!");
+              //Get.toNamed(Routes.ADD_DOCTOR);
+            },
+            backgroundColor: AppColors.blueColor,
+            icon: const Icon(
+              Icons.add,
+              color: Colors.white,
+            ),
+            label: Text(
+              'Tambah Lab Test',
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          );
+        } else {
+          return const SizedBox.shrink();
+        }
+      }),
     );
   }
 }
