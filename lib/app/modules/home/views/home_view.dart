@@ -247,12 +247,14 @@ class HomeView extends GetView<HomeController> {
                                         style: TextStyle(
                                           color: AppColors.blueColor,
                                           fontWeight: FontWeight.bold,
+                                          fontSize: AppSizes.fontSize18,
                                         ),
                                       ),
                                       content: Text(
                                         "Apakah Anda yakin ingin menghapus dokter ini?",
                                         style: TextStyle(
                                           color: Colors.black87,
+                                          fontSize: AppSizes.fontSize12,
                                         ),
                                       ),
                                       actions: <Widget>[
@@ -264,6 +266,7 @@ class HomeView extends GetView<HomeController> {
                                             style: TextStyle(
                                               color: AppColors.blueColor,
                                               fontWeight: FontWeight.bold,
+                                              fontSize: AppSizes.fontSize14,
                                             ),
                                           ),
                                         ),
@@ -275,6 +278,7 @@ class HomeView extends GetView<HomeController> {
                                             style: TextStyle(
                                               color: Colors.red,
                                               fontWeight: FontWeight.bold,
+                                              fontSize: AppSizes.fontSize14,
                                             ),
                                           ),
                                         ),
@@ -316,13 +320,14 @@ class HomeView extends GetView<HomeController> {
             icon: Icon(
               Icons.add,
               color: Colors.white,
+              size: AppSizes.iconSize28,
             ),
             label: Text(
               'Tambah Dokter',
               style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-              ),
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: AppSizes.fontSize14),
             ),
           );
         } else {

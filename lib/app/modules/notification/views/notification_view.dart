@@ -13,6 +13,14 @@ class NotificationView extends GetView<NotificationController> {
       appBar: AppBar(
         backgroundColor: AppColors.blueColor,
         elevation: 0.0,
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+            size: AppSizes.iconSize28,
+          ),
+          onPressed: () => Get.back(),
+        ),
         title: Text(
           'Notifikasi',
           style: TextStyle(
@@ -83,6 +91,7 @@ class NotificationView extends GetView<NotificationController> {
                       trailing: Icon(
                         Icons.notifications_active,
                         color: Colors.blueAccent,
+                        size: AppSizes.iconSize28,
                       ),
                       onTap: () {
                         Get.snackbar(

@@ -13,11 +13,24 @@ class ChangeProfileView extends GetView<ChangeProfileController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          "Ubah Profil",
-          style: TextStyle(color: Colors.white),
-        ),
         backgroundColor: AppColors.blueColor,
+        elevation: 0.0,
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+            size: AppSizes.iconSize28,
+          ),
+          onPressed: () => Get.back(),
+        ),
+        title: Text(
+          'Ubah Profile',
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            fontSize: AppSizes.fontSize20,
+          ),
+        ),
         centerTitle: true,
       ),
       body: RefreshIndicator(
@@ -111,7 +124,10 @@ class ChangeProfileView extends GetView<ChangeProfileController> {
                         ),
                       ),
                       IconButton(
-                        icon: Icon(Icons.calendar_today),
+                        icon: Icon(
+                          Icons.calendar_today,
+                          size: AppSizes.iconSize28,
+                        ),
                         onPressed: () async {
                           final selectedDate = await showDatePicker(
                             context: context,
@@ -165,6 +181,7 @@ class ChangeProfileView extends GetView<ChangeProfileController> {
                                 style: TextStyle(
                                   color: Colors.black,
                                   fontWeight: FontWeight.bold,
+                                  fontSize: AppSizes.fontSize12,
                                 ),
                               ),
                             ),
@@ -195,9 +212,9 @@ class ChangeProfileView extends GetView<ChangeProfileController> {
                               child: Text(
                                 "Perempuan",
                                 style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: AppSizes.fontSize12),
                               ),
                             ),
                           ),
@@ -220,12 +237,14 @@ class ChangeProfileView extends GetView<ChangeProfileController> {
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   color: AppColors.blueColor,
+                                  fontSize: AppSizes.fontSize18,
                                 ),
                               ),
                               content: Text(
                                 'Apakah data yang diinputkan sudah benar?',
                                 style: TextStyle(
                                   color: Colors.grey[800],
+                                  fontSize: AppSizes.fontSize12,
                                 ),
                               ),
                               actions: [
@@ -238,6 +257,7 @@ class ChangeProfileView extends GetView<ChangeProfileController> {
                                     style: TextStyle(
                                       color: Colors.red,
                                       fontWeight: FontWeight.bold,
+                                      fontSize: AppSizes.fontSize14,
                                     ),
                                   ),
                                 ),
@@ -258,6 +278,7 @@ class ChangeProfileView extends GetView<ChangeProfileController> {
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold,
+                                      fontSize: AppSizes.fontSize14,
                                     ),
                                   ),
                                 ),

@@ -13,13 +13,22 @@ class HelpView extends GetView<HelpController> {
         backgroundColor: AppColors.blueColor,
         elevation: 0.0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.white),
+          icon: Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+            size: AppSizes.iconSize28,
+          ),
           onPressed: () => Get.back(),
         ),
         title: Text(
-          "Bantuan",
-          style: TextStyle(color: Colors.white),
+          'Bantuan',
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            fontSize: AppSizes.fontSize20,
+          ),
         ),
+        centerTitle: true,
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(AppSizes.paddingAll16),

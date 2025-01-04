@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:aplikasi_booking_dokter/app/data/consts/consts.dart';
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -76,9 +76,12 @@ class AddDoctorController extends GetxController {
   void addSchedule(String day, String startTime, String endTime) {
     if (day.isNotEmpty && startTime.isNotEmpty && endTime.isNotEmpty) {
       schedules.add({
-        'day': day,
-        'startTime': startTime,
-        'endTime': endTime,
+        day.upperCamelCase: [
+          {
+            'startTime': startTime,
+            'endTime': endTime,
+          }
+        ],
       });
       scheduleDayController.clear();
       scheduleStartController.clear();
@@ -95,16 +98,26 @@ class AddDoctorController extends GetxController {
 
   void saveClinicData() {
     if (validateClinicInput()) {
+      // Gabungkan semua data dari schedules menjadi satu Map
+      Map<String, dynamic> combinedSchedules = {};
+      for (var schedule in schedules) {
+        combinedSchedules.addAll(schedule);
+      }
+
+      // Tambahkan data klinik ke clinicList
       clinicList.add({
         'name': clinicNameController.text,
         'address': clinicAddressController.text,
         'city': clinicCityController.text,
         'district': clinicDistrictController.text,
         'image': clinicImageController.text,
-        'schedules': schedules.toList(), // Simpan jadwal
+        'schedules': combinedSchedules,
       });
+
+      print("Data Schedule: $combinedSchedules");
+
       clearClinicFields();
-      Get.back(); // Kembali ke halaman sebelumnya
+      Get.back();
     }
   }
 

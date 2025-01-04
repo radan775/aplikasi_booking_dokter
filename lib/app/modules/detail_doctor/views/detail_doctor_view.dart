@@ -15,7 +15,11 @@ class DetailDoctorView extends GetView<DetailDoctorController> {
         backgroundColor: AppColors.blueColor,
         elevation: 0.0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.white),
+          icon: Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+            size: AppSizes.iconSize28,
+          ),
           onPressed: () => Get.back(),
         ),
         title: Text(
@@ -23,6 +27,7 @@ class DetailDoctorView extends GetView<DetailDoctorController> {
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
+            fontSize: AppSizes.fontSize20,
           ),
         ),
         centerTitle: true,
@@ -217,8 +222,14 @@ class DetailDoctorView extends GetView<DetailDoctorController> {
                                         color: isSelected
                                             ? Colors.green
                                             : Colors.blueAccent,
+                                        size: AppSizes.iconSize25,
                                       ),
-                                      title: Text('$startTime - $endTime'),
+                                      title: Text(
+                                        '$startTime - $endTime',
+                                        style: TextStyle(
+                                          fontSize: AppSizes.fontSize12,
+                                        ),
+                                      ),
                                       onTap: () {
                                         controller.selectSchedule(
                                           doctorId,

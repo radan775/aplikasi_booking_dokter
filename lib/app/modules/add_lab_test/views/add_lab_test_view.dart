@@ -12,6 +12,14 @@ class AddLabTestView extends GetView<AddLabTestController> {
       appBar: AppBar(
         backgroundColor: AppColors.blueColor,
         elevation: 0.0,
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+            size: AppSizes.iconSize28,
+          ),
+          onPressed: () => Get.back(),
+        ),
         title: Text(
           'Tambah Lab Test',
           style: TextStyle(
@@ -167,7 +175,12 @@ class AddLabTestView extends GetView<AddLabTestController> {
             // Tombol Tambah Jadwal
             ElevatedButton(
               onPressed: controller.addSchedule,
-              child: Text('Tambah Jadwal'),
+              child: Text(
+                'Tambah Jadwal',
+                style: TextStyle(
+                  fontSize: AppSizes.fontSize14,
+                ),
+              ),
             ),
             SizedBox(height: AppSizes.heightSizeBox16),
             Text(
@@ -190,10 +203,15 @@ class AddLabTestView extends GetView<AddLabTestController> {
                       '${schedule['start']} - ${schedule['end']} (${schedule['type']})',
                       style: TextStyle(
                         fontWeight: FontWeight.w500,
+                        fontSize: AppSizes.fontSize14,
                       ),
                     ),
                     trailing: IconButton(
-                      icon: Icon(Icons.delete, color: Colors.red),
+                      icon: Icon(
+                        Icons.delete,
+                        color: Colors.red,
+                        size: AppSizes.iconSize28,
+                      ),
                       onPressed: () {
                         controller.removeSchedule(index);
                       },

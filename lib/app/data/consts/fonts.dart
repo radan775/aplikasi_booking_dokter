@@ -96,6 +96,7 @@ class AppSizes {
   static double get iconSize18 => 18.r;
   static double get iconSize20 => 20.r;
   static double get iconSize25 => 25.r;
+  static double get iconSize28 => 28.r;
   static double get iconSize30 => 30.r;
   static double get iconSize32 => 32.r;
   static double get iconSize40 => 40.r;

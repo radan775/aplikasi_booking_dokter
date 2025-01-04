@@ -118,7 +118,7 @@ class AddLabTestController extends GetxController {
           'city': cityController.text,
           'district': districtController.text,
         },
-        'operationalHours': {
+        'operasionalHours': {
           'start': startHourController.text,
           'end': endHourController.text,
         },

@@ -13,14 +13,19 @@ class DetailPasienView extends GetView<DetailPasienController> {
         backgroundColor: AppColors.blueColor,
         elevation: 0.0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.white),
+          icon: Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+            size: AppSizes.iconSize28,
+          ),
           onPressed: () => Get.back(),
         ),
         title: Text(
-          "Detail Pasien",
+          'Detail Pasien',
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
+            fontSize: AppSizes.fontSize20,
           ),
         ),
         centerTitle: true,
@@ -69,7 +74,10 @@ class DetailPasienView extends GetView<DetailPasienController> {
                       ),
                     ),
                     IconButton(
-                      icon: Icon(Icons.calendar_today),
+                      icon: Icon(
+                        Icons.calendar_today,
+                        size: AppSizes.iconSize25,
+                      ),
                       onPressed: () async {
                         final selectedDate = await showDatePicker(
                           context: context,
@@ -105,8 +113,7 @@ class DetailPasienView extends GetView<DetailPasienController> {
                                     ? AppColors.blueColor
                                     : Colors.grey[300],
                             shape: RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.circular(0), // Sudut kotak
+                              borderRadius: BorderRadius.circular(0),
                             ),
                           ),
                           onPressed: () {
@@ -119,6 +126,7 @@ class DetailPasienView extends GetView<DetailPasienController> {
                                   controller.selectedGender.value == "Laki-laki"
                                       ? Colors.white
                                       : Colors.black,
+                              fontSize: AppSizes.fontSize14,
                             ),
                           ),
                         ),
@@ -147,6 +155,7 @@ class DetailPasienView extends GetView<DetailPasienController> {
                                   controller.selectedGender.value == "Perempuan"
                                       ? Colors.white
                                       : Colors.black,
+                              fontSize: AppSizes.fontSize14,
                             ),
                           ),
                         ),

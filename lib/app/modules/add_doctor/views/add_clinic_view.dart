@@ -12,6 +12,14 @@ class AddClinicView extends GetView<AddDoctorController> {
       appBar: AppBar(
         backgroundColor: AppColors.blueColor,
         elevation: 0.0,
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+            size: AppSizes.iconSize28,
+          ),
+          onPressed: () => Get.back(),
+        ),
         title: Text(
           'Tambah Klinik',
           style: TextStyle(
@@ -107,14 +115,19 @@ class AddClinicView extends GetView<AddDoctorController> {
                 itemCount: controller.schedules.length,
                 itemBuilder: (context, index) {
                   final schedule = controller.schedules[index];
+                  final day = schedule.keys.first;
                   return ListTile(
                     title: Text(
-                      '${schedule['day']} : ${schedule['startTime']} - ${schedule['endTime']}',
+                      '$day : ${schedule[day][0]["startTime"]} - ${schedule[day][0]["endTime"]}',
+                      style: TextStyle(
+                        fontSize: AppSizes.fontSize12,
+                      ),
                     ),
                     trailing: IconButton(
                       icon: Icon(
                         Icons.delete,
                         color: Colors.red,
+                        size: AppSizes.iconSize25,
                       ),
                       onPressed: () {
                         controller.removeSchedule(index);
@@ -136,9 +149,14 @@ class AddClinicView extends GetView<AddDoctorController> {
                 // Panggil method untuk menambah jadwal
                 controller.addSchedule(day, startTime, endTime);
               },
-              child: Text('Tambah Jadwal'),
+              child: Text(
+                'Tambah Jadwal',
+                style: TextStyle(
+                  fontSize: AppSizes.fontSize14,
+                ),
+              ),
             ),
-            SizedBox(height: AppSizes.heightSizeBox30),
+            SizedBox(height: AppSizes.heightSizeBox24),
 
             // Tombol Tambah Dokter
             ElevatedButton(

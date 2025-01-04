@@ -12,6 +12,14 @@ class AddNewsView extends GetView<AddNewsController> {
       appBar: AppBar(
         backgroundColor: AppColors.blueColor,
         elevation: 0.0,
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+            size: AppSizes.iconSize28,
+          ),
+          onPressed: () => Get.back(),
+        ),
         title: Text(
           'Tambah Berita',
           style: TextStyle(
@@ -65,6 +73,7 @@ class AddNewsView extends GetView<AddNewsController> {
                             'Masukkan URL Gambar',
                             style: TextStyle(
                               color: Colors.grey[600],
+                              fontSize: AppSizes.fontSize16,
                             ),
                           ),
                         ],

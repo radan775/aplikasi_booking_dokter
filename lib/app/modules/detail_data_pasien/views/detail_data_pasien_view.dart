@@ -12,7 +12,11 @@ class DetailDataPasienView extends GetView<DetailDataPasienController> {
         backgroundColor: AppColors.blueColor,
         elevation: 0.0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.white),
+          icon: Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+            size: AppSizes.iconSize28,
+          ),
           onPressed: () => Get.back(),
         ),
         title: Text(
@@ -20,6 +24,7 @@ class DetailDataPasienView extends GetView<DetailDataPasienController> {
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
+            fontSize: AppSizes.fontSize20,
           ),
         ),
         centerTitle: true,
@@ -325,6 +330,7 @@ class DetailDataPasienView extends GetView<DetailDataPasienController> {
                                           "Ya"
                                       ? Colors.white
                                       : Colors.black,
+                                  fontSize: AppSizes.fontSize14,
                                 ),
                               ),
                             ),
@@ -356,6 +362,7 @@ class DetailDataPasienView extends GetView<DetailDataPasienController> {
                                           "Tidak"
                                       ? Colors.white
                                       : Colors.black,
+                                  fontSize: AppSizes.fontSize14,
                                 ),
                               ),
                             ),
@@ -402,6 +409,7 @@ class DetailDataPasienView extends GetView<DetailDataPasienController> {
                                               "Dana Pribadi"
                                           ? Colors.white
                                           : Colors.black,
+                                  fontSize: AppSizes.fontSize14,
                                 ),
                               ),
                             ),
@@ -435,6 +443,7 @@ class DetailDataPasienView extends GetView<DetailDataPasienController> {
                                               "Asuransi"
                                           ? Colors.white
                                           : Colors.black,
+                                  fontSize: AppSizes.fontSize14,
                                 ),
                               ),
                             ),
@@ -455,12 +464,14 @@ class DetailDataPasienView extends GetView<DetailDataPasienController> {
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   color: AppColors.blueColor,
+                                  fontSize: AppSizes.fontSize18,
                                 ),
                               ),
                               content: Text(
                                 'Apakah semua data sudah benar?',
                                 style: TextStyle(
                                   color: Colors.grey[800],
+                                  fontSize: AppSizes.fontSize12,
                                 ),
                               ),
                               actions: [
@@ -475,6 +486,7 @@ class DetailDataPasienView extends GetView<DetailDataPasienController> {
                                     style: TextStyle(
                                       color: Colors.red,
                                       fontWeight: FontWeight.bold,
+                                      fontSize: AppSizes.fontSize14,
                                     ),
                                   ),
                                 ),
@@ -493,6 +505,7 @@ class DetailDataPasienView extends GetView<DetailDataPasienController> {
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold,
+                                      fontSize: AppSizes.fontSize14,
                                     ),
                                   ),
                                 ),

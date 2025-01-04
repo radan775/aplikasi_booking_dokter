@@ -13,6 +13,14 @@ class AddDoctorView extends GetView<AddDoctorController> {
       appBar: AppBar(
         backgroundColor: AppColors.blueColor,
         elevation: 0.0,
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+            size: AppSizes.iconSize28,
+          ),
+          onPressed: () => Get.back(),
+        ),
         title: Text(
           'Tambah Dokter',
           style: TextStyle(
@@ -85,7 +93,10 @@ class AddDoctorView extends GetView<AddDoctorController> {
               onPressed: () {
                 controller.addEducation(controller.educationController.text);
               },
-              child: Text('Tambah Pendidikan'),
+              child: Text(
+                'Tambah Pendidikan',
+                style: TextStyle(fontSize: AppSizes.fontSize14),
+              ),
             ),
             Obx(() {
               return ListView.builder(
@@ -94,9 +105,18 @@ class AddDoctorView extends GetView<AddDoctorController> {
                 itemCount: controller.educationList.length,
                 itemBuilder: (context, index) {
                   return ListTile(
-                    title: Text(controller.educationList[index]),
+                    title: Text(
+                      controller.educationList[index],
+                      style: TextStyle(
+                        fontSize: AppSizes.fontSize14,
+                      ),
+                    ),
                     trailing: IconButton(
-                      icon: Icon(Icons.delete, color: Colors.red),
+                      icon: Icon(
+                        Icons.delete,
+                        color: Colors.red,
+                        size: AppSizes.iconSize25,
+                      ),
                       onPressed: () {
                         controller.removeEducation(index);
                       },
@@ -118,7 +138,10 @@ class AddDoctorView extends GetView<AddDoctorController> {
               onPressed: () {
                 controller.addExperience(controller.experienceController.text);
               },
-              child: Text('Tambah Pengalaman'),
+              child: Text(
+                'Tambah Pengalaman',
+                style: TextStyle(fontSize: AppSizes.fontSize14),
+              ),
             ),
             Obx(() {
               return ListView.builder(
@@ -127,9 +150,18 @@ class AddDoctorView extends GetView<AddDoctorController> {
                 itemCount: controller.experienceList.length,
                 itemBuilder: (context, index) {
                   return ListTile(
-                    title: Text(controller.experienceList[index]),
+                    title: Text(
+                      controller.experienceList[index],
+                      style: TextStyle(
+                        fontSize: AppSizes.fontSize14,
+                      ),
+                    ),
                     trailing: IconButton(
-                      icon: Icon(Icons.delete, color: Colors.red),
+                      icon: Icon(
+                        Icons.delete,
+                        color: Colors.red,
+                        size: AppSizes.iconSize25,
+                      ),
                       onPressed: () {
                         controller.removeExperience(index);
                       },
@@ -151,7 +183,10 @@ class AddDoctorView extends GetView<AddDoctorController> {
               onPressed: () {
                 controller.addTreatment(controller.treatmentsController.text);
               },
-              child: Text('Tambah Treatment'),
+              child: Text(
+                'Tambah Treatment',
+                style: TextStyle(fontSize: AppSizes.fontSize14),
+              ),
             ),
             Obx(() {
               return ListView.builder(
@@ -160,9 +195,18 @@ class AddDoctorView extends GetView<AddDoctorController> {
                 itemCount: controller.treatmentsList.length,
                 itemBuilder: (context, index) {
                   return ListTile(
-                    title: Text(controller.treatmentsList[index]),
+                    title: Text(
+                      controller.treatmentsList[index],
+                      style: TextStyle(
+                        fontSize: AppSizes.fontSize14,
+                      ),
+                    ),
                     trailing: IconButton(
-                      icon: Icon(Icons.delete, color: Colors.red),
+                      icon: Icon(
+                        Icons.delete,
+                        color: Colors.red,
+                        size: AppSizes.iconSize25,
+                      ),
                       onPressed: () {
                         controller.removeTreatment(index);
                       },
@@ -219,7 +263,8 @@ class AddDoctorView extends GetView<AddDoctorController> {
                             },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.blueColor,
-                        padding: EdgeInsets.symmetric(vertical: 15),
+                        padding: EdgeInsets.symmetric(
+                            vertical: AppSizes.paddingVertical15),
                         shape: RoundedRectangleBorder(
                           borderRadius:
                               BorderRadius.circular(AppSizes.borderRadius8),

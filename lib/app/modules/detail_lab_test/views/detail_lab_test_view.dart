@@ -11,10 +11,15 @@ class DetailLabTestView extends GetView<DetailLabTestController> {
 
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: AppSizes.heightToolBar70,
         backgroundColor: AppColors.blueColor,
         elevation: 0.0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.white),
+          icon: Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+            size: AppSizes.iconSize28,
+          ),
           onPressed: () => Get.back(),
         ),
         title: Column(
@@ -292,8 +297,6 @@ class DetailLabTestView extends GetView<DetailLabTestController> {
                         onPressed: () {
                           controller.buatJanji(
                               schedule['start'], schedule['end']);
-                          print(
-                              "Buat Janji untuk ${schedule['type']} (${schedule['start']} - ${schedule['end']})");
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.green,
@@ -306,7 +309,7 @@ class DetailLabTestView extends GetView<DetailLabTestController> {
                           "Buat Janji",
                           style: TextStyle(
                             color: Colors.white,
-                            fontSize: AppSizes.fontSize14,
+                            fontSize: AppSizes.fontSize16,
                           ),
                         ),
                       ),

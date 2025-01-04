@@ -13,14 +13,24 @@ class HelpDetailView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.blueColor,
-        title: Text(
-          helpTitle,
-          style: TextStyle(color: Colors.white),
-        ),
+        elevation: 0.0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.white),
+          icon: Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+            size: AppSizes.iconSize28,
+          ),
           onPressed: () => Get.back(),
         ),
+        title: Text(
+          helpTitle,
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            fontSize: AppSizes.fontSize20,
+          ),
+        ),
+        centerTitle: true,
       ),
       body: Padding(
         padding: EdgeInsets.all(AppSizes.paddingAll16),

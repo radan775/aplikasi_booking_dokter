@@ -28,7 +28,11 @@ class DetailHistoryView extends GetView<DetailHistoryController> {
       backgroundColor: AppColors.blueColor,
       elevation: 0.0,
       leading: IconButton(
-        icon: Icon(Icons.arrow_back, color: Colors.white),
+        icon: Icon(
+          Icons.arrow_back,
+          color: Colors.white,
+          size: AppSizes.iconSize28,
+        ),
         onPressed: () => Get.back(),
       ),
       title: Text(

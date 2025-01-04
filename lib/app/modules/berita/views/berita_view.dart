@@ -55,17 +55,43 @@ class BeritaView extends GetView<BeritaController> {
                       context: context,
                       builder: (BuildContext context) {
                         return AlertDialog(
-                          title: Text('Hapus Berita'),
+                          title: Text(
+                            'Hapus Berita',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: AppColors.blueColor,
+                              fontSize: AppSizes.fontSize18,
+                            ),
+                          ),
                           content: Text(
-                              'Apakah Anda yakin ingin menghapus berita ini?'),
+                            'Apakah Anda yakin ingin menghapus berita ini?',
+                            style: TextStyle(
+                              color: Colors.grey[800],
+                              fontSize: AppSizes.fontSize12,
+                            ),
+                          ),
                           actions: [
                             TextButton(
                               onPressed: () => Navigator.of(context).pop(false),
-                              child: Text('Batal'),
+                              child: Text(
+                                'Batal',
+                                style: TextStyle(
+                                  color: Colors.red,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: AppSizes.fontSize14,
+                                ),
+                              ),
                             ),
                             TextButton(
                               onPressed: () => Navigator.of(context).pop(true),
-                              child: Text('Hapus'),
+                              child: Text(
+                                'Hapus',
+                                style: TextStyle(
+                                  color: AppColors.blueColor,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: AppSizes.fontSize14,
+                                ),
+                              ),
                             ),
                           ],
                         );
@@ -112,12 +138,14 @@ class BeritaView extends GetView<BeritaController> {
             icon: Icon(
               Icons.add,
               color: Colors.white,
+              size: AppSizes.iconSize28,
             ),
             label: Text(
               'Tambah Berita',
               style: TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
+                fontSize: AppSizes.fontSize14,
               ),
             ),
           );

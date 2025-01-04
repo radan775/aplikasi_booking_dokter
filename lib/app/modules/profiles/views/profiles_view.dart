@@ -18,6 +18,7 @@ class ProfilesView extends GetView<ProfilesController> {
           color: AppColors.whiteColor,
           size: AppSizes.fontSize18,
         ),
+        centerTitle: true,
       ),
       body: RefreshIndicator(
         onRefresh: () async => await controller.fetchUserData(),
