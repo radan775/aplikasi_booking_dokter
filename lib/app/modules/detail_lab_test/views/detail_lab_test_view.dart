@@ -14,7 +14,7 @@ class DetailLabTestView extends GetView<DetailLabTestController> {
         backgroundColor: AppColors.blueColor,
         elevation: 0.0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          icon: Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () => Get.back(),
         ),
         title: Column(
@@ -22,31 +22,31 @@ class DetailLabTestView extends GetView<DetailLabTestController> {
           children: [
             Text(
               labTestData['test'] ?? 'Unknown Test',
-              style: const TextStyle(
+              style: TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
-                fontSize: 18,
+                fontSize: AppSizes.fontSize18,
               ),
             ),
             Text(
               '${labTestData['currency']}${labTestData['price']}',
-              style: const TextStyle(
+              style: TextStyle(
                 color: Colors.white70,
-                fontSize: 14,
+                fontSize: AppSizes.fontSize14,
               ),
             ),
           ],
         ),
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16.0),
+        padding: EdgeInsets.all(AppSizes.paddingAll16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _buildLocationCard(labTestData),
-            const SizedBox(height: 16),
+            SizedBox(height: AppSizes.heightSizeBox16),
             _buildDescriptionCard(labTestData),
-            const SizedBox(height: 16),
+            SizedBox(height: AppSizes.heightSizeBox16),
             _buildScheduleCard(labTestData),
           ],
         ),
@@ -58,64 +58,64 @@ class DetailLabTestView extends GetView<DetailLabTestController> {
     return Card(
       elevation: 5,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(AppSizes.borderRadius12),
       ),
       child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: EdgeInsets.all(AppSizes.paddingAll16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
+            Text(
               "Lokasi Rumah Sakit",
               style: TextStyle(
-                fontSize: 16,
+                fontSize: AppSizes.fontSize16,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const Divider(),
+            Divider(),
             Row(
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.circular(12),
                   child: Image.network(
                     labTestData['image'] ?? '',
-                    width: 80,
-                    height: 80,
+                    width: AppSizes.imageWidth80,
+                    height: AppSizes.imageHeight80,
                     fit: BoxFit.cover,
                     errorBuilder: (context, error, stackTrace) => Container(
-                      width: 80,
-                      height: 80,
+                      width: AppSizes.imageWidth80,
+                      height: AppSizes.imageHeight80,
                       color: Colors.grey[300],
-                      child: const Icon(Icons.image_not_supported,
-                          color: Colors.grey),
+                      child:
+                          Icon(Icons.image_not_supported, color: Colors.grey),
                     ),
                   ),
                 ),
-                const SizedBox(width: 16),
+                SizedBox(width: AppSizes.widthSizeBox16),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         labTestData['hospital'] ?? 'Unknown Hospital',
-                        style: const TextStyle(
-                          fontSize: 16,
+                        style: TextStyle(
+                          fontSize: AppSizes.fontSize16,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      const SizedBox(height: 8),
+                      SizedBox(height: AppSizes.heightSizeBox8),
                       Text(
                         labTestData['address'] ?? 'Unknown Address',
-                        style: const TextStyle(
-                          fontSize: 14,
+                        style: TextStyle(
+                          fontSize: AppSizes.fontSize14,
                           color: Colors.grey,
                         ),
                       ),
-                      const SizedBox(height: 8),
+                      SizedBox(height: AppSizes.heightSizeBox8),
                       Text(
                         'Jam Operasional: ${labTestData['operasionalHours']['start']} - ${labTestData['operasionalHours']['end']}',
-                        style: const TextStyle(
-                          fontSize: 14,
+                        style: TextStyle(
+                          fontSize: AppSizes.fontSize14,
                           color: Colors.grey,
                         ),
                       ),
@@ -134,27 +134,27 @@ class DetailLabTestView extends GetView<DetailLabTestController> {
     return Card(
       elevation: 5,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(AppSizes.borderRadius12),
       ),
       child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: EdgeInsets.all(AppSizes.paddingAll16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
+            Text(
               "Deskripsi",
               style: TextStyle(
-                fontSize: 16,
+                fontSize: AppSizes.fontSize16,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const Divider(),
+            Divider(),
             Text(
               labTestData['description'] ?? 'No description available.',
-              style: const TextStyle(
-                fontSize: 14,
+              style: TextStyle(
+                fontSize: AppSizes.fontSize14,
                 color: Colors.black87,
-                height: 1.5,
+                height: AppSizes.textHeight1_5,
               ),
             ),
           ],
@@ -167,57 +167,65 @@ class DetailLabTestView extends GetView<DetailLabTestController> {
     return Card(
       elevation: 5,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(AppSizes.borderRadius12),
       ),
       child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: EdgeInsets.all(AppSizes.paddingAll16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
+            Text(
               "Jadwal",
               style: TextStyle(
-                fontSize: 16,
+                fontSize: AppSizes.fontSize16,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const Divider(),
+            Divider(),
             Obx(() {
-              // Jika belum memilih tanggal, tampilkan tombol
               if (controller.selectedDateText.value.isEmpty) {
                 return ElevatedButton(
                   onPressed: () => controller.pickDate(),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.transparent,
                     elevation: 0,
-                    minimumSize: const Size(double.infinity, 45),
+                    minimumSize: Size(
+                      double.infinity,
+                      AppSizes.heightSizeButton45,
+                    ),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
+                      borderRadius: BorderRadius.circular(
+                        AppSizes.borderRadius8,
+                      ),
                       side: BorderSide(
                         color: AppColors.blueColor,
-                        width: 1.5,
+                        width: AppSizes.widthBorderSide1_5,
                       ),
                     ),
                   ),
-                  child: const Text(
+                  child: Text(
                     "Pilih Tanggal",
                     style: TextStyle(
                       color: AppColors.blueColor,
-                      fontSize: 16,
+                      fontSize: AppSizes.fontSize16,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                 );
               }
 
-              // Jika sudah memilih tanggal, tampilkan container dengan tanggal dan tombol ganti
               return Container(
                 width: double.infinity,
-                padding:
-                    const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                padding: EdgeInsets.symmetric(
+                    vertical: AppSizes.paddingVertical12,
+                    horizontal: AppSizes.paddingHorizontal16),
                 decoration: BoxDecoration(
-                  border: Border.all(color: AppColors.blueColor, width: 1.5),
-                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(
+                      color: AppColors.blueColor,
+                      width: AppSizes.widthBoxDecoration1_5),
+                  borderRadius: BorderRadius.circular(
+                    AppSizes.borderRadius8,
+                  ),
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -226,7 +234,7 @@ class DetailLabTestView extends GetView<DetailLabTestController> {
                       controller.selectedDateText.value,
                       style: TextStyle(
                         color: AppColors.blueColor,
-                        fontSize: 16,
+                        fontSize: AppSizes.fontSize16,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -236,7 +244,7 @@ class DetailLabTestView extends GetView<DetailLabTestController> {
                         "Ganti Tanggal",
                         style: TextStyle(
                           color: Colors.red,
-                          fontSize: 14,
+                          fontSize: AppSizes.fontSize14,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -245,14 +253,16 @@ class DetailLabTestView extends GetView<DetailLabTestController> {
                 ),
               );
             }),
-            const SizedBox(height: 16),
+            SizedBox(height: AppSizes.heightSizeBox16),
             ...List.generate(
               (labTestData['schedule'] as List?)?.length ?? 0,
               (index) {
                 final schedule = (labTestData['schedule'] as List)[index]
                     as Map<String, dynamic>;
                 return Padding(
-                  padding: const EdgeInsets.only(bottom: 8.0),
+                  padding: EdgeInsets.only(
+                    bottom: AppSizes.paddingBottom8,
+                  ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -262,16 +272,16 @@ class DetailLabTestView extends GetView<DetailLabTestController> {
                           children: [
                             Text(
                               schedule['type'] ?? 'Unknown Type',
-                              style: const TextStyle(
-                                fontSize: 14,
+                              style: TextStyle(
+                                fontSize: AppSizes.fontSize14,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            const SizedBox(height: 4),
+                            SizedBox(height: AppSizes.heightSizeBox4),
                             Text(
                               '${schedule['start']} - ${schedule['end']}',
-                              style: const TextStyle(
-                                fontSize: 14,
+                              style: TextStyle(
+                                fontSize: AppSizes.fontSize14,
                                 color: Colors.grey,
                               ),
                             ),
@@ -288,14 +298,15 @@ class DetailLabTestView extends GetView<DetailLabTestController> {
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.green,
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8),
+                            borderRadius:
+                                BorderRadius.circular(AppSizes.borderRadius8),
                           ),
                         ),
-                        child: const Text(
+                        child: Text(
                           "Buat Janji",
                           style: TextStyle(
                             color: Colors.white,
-                            fontSize: 14,
+                            fontSize: AppSizes.fontSize14,
                           ),
                         ),
                       ),

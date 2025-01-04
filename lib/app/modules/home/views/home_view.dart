@@ -13,6 +13,7 @@ class HomeView extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: AppSizes.heightToolBar70,
         backgroundColor: AppColors.blueColor,
         elevation: 0.0,
         title: Column(
@@ -23,41 +24,52 @@ class HomeView extends GetView<HomeController> {
                   title:
                       "${AppStrings.welcome} ${controller.namalengkap.value}",
                   color: AppColors.whiteColor,
-                  size: AppSizes.size18,
+                  size: AppSizes.fontSize18,
                 )),
             Obx(() => AppStyles.normal(
                   title: controller.userAddress.value,
                   color: AppColors.whiteColor.withOpacity(0.8),
-                  size: AppSizes.size12,
+                  size: AppSizes.fontSize12,
                 )),
           ],
         ),
         actions: [
-          IconButton(
-            icon: Icon(Icons.notifications, color: AppColors.whiteColor),
-            onPressed: () {
-              Get.toNamed(Routes.NOTIFICATION);
-            },
+          Padding(
+            padding: EdgeInsets.only(right: AppSizes.paddingRight10),
+            child: IconButton(
+              icon: Icon(
+                Icons.notifications,
+                color: AppColors.whiteColor,
+                size: AppSizes.iconSize30,
+              ),
+              onPressed: () {
+                Get.toNamed(Routes.NOTIFICATION);
+              },
+            ),
           ),
         ],
       ),
       body: Obx(() {
         if (controller.isLoading.value) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
+          return Center(
+              child: SizedBox(
+            width: AppSizes.loadingSize,
+            height: AppSizes.loadingSize,
+            child: CircularProgressIndicator(
+              strokeWidth: AppSizes.strokeWidth3,
+            ),
+          ));
         }
         if (controller.doctors.isEmpty) {
-          return const Center(
+          return Center(
             child: Text("No doctors available."),
           );
         }
 
         return Column(
           children: [
-            // Search Bar
             Container(
-              padding: const EdgeInsets.all(12),
+              padding: EdgeInsets.all(AppSizes.paddingAll12),
               color: AppColors.blueColor,
               child: Row(
                 children: [
@@ -72,18 +84,18 @@ class HomeView extends GetView<HomeController> {
                       },
                     ),
                   ),
-                  const SizedBox(width: 10),
+                  SizedBox(width: AppSizes.widthSizeBox10),
                   // Tambahkan tombol mikropon
                   Obx(() {
                     return IconButton(
                       icon: Icon(
-                        controller.isListening.value
-                            ? Icons.mic
-                            : Icons.mic_none,
-                        color: controller.isListening.value
-                            ? Colors.red
-                            : Colors.white,
-                      ),
+                          controller.isListening.value
+                              ? Icons.mic
+                              : Icons.mic_none,
+                          color: controller.isListening.value
+                              ? Colors.red
+                              : Colors.white,
+                          size: AppSizes.iconSize30),
                       onPressed: () {
                         if (controller.isListening.value) {
                           // Jika sedang listening, hentikan
@@ -100,18 +112,21 @@ class HomeView extends GetView<HomeController> {
             ),
             // Horizontal ListView for Doctor Types
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+              padding: EdgeInsets.symmetric(
+                horizontal: AppSizes.paddingHorizontal10,
+                vertical: AppSizes.paddingVertical10,
+              ),
               alignment: Alignment.centerLeft,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   AppStyles.bold(
                     title: "Doctors",
-                    size: AppSizes.size18,
+                    size: AppSizes.fontSize18,
                     color: AppColors.blueColor,
                   ),
                   SizedBox(
-                    height: 33, // Tinggi dari horizontal ListView
+                    height: AppSizes.heightSizeBox33,
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
                       itemCount: controller.doctorTypes.length,
@@ -124,25 +139,26 @@ class HomeView extends GetView<HomeController> {
                           return GestureDetector(
                             onTap: () {
                               controller.filterDoctorsBySpecialty(specialty);
-                              print(
-                                  "${controller.doctorTypes[index]} selected!");
                             },
                             child: Container(
-                              margin: const EdgeInsets.only(right: 8),
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 16,
-                                vertical: 8,
+                              margin:
+                                  EdgeInsets.only(right: AppSizes.marginRight8),
+                              padding: EdgeInsets.symmetric(
+                                horizontal: AppSizes.paddingHorizontal16,
+                                vertical: AppSizes.paddingVertical8,
                               ),
                               decoration: BoxDecoration(
                                 color: isSelected
                                     ? AppColors.blueColor
                                     : AppColors.blueColor.withOpacity(0.1),
-                                borderRadius: BorderRadius.circular(20),
+                                borderRadius: BorderRadius.circular(
+                                  AppSizes.borderRadius20,
+                                ),
                               ),
                               child: Center(
                                 child: AppStyles.normal(
                                   title: specialty,
-                                  size: AppSizes.size14,
+                                  size: AppSizes.fontSize14,
                                   color: isSelected
                                       ? Colors.white
                                       : AppColors.blueColor,
@@ -170,26 +186,26 @@ class HomeView extends GetView<HomeController> {
                           children: [
                             Lottie.asset(
                               AppLotties.search_not_found,
-                              width: 200,
-                              height: 200,
+                              width: AppSizes.lottieWidth200,
+                              height: AppSizes.lottieHeight200,
                               repeat: true,
                               fit: BoxFit.contain,
                             ),
-                            const SizedBox(height: 16),
+                            SizedBox(height: AppSizes.heightSizeBox16),
                             Text(
                               "Hasil tidak ada",
                               style: TextStyle(
                                 color: Colors.grey[600],
-                                fontSize: 18,
+                                fontSize: AppSizes.fontSize18,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            const SizedBox(height: 8),
+                            SizedBox(height: AppSizes.heightSizeBox8),
                             Text(
                               "Coba kata kunci lain",
                               style: TextStyle(
                                 color: Colors.grey[500],
-                                fontSize: 14,
+                                fontSize: AppSizes.fontSize14,
                               ),
                             ),
                           ],
@@ -197,13 +213,13 @@ class HomeView extends GetView<HomeController> {
                       );
                     }
                     return ListView.builder(
-                      padding: const EdgeInsets.all(10.0),
+                      padding: EdgeInsets.all(AppSizes.paddingAll10),
                       itemCount: controller.filteredDoctors.length,
                       itemBuilder: (context, index) {
                         final doctor = controller.filteredDoctors[index];
                         final firstClinic = doctor["clinics"].isNotEmpty
                             ? doctor["clinics"][0]
-                            : null; // Klinik pertama
+                            : null;
                         return Obx(() {
                           if (controller.isAdmin) {
                             return Dismissible(
@@ -211,16 +227,17 @@ class HomeView extends GetView<HomeController> {
                               direction: DismissDirection.endToStart,
                               background: Container(
                                 color: Colors.red,
-                                padding: const EdgeInsets.only(right: 20),
+                                padding: EdgeInsets.only(
+                                  right: AppSizes.paddingRigth20,
+                                ),
                                 alignment: Alignment.centerRight,
-                                child: const Icon(
+                                child: Icon(
                                   Icons.delete,
                                   color: Colors.white,
-                                  size: 32,
+                                  size: AppSizes.iconSize32,
                                 ),
                               ),
                               confirmDismiss: (direction) async {
-                                // Konfirmasi sebelum menghapus
                                 return await showDialog(
                                   context: context,
                                   builder: (BuildContext context) {
@@ -228,16 +245,15 @@ class HomeView extends GetView<HomeController> {
                                       title: Text(
                                         "Hapus Dokter",
                                         style: TextStyle(
-                                          color: AppColors
-                                              .blueColor, // Warna judul
+                                          color: AppColors.blueColor,
                                           fontWeight: FontWeight.bold,
                                         ),
                                       ),
-                                      content: const Text(
+                                      content: Text(
                                         "Apakah Anda yakin ingin menghapus dokter ini?",
                                         style: TextStyle(
-                                            color: Colors
-                                                .black87), // Warna teks konten
+                                          color: Colors.black87,
+                                        ),
                                       ),
                                       actions: <Widget>[
                                         TextButton(
@@ -246,8 +262,7 @@ class HomeView extends GetView<HomeController> {
                                           child: Text(
                                             "Batal",
                                             style: TextStyle(
-                                              color: AppColors
-                                                  .blueColor, // Warna untuk tombol "Batal"
+                                              color: AppColors.blueColor,
                                               fontWeight: FontWeight.bold,
                                             ),
                                           ),
@@ -258,8 +273,7 @@ class HomeView extends GetView<HomeController> {
                                           child: Text(
                                             "Hapus",
                                             style: TextStyle(
-                                              color: Colors
-                                                  .red, // Warna untuk tombol "Hapus"
+                                              color: Colors.red,
                                               fontWeight: FontWeight.bold,
                                             ),
                                           ),
@@ -270,9 +284,7 @@ class HomeView extends GetView<HomeController> {
                                 );
                               },
                               onDismissed: (direction) async {
-                                // Hapus dokter dari Firestore
                                 await controller.deleteDoctor(doctor['id']);
-                                // Hapus dokter dari daftar
                                 controller.filteredDoctors.removeAt(index);
                               },
                               child: buildDoctorCard(doctor, firstClinic),
@@ -301,7 +313,7 @@ class HomeView extends GetView<HomeController> {
               }
             },
             backgroundColor: AppColors.blueColor,
-            icon: const Icon(
+            icon: Icon(
               Icons.add,
               color: Colors.white,
             ),
@@ -314,7 +326,7 @@ class HomeView extends GetView<HomeController> {
             ),
           );
         } else {
-          return const SizedBox.shrink();
+          return SizedBox.shrink();
         }
       }),
     );
@@ -323,7 +335,9 @@ class HomeView extends GetView<HomeController> {
   Widget buildDoctorCard(
       Map<String, dynamic> doctor, Map<String, dynamic>? firstClinic) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 10.0),
+      padding: EdgeInsets.only(
+        bottom: AppSizes.paddingBottom10,
+      ),
       child: InkWell(
         onTap: () {
           Get.toNamed(
@@ -334,10 +348,12 @@ class HomeView extends GetView<HomeController> {
         child: Card(
           elevation: 3,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(
+              AppSizes.borderRadius12,
+            ),
           ),
           child: Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: EdgeInsets.all(AppSizes.paddingAll16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -347,81 +363,80 @@ class HomeView extends GetView<HomeController> {
                     ClipOval(
                       child: Image.network(
                         doctor["image"],
-                        width: 70,
-                        height: 70,
+                        width: AppSizes.imageWidth70,
+                        height: AppSizes.imageHeight70,
                         fit: BoxFit.cover,
                         errorBuilder: (context, error, stackTrace) {
                           return ClipOval(
                             child: Container(
-                              width: 70,
-                              height: 70,
+                              width: AppSizes.imageWidth70,
+                              height: AppSizes.imageHeight70,
                               color: Colors.blue,
-                              child: const Icon(
+                              child: Icon(
                                 Icons.person,
                                 color: Colors.white,
-                                size: 40,
+                                size: AppSizes.iconSize40,
                               ),
                             ),
                           );
                         },
                       ),
                     ),
-                    const SizedBox(width: 10),
+                    SizedBox(width: AppSizes.widthSizeBox10),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          // Doctor Name
                           Row(
                             children: [
-                              const Icon(
+                              Icon(
                                 Icons.person,
                                 color: Colors.blueAccent,
-                                size: 20,
+                                size: AppSizes.iconSize20,
                               ),
-                              const SizedBox(width: 8),
+                              SizedBox(width: AppSizes.widthSizeBox8),
                               Expanded(
                                 child: AppStyles.bold(
                                   title: doctor["name"],
-                                  size: AppSizes.size18,
+                                  size: AppSizes.fontSize18,
                                   color: Colors.black,
                                 ),
                               ),
                             ],
                           ),
-                          const SizedBox(height: 8),
+                          SizedBox(height: AppSizes.heightSizeBox8),
                           // Specialty
                           Row(
                             children: [
                               Icon(
                                 Icons.local_hospital,
                                 color: Colors.grey[700],
-                                size: 18,
+                                size: AppSizes.iconSize18,
                               ),
-                              const SizedBox(width: 8),
+                              SizedBox(width: AppSizes.widthSizeBox8),
                               Expanded(
                                 child: AppStyles.normal(
                                   title: doctor["specialty"],
-                                  size: AppSizes.size14,
+                                  size: AppSizes.fontSize14,
                                   color: Colors.grey[700]!,
                                 ),
                               ),
                             ],
                           ),
-                          const SizedBox(height: 8),
+                          SizedBox(height: AppSizes.heightSizeBox8),
                           Row(
                             children: [
-                              const Icon(
+                              Icon(
                                 Icons.location_on,
                                 color: Colors.redAccent,
-                                size: 18,
+                                size: AppSizes.iconSize18,
                               ),
-                              const SizedBox(width: 8),
+                              SizedBox(width: AppSizes.widthSizeBox8),
                               Expanded(
                                 child: AppStyles.normal(
                                   title: firstClinic?["clinicName"] ??
                                       "No Clinic Available",
-                                  size: AppSizes.size14,
+                                  size: AppSizes.fontSize14,
                                   color: Colors.grey[700]!,
                                 ),
                               ),
@@ -432,12 +447,12 @@ class HomeView extends GetView<HomeController> {
                     )
                   ],
                 ),
-                const SizedBox(height: 8),
+                SizedBox(height: AppSizes.heightSizeBox8),
                 Divider(
-                  thickness: 1,
+                  thickness: AppSizes.deviderThickness1,
                   color: Colors.grey[300],
                 ),
-                const SizedBox(height: 8),
+                SizedBox(height: AppSizes.heightSizeBox8),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -446,13 +461,13 @@ class HomeView extends GetView<HomeController> {
                       children: [
                         AppStyles.normal(
                           title: "Estimated Fee",
-                          size: AppSizes.size14,
+                          size: AppSizes.fontSize14,
                           color: Colors.grey[700]!,
                         ),
                         AppStyles.bold(
                           title: controller.formatFee(
                               doctor["currency"], doctor["fee"]),
-                          size: AppSizes.size16,
+                          size: AppSizes.fontSize16,
                           color: Colors.black,
                         ),
                       ],
@@ -463,17 +478,19 @@ class HomeView extends GetView<HomeController> {
                           Routes.DETAIL_DOCTOR,
                           arguments: doctor,
                         );
-                        print("Make Appointment clicked!");
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.blue,
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
+                          borderRadius:
+                              BorderRadius.circular(AppSizes.borderRadius12),
                         ),
+                        minimumSize: Size(
+                            AppSizes.widthSizeBox180, AppSizes.heightSizeBox50),
                       ),
                       child: AppStyles.normal(
                         title: "Make Appointment",
-                        size: AppSizes.size14,
+                        size: AppSizes.fontSize14,
                         color: Colors.white,
                       ),
                     ),

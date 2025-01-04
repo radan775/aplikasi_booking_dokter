@@ -1,6 +1,4 @@
-import 'package:aplikasi_booking_dokter/app/data/consts/colors.dart';
-import 'package:flutter/material.dart';
-import 'package:velocity_x/velocity_x.dart';
+import 'package:aplikasi_booking_dokter/app/data/consts/consts.dart';
 
 class CustomButton extends StatelessWidget {
   final Function()? onTap;
@@ -8,6 +6,7 @@ class CustomButton extends StatelessWidget {
   final Color buttonColor;
   final Color textColor;
   final double borderRadius;
+  final double fontSize;
 
   const CustomButton({
     super.key,
@@ -15,14 +14,15 @@ class CustomButton extends StatelessWidget {
     required this.buttonText,
     this.buttonColor = AppColors.primaryColor,
     this.textColor = AppColors.bgColor,
-    this.borderRadius = 8.0,
+    required this.borderRadius,
+    this.fontSize = 16.0,
   });
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: context.screenWidth - 60,
-      height: 44,
+      width: AppSizes.widthSizeBox332,
+      height: AppSizes.heightSizeBox44,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           backgroundColor: buttonColor,
@@ -32,7 +32,14 @@ class CustomButton extends StatelessWidget {
           ),
         ),
         onPressed: onTap,
-        child: buttonText.text.color(textColor).make(),
+        child: Text(
+          buttonText,
+          style: TextStyle(
+            fontSize: fontSize,
+            color: textColor,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
       ),
     );
   }

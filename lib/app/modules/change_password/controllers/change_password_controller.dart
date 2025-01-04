@@ -86,12 +86,15 @@ class ChangePasswordController extends GetxController {
   void showMissingFieldsSnackbar() {
     List<String> missingFields = [];
 
-    if (oldPasswordController.text.trim().isEmpty)
+    if (oldPasswordController.text.trim().isEmpty) {
       missingFields.add('Password Lama');
-    if (newPasswordController.text.trim().isEmpty)
+    }
+    if (newPasswordController.text.trim().isEmpty) {
       missingFields.add('Password Baru');
-    if (confirmPasswordController.text.trim().isEmpty)
+    }
+    if (confirmPasswordController.text.trim().isEmpty) {
       missingFields.add('Konfirmasi Password Baru');
+    }
 
     String missingFieldsText = missingFields.join(', ');
 

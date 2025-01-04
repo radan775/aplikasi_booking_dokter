@@ -17,13 +17,13 @@ class AddNewsView extends GetView<AddNewsController> {
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
-            fontSize: 20,
+            fontSize: AppSizes.fontSize20,
           ),
         ),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
+        padding: EdgeInsets.all(AppSizes.paddingAll16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -31,9 +31,11 @@ class AddNewsView extends GetView<AddNewsController> {
             Obx(() {
               return controller.imageUrl.value.isNotEmpty
                   ? Container(
-                      height: 200,
+                      height: AppSizes.heightContainer200,
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius: BorderRadius.circular(
+                          AppSizes.borderRadius10,
+                        ),
                         image: DecorationImage(
                           image: NetworkImage(controller.imageUrl.value),
                           fit: BoxFit.cover,
@@ -41,20 +43,24 @@ class AddNewsView extends GetView<AddNewsController> {
                       ),
                     )
                   : Container(
-                      height: 200,
+                      height: AppSizes.heightContainer200,
                       decoration: BoxDecoration(
                         color: Colors.grey[200],
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius: BorderRadius.circular(
+                          AppSizes.borderRadius10,
+                        ),
                       ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Icon(
                             Icons.image,
-                            size: 50,
+                            size: AppSizes.iconSize50,
                             color: Colors.grey[400],
                           ),
-                          SizedBox(height: 10),
+                          SizedBox(
+                            height: AppSizes.heightSizeBox10,
+                          ),
                           Text(
                             'Masukkan URL Gambar',
                             style: TextStyle(
@@ -65,7 +71,7 @@ class AddNewsView extends GetView<AddNewsController> {
                       ),
                     );
             }),
-            SizedBox(height: 20),
+            SizedBox(height: AppSizes.heightSizeBox20),
 
             // Input URL Gambar
             CustomTextfield(
@@ -79,7 +85,7 @@ class AddNewsView extends GetView<AddNewsController> {
                 controller.updateImageUrl(value);
               },
             ),
-            SizedBox(height: 20),
+            SizedBox(height: AppSizes.heightSizeBox20),
 
             CustomTextfield(
               hint: 'Judul Berita',
@@ -87,7 +93,7 @@ class AddNewsView extends GetView<AddNewsController> {
               icon: Icons.title,
               borderColor: AppColors.blueColor,
             ),
-            SizedBox(height: 20),
+            SizedBox(height: AppSizes.heightSizeBox20),
 
             // Input Link
             CustomTextfield(
@@ -97,7 +103,7 @@ class AddNewsView extends GetView<AddNewsController> {
               borderColor: AppColors.blueColor,
               inputType: TextInputType.url,
             ),
-            SizedBox(height: 30),
+            SizedBox(height: AppSizes.heightSizeBox30),
 
             // Tombol Unggah
             Obx(() {
@@ -106,10 +112,10 @@ class AddNewsView extends GetView<AddNewsController> {
                     controller.isLoading.value ? null : controller.uploadNews,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.blueColor,
-                  padding: EdgeInsets.symmetric(vertical: 15),
+                  padding: EdgeInsets.symmetric(
+                      vertical: AppSizes.paddingVertical15),
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(
-                        8), // Ubah radius sesuai keinginan
+                    borderRadius: BorderRadius.circular(8),
                   ),
                 ),
                 child: controller.isLoading.value
@@ -117,7 +123,7 @@ class AddNewsView extends GetView<AddNewsController> {
                     : Text(
                         'Unggah Berita',
                         style: TextStyle(
-                          fontSize: 16,
+                          fontSize: AppSizes.fontSize16,
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
                         ),

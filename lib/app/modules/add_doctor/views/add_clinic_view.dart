@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:aplikasi_booking_dokter/app/data/consts/consts.dart';
 import 'package:aplikasi_booking_dokter/app/modules/add_doctor/controllers/add_doctor_controller.dart';
@@ -18,13 +17,13 @@ class AddClinicView extends GetView<AddDoctorController> {
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
-            fontSize: 20,
+            fontSize: AppSizes.fontSize20,
           ),
         ),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
+        padding: EdgeInsets.all(AppSizes.paddingAll16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -35,7 +34,7 @@ class AddClinicView extends GetView<AddDoctorController> {
               icon: Icons.local_hospital,
               borderColor: AppColors.blueColor,
             ),
-            SizedBox(height: 16),
+            SizedBox(height: AppSizes.heightSizeBox16),
 
             // Input Alamat Klinik
             CustomTextfield(
@@ -44,7 +43,7 @@ class AddClinicView extends GetView<AddDoctorController> {
               icon: Icons.location_on,
               borderColor: AppColors.blueColor,
             ),
-            SizedBox(height: 16),
+            SizedBox(height: AppSizes.heightSizeBox16),
 
             // Input Kota Klinik
             CustomTextfield(
@@ -53,7 +52,7 @@ class AddClinicView extends GetView<AddDoctorController> {
               icon: Icons.location_city,
               borderColor: AppColors.blueColor,
             ),
-            SizedBox(height: 16),
+            SizedBox(height: AppSizes.heightSizeBox16),
 
             // Input Kecamatan Klinik
             CustomTextfield(
@@ -62,7 +61,7 @@ class AddClinicView extends GetView<AddDoctorController> {
               icon: Icons.map,
               borderColor: AppColors.blueColor,
             ),
-            SizedBox(height: 16),
+            SizedBox(height: AppSizes.heightSizeBox16),
 
             // Input URL Gambar Klinik
             CustomTextfield(
@@ -71,7 +70,7 @@ class AddClinicView extends GetView<AddDoctorController> {
               icon: Icons.image,
               borderColor: AppColors.blueColor,
             ),
-            SizedBox(height: 16),
+            SizedBox(height: AppSizes.heightSizeBox16),
 
             // Input Hari
             CustomTextfield(
@@ -80,7 +79,7 @@ class AddClinicView extends GetView<AddDoctorController> {
               icon: Icons.calendar_today,
               borderColor: AppColors.blueColor,
             ),
-            SizedBox(height: 16),
+            SizedBox(height: AppSizes.heightSizeBox16),
 
             // Input Jam Mulai
             CustomTextfield(
@@ -89,7 +88,7 @@ class AddClinicView extends GetView<AddDoctorController> {
               icon: Icons.access_time,
               borderColor: AppColors.blueColor,
             ),
-            SizedBox(height: 16),
+            SizedBox(height: AppSizes.heightSizeBox16),
 
             // Input Jam Selesai
             CustomTextfield(
@@ -98,21 +97,25 @@ class AddClinicView extends GetView<AddDoctorController> {
               icon: Icons.access_time,
               borderColor: AppColors.blueColor,
             ),
-            SizedBox(height: 16),
+            SizedBox(height: AppSizes.heightSizeBox16),
 
             // Tampilkan Daftar Jadwal
             Obx(() {
               return ListView.builder(
                 shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
+                physics: NeverScrollableScrollPhysics(),
                 itemCount: controller.schedules.length,
                 itemBuilder: (context, index) {
                   final schedule = controller.schedules[index];
                   return ListTile(
                     title: Text(
-                        '${schedule['day']} : ${schedule['startTime']} - ${schedule['endTime']}'),
+                      '${schedule['day']} : ${schedule['startTime']} - ${schedule['endTime']}',
+                    ),
                     trailing: IconButton(
-                      icon: Icon(Icons.delete, color: Colors.red),
+                      icon: Icon(
+                        Icons.delete,
+                        color: Colors.red,
+                      ),
                       onPressed: () {
                         controller.removeSchedule(index);
                       },
@@ -135,7 +138,7 @@ class AddClinicView extends GetView<AddDoctorController> {
               },
               child: Text('Tambah Jadwal'),
             ),
-            SizedBox(height: 30),
+            SizedBox(height: AppSizes.heightSizeBox30),
 
             // Tombol Tambah Dokter
             ElevatedButton(
@@ -144,15 +147,17 @@ class AddClinicView extends GetView<AddDoctorController> {
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.blueColor,
-                padding: EdgeInsets.symmetric(vertical: 15),
+                padding: EdgeInsets.symmetric(
+                  vertical: AppSizes.paddingVertical15,
+                ),
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
+                  borderRadius: BorderRadius.circular(AppSizes.borderRadius8),
                 ),
               ),
               child: Text(
                 'Tambah Klinik',
                 style: TextStyle(
-                  fontSize: 16,
+                  fontSize: AppSizes.fontSize16,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
                 ),

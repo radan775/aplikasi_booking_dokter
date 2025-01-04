@@ -12,10 +12,10 @@ class DetailDataPasienView extends GetView<DetailDataPasienController> {
         backgroundColor: AppColors.blueColor,
         elevation: 0.0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          icon: Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () => Get.back(),
         ),
-        title: const Text(
+        title: Text(
           'Lengkapi data pasien',
           style: TextStyle(
             color: Colors.white,
@@ -25,22 +25,22 @@ class DetailDataPasienView extends GetView<DetailDataPasienController> {
         centerTitle: true,
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(12.0),
+        padding: EdgeInsets.all(AppSizes.paddingAll12),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Card(
               elevation: 5,
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(AppSizes.borderRadius10),
               ),
               child: Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding: EdgeInsets.all(AppSizes.paddingAll16),
                 child: Obx(() {
                   if (controller.selectedSchedule["type"] == 'doctor') {
                     if (controller.selectedDoctorData.value.isEmpty &&
                         controller.selectedClinicData.value.isEmpty) {
-                      return const Center(
+                      return Center(
                         child: CircularProgressIndicator(),
                       );
                     }
@@ -48,38 +48,38 @@ class DetailDataPasienView extends GetView<DetailDataPasienController> {
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
+                        Text(
                           "Dokter pilihan anda",
                           style: TextStyle(
-                            fontSize: 16,
+                            fontSize: AppSizes.fontSize16,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        const SizedBox(height: 16),
+                        SizedBox(height: AppSizes.heightSizeBox16),
                         Row(
                           children: [
                             CircleAvatar(
-                              radius: 40,
+                              radius: AppSizes.avatarRadius40,
                               backgroundImage: NetworkImage(
                                 controller.selectedDoctorData.value['image'],
                               ),
                             ),
-                            const SizedBox(width: 16),
+                            SizedBox(width: AppSizes.widthSizeBox16),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
                                   '${controller.selectedDoctorData.value['name']}',
-                                  style: const TextStyle(
-                                    fontSize: 18,
+                                  style: TextStyle(
+                                    fontSize: AppSizes.fontSize18,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
-                                const SizedBox(height: 8),
+                                SizedBox(height: AppSizes.heightSizeBox8),
                                 Text(
                                   '${controller.selectedDoctorData.value['specialty']}',
-                                  style: const TextStyle(
-                                    fontSize: 14,
+                                  style: TextStyle(
+                                    fontSize: AppSizes.fontSize14,
                                     color: Colors.grey,
                                   ),
                                 ),
@@ -87,67 +87,69 @@ class DetailDataPasienView extends GetView<DetailDataPasienController> {
                             ),
                           ],
                         ),
-                        const SizedBox(height: 12),
-                        const Divider(),
-                        const Text(
+                        SizedBox(height: AppSizes.heightSizeBox12),
+                        Divider(),
+                        Text(
                           "Lokasi dan jadwal praktik",
                           style: TextStyle(
-                            fontSize: 16,
+                            fontSize: AppSizes.fontSize16,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        const SizedBox(height: 8),
+                        SizedBox(height: AppSizes.heightSizeBox8),
                         Row(
                           children: [
                             ClipRRect(
-                              borderRadius: BorderRadius.circular(10),
+                              borderRadius: BorderRadius.circular(
+                                AppSizes.borderRadius8,
+                              ),
                               child: Image.network(
                                 '${controller.selectedClinicData.value['clinicImage']}',
-                                width: 80,
-                                height: 80,
+                                width: AppSizes.imageWidth80,
+                                height: AppSizes.imageHeight80,
                                 fit: BoxFit.cover,
                                 errorBuilder: (context, error, stackTrace) =>
                                     Container(
-                                  width: 80,
-                                  height: 80,
+                                  width: AppSizes.imageWidth80,
+                                  height: AppSizes.imageHeight80,
                                   color: Colors.grey,
-                                  child: const Icon(
+                                  child: Icon(
                                     Icons.image_not_supported,
                                     color: Colors.white,
                                   ),
                                 ),
                               ),
                             ),
-                            const SizedBox(width: 16),
+                            SizedBox(width: AppSizes.widthSizeBox16),
                             Expanded(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
                                     '${controller.selectedClinicData.value['clinicName']}',
-                                    style: const TextStyle(
-                                      fontSize: 16,
+                                    style: TextStyle(
+                                      fontSize: AppSizes.fontSize16,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
                                   Text(
                                     "${controller.selectedClinicData.value['scheduleDay']}, ${controller.selectedClinicData.value['scheduleDate']}",
-                                    style: const TextStyle(
-                                      fontSize: 14,
+                                    style: TextStyle(
+                                      fontSize: AppSizes.fontSize14,
                                       color: Colors.grey,
                                     ),
                                   ),
                                   Text(
                                     '${controller.selectedClinicData.value['scheduleTime']}',
-                                    style: const TextStyle(
-                                      fontSize: 14,
+                                    style: TextStyle(
+                                      fontSize: AppSizes.fontSize14,
                                       color: Colors.grey,
                                     ),
                                   ),
                                   Text(
                                     "Biaya: Rp${controller.selectedClinicData.value['fee']}",
-                                    style: const TextStyle(
-                                      fontSize: 16,
+                                    style: TextStyle(
+                                      fontSize: AppSizes.fontSize16,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
@@ -160,7 +162,7 @@ class DetailDataPasienView extends GetView<DetailDataPasienController> {
                     );
                   } else {
                     if (controller.selectedClinicData.value.isEmpty) {
-                      return const Center(
+                      return Center(
                         child: CircularProgressIndicator(),
                       );
                     }
@@ -168,65 +170,66 @@ class DetailDataPasienView extends GetView<DetailDataPasienController> {
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
+                        Text(
                           "Lokasi dan jadwal praktik",
                           style: TextStyle(
-                            fontSize: 16,
+                            fontSize: AppSizes.fontSize16,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        const SizedBox(height: 8),
+                        SizedBox(height: AppSizes.heightSizeBox8),
                         Row(
                           children: [
                             ClipRRect(
-                              borderRadius: BorderRadius.circular(10),
+                              borderRadius: BorderRadius.circular(
+                                  AppSizes.borderRadius10),
                               child: Image.network(
                                 '${controller.selectedClinicData.value['clinicImage']}',
-                                width: 80,
-                                height: 80,
+                                width: AppSizes.imageWidth80,
+                                height: AppSizes.imageHeight80,
                                 fit: BoxFit.cover,
                                 errorBuilder: (context, error, stackTrace) =>
                                     Container(
-                                  width: 80,
-                                  height: 80,
+                                  width: AppSizes.imageWidth80,
+                                  height: AppSizes.imageHeight80,
                                   color: Colors.grey,
-                                  child: const Icon(
+                                  child: Icon(
                                     Icons.image_not_supported,
                                     color: Colors.white,
                                   ),
                                 ),
                               ),
                             ),
-                            const SizedBox(width: 16),
+                            SizedBox(width: AppSizes.widthSizeBox16),
                             Expanded(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
                                     '${controller.selectedClinicData.value['name']}',
-                                    style: const TextStyle(
-                                      fontSize: 16,
+                                    style: TextStyle(
+                                      fontSize: AppSizes.fontSize16,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
                                   Text(
                                     "${controller.selectedClinicData.value['scheduleDay']}, ${controller.selectedClinicData.value['scheduleDate']}",
-                                    style: const TextStyle(
-                                      fontSize: 14,
+                                    style: TextStyle(
+                                      fontSize: AppSizes.fontSize14,
                                       color: Colors.grey,
                                     ),
                                   ),
                                   Text(
                                     '${controller.selectedClinicData.value['scheduleTime']}',
-                                    style: const TextStyle(
-                                      fontSize: 14,
+                                    style: TextStyle(
+                                      fontSize: AppSizes.fontSize14,
                                       color: Colors.grey,
                                     ),
                                   ),
                                   Text(
                                     "Biaya: Rp${controller.selectedClinicData.value['fee']}",
-                                    style: const TextStyle(
-                                      fontSize: 16,
+                                    style: TextStyle(
+                                      fontSize: AppSizes.fontSize16,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
@@ -235,20 +238,20 @@ class DetailDataPasienView extends GetView<DetailDataPasienController> {
                             ),
                           ],
                         ),
-                        SizedBox(height: 6),
+                        SizedBox(height: AppSizes.heightSizeBox6),
                         Row(
                           children: [
                             Text(
                               "Tes: ",
-                              style: const TextStyle(
-                                fontSize: 16,
+                              style: TextStyle(
+                                fontSize: AppSizes.fontSize16,
                                 fontWeight: FontWeight.normal,
                               ),
                             ),
                             Text(
                               controller.selectedClinicData.value['test'],
-                              style: const TextStyle(
-                                fontSize: 16,
+                              style: TextStyle(
+                                fontSize: AppSizes.fontSize16,
                                 fontWeight: FontWeight.normal,
                                 color: AppColors.blueColor,
                               ),
@@ -261,42 +264,41 @@ class DetailDataPasienView extends GetView<DetailDataPasienController> {
                 }),
               ),
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: AppSizes.heightSizeBox8),
             Card(
               elevation: 5,
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(AppSizes.borderRadius10),
               ),
               child: Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding: EdgeInsets.all(AppSizes.paddingAll16),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // Header
-                    const Text(
+                    Text(
                       "Sebentar lagi selesai",
                       style: TextStyle(
-                        fontSize: 18,
+                        fontSize: AppSizes.fontSize18,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const SizedBox(height: 8),
-                    const Text(
+                    SizedBox(height: AppSizes.heightSizeBox8),
+                    Text(
                       "Selesaikan proses buat janji dengan melengkapi data berikut:",
                       style: TextStyle(
-                        fontSize: 14,
+                        fontSize: AppSizes.fontSize14,
                         color: Colors.grey,
                       ),
                     ),
 
-                    // Apakah pasien sudah berobat
-                    const Text(
+                    Text(
                       "Apakah pasien sudah berobat di Rumah sakit ini?",
                       style: TextStyle(
-                        fontSize: 16,
+                        fontSize: AppSizes.fontSize16,
                       ),
                     ),
-                    const SizedBox(height: 8),
+                    SizedBox(height: AppSizes.heightSizeBox8),
                     Row(
                       children: [
                         Expanded(
@@ -308,7 +310,9 @@ class DetailDataPasienView extends GetView<DetailDataPasienController> {
                                         ? AppColors.blueColor
                                         : Colors.grey[300],
                                 shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
+                                  borderRadius: BorderRadius.circular(
+                                    AppSizes.borderRadius10,
+                                  ),
                                 ),
                               ),
                               onPressed: () {
@@ -326,7 +330,7 @@ class DetailDataPasienView extends GetView<DetailDataPasienController> {
                             ),
                           ),
                         ),
-                        const SizedBox(width: 8),
+                        SizedBox(width: AppSizes.widthSizeBox8),
                         Expanded(
                           child: Obx(
                             () => ElevatedButton(
@@ -337,7 +341,9 @@ class DetailDataPasienView extends GetView<DetailDataPasienController> {
                                         ? AppColors.blueColor
                                         : Colors.grey[300],
                                 shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
+                                  borderRadius: BorderRadius.circular(
+                                    AppSizes.borderRadius10,
+                                  ),
                                 ),
                               ),
                               onPressed: () {
@@ -357,16 +363,16 @@ class DetailDataPasienView extends GetView<DetailDataPasienController> {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 10),
+                    SizedBox(height: AppSizes.heightSizeBox10),
 
                     // Metode pembayaran
-                    const Text(
+                    Text(
                       "Metode pembayaran",
                       style: TextStyle(
-                        fontSize: 16,
+                        fontSize: AppSizes.fontSize16,
                       ),
                     ),
-                    const SizedBox(height: 8),
+                    SizedBox(height: AppSizes.heightSizeBox8),
                     Row(
                       children: [
                         Expanded(
@@ -379,7 +385,9 @@ class DetailDataPasienView extends GetView<DetailDataPasienController> {
                                         ? AppColors.blueColor
                                         : Colors.grey[300],
                                 shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
+                                  borderRadius: BorderRadius.circular(
+                                    AppSizes.borderRadius10,
+                                  ),
                                 ),
                               ),
                               onPressed: () {
@@ -399,7 +407,7 @@ class DetailDataPasienView extends GetView<DetailDataPasienController> {
                             ),
                           ),
                         ),
-                        const SizedBox(width: 8),
+                        SizedBox(width: AppSizes.widthSizeBox8),
                         Expanded(
                           child: Obx(
                             () => ElevatedButton(
@@ -410,7 +418,9 @@ class DetailDataPasienView extends GetView<DetailDataPasienController> {
                                         ? AppColors.blueColor
                                         : Colors.grey[300],
                                 shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
+                                  borderRadius: BorderRadius.circular(
+                                    AppSizes.borderRadius10,
+                                  ),
                                 ),
                               ),
                               onPressed: () {
@@ -432,7 +442,7 @@ class DetailDataPasienView extends GetView<DetailDataPasienController> {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 16),
+                    SizedBox(height: AppSizes.heightSizeBox16),
                     ElevatedButton(
                       onPressed: () {
                         // Tampilkan dialog konfirmasi
@@ -473,8 +483,6 @@ class DetailDataPasienView extends GetView<DetailDataPasienController> {
                                   onPressed: () {
                                     // Tutup dialog
                                     Navigator.of(context).pop();
-
-                                    // Panggil method selesaikanPemesanan
                                     controller.selesaikanPemesanan();
                                   },
                                   style: ElevatedButton.styleFrom(
@@ -495,16 +503,19 @@ class DetailDataPasienView extends GetView<DetailDataPasienController> {
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.blueColor,
-                        padding: const EdgeInsets.symmetric(vertical: 16),
+                        padding: EdgeInsets.symmetric(
+                            vertical: AppSizes.paddingVertical16),
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
+                          borderRadius: BorderRadius.circular(
+                            AppSizes.borderRadius10,
+                          ),
                         ),
                       ),
-                      child: const Center(
+                      child: Center(
                         child: Text(
                           "Selesai dan buat janji",
                           style: TextStyle(
-                            fontSize: 16,
+                            fontSize: AppSizes.fontSize16,
                             color: Colors.white,
                           ),
                         ),

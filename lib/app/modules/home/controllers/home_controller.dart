@@ -239,7 +239,6 @@ class HomeController extends GetxController {
       isLoading.value = true;
       String? userId = _storage.read('userId');
       if (userId == null) {
-        print('User ID tidak ditemukan');
         return;
       }
 

@@ -17,13 +17,13 @@ class AddLabTestView extends GetView<AddLabTestController> {
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
-            fontSize: 20,
+            fontSize: AppSizes.fontSize20,
           ),
         ),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
+        padding: EdgeInsets.all(AppSizes.paddingAll16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -34,7 +34,7 @@ class AddLabTestView extends GetView<AddLabTestController> {
               icon: Icons.local_hospital,
               borderColor: AppColors.blueColor,
             ),
-            SizedBox(height: 16),
+            SizedBox(height: AppSizes.heightSizeBox16),
 
             // Alamat
             CustomTextfield(
@@ -43,7 +43,7 @@ class AddLabTestView extends GetView<AddLabTestController> {
               icon: Icons.location_on,
               borderColor: AppColors.blueColor,
             ),
-            SizedBox(height: 16),
+            SizedBox(height: AppSizes.heightSizeBox16),
 
             // Lokasi (Kota & Kecamatan)
             Row(
@@ -56,7 +56,7 @@ class AddLabTestView extends GetView<AddLabTestController> {
                     borderColor: AppColors.blueColor,
                   ),
                 ),
-                SizedBox(width: 16),
+                SizedBox(width: AppSizes.widthSizeBox16),
                 Expanded(
                   child: CustomTextfield(
                     hint: 'Kecamatan',
@@ -67,7 +67,7 @@ class AddLabTestView extends GetView<AddLabTestController> {
                 ),
               ],
             ),
-            SizedBox(height: 16),
+            SizedBox(height: AppSizes.heightSizeBox16),
 
             // Deskripsi
             CustomTextfield(
@@ -76,7 +76,7 @@ class AddLabTestView extends GetView<AddLabTestController> {
               icon: Icons.description,
               borderColor: AppColors.blueColor,
             ),
-            SizedBox(height: 16),
+            SizedBox(height: AppSizes.heightSizeBox16),
 
             // Image URL
             CustomTextfield(
@@ -85,7 +85,7 @@ class AddLabTestView extends GetView<AddLabTestController> {
               icon: Icons.image,
               borderColor: AppColors.blueColor,
             ),
-            SizedBox(height: 16),
+            SizedBox(height: AppSizes.heightSizeBox16),
 
             // Harga
             CustomTextfield(
@@ -95,7 +95,7 @@ class AddLabTestView extends GetView<AddLabTestController> {
               borderColor: AppColors.blueColor,
               inputType: TextInputType.number,
             ),
-            SizedBox(height: 16),
+            SizedBox(height: AppSizes.heightSizeBox16),
 
             // Jam Operasional
             Row(
@@ -108,7 +108,7 @@ class AddLabTestView extends GetView<AddLabTestController> {
                     borderColor: AppColors.blueColor,
                   ),
                 ),
-                SizedBox(width: 16),
+                SizedBox(width: AppSizes.widthSizeBox16),
                 Expanded(
                   child: CustomTextfield(
                     hint: 'Jam Tutup (HH:MM)',
@@ -119,7 +119,7 @@ class AddLabTestView extends GetView<AddLabTestController> {
                 ),
               ],
             ),
-            SizedBox(height: 16),
+            SizedBox(height: AppSizes.heightSizeBox16),
 
             // Jenis Tes
             CustomTextfield(
@@ -128,17 +128,17 @@ class AddLabTestView extends GetView<AddLabTestController> {
               icon: Icons.medical_services,
               borderColor: AppColors.blueColor,
             ),
-            SizedBox(height: 16),
+            SizedBox(height: AppSizes.heightSizeBox16),
 
             // Jadwal
             Text(
               'Tambah Jadwal',
               style: TextStyle(
-                fontSize: 18,
+                fontSize: AppSizes.fontSize18,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 16),
+            SizedBox(height: AppSizes.heightSizeBox16),
 
             // Input Jadwal
             Row(
@@ -151,7 +151,7 @@ class AddLabTestView extends GetView<AddLabTestController> {
                     borderColor: AppColors.blueColor,
                   ),
                 ),
-                SizedBox(width: 16),
+                SizedBox(width: AppSizes.widthSizeBox16),
                 Expanded(
                   child: CustomTextfield(
                     hint: 'Jam Selesai (HH:MM)',
@@ -162,26 +162,26 @@ class AddLabTestView extends GetView<AddLabTestController> {
                 ),
               ],
             ),
-            SizedBox(height: 16),
+            SizedBox(height: AppSizes.heightSizeBox16),
 
             // Tombol Tambah Jadwal
             ElevatedButton(
               onPressed: controller.addSchedule,
               child: Text('Tambah Jadwal'),
             ),
-            SizedBox(height: 16),
+            SizedBox(height: AppSizes.heightSizeBox16),
             Text(
               'Daftar Jadwal',
               style: TextStyle(
-                fontSize: 18,
+                fontSize: AppSizes.fontSize18,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 8),
+            SizedBox(height: AppSizes.heightSizeBox8),
             Obx(() {
               return ListView.builder(
                 shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
+                physics: NeverScrollableScrollPhysics(),
                 itemCount: controller.schedules.length,
                 itemBuilder: (context, index) {
                   final schedule = controller.schedules[index];
@@ -211,9 +211,10 @@ class AddLabTestView extends GetView<AddLabTestController> {
                     : controller.uploadLabTest,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.blueColor,
-                  padding: EdgeInsets.symmetric(vertical: 15),
+                  padding: EdgeInsets.symmetric(
+                      vertical: AppSizes.paddingVertical15),
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(AppSizes.borderRadius8),
                   ),
                 ),
                 child: controller.isLoading.value
@@ -221,7 +222,7 @@ class AddLabTestView extends GetView<AddLabTestController> {
                     : Text(
                         'Tambah Lab Test',
                         style: TextStyle(
-                          fontSize: 16,
+                          fontSize: AppSizes.fontSize16,
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
                         ),

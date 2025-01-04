@@ -22,7 +22,6 @@ class HistoryController extends GetxController {
       String? userId = _storage.read('userId');
 
       if (userId == null) {
-        print('User ID tidak ditemukan');
         isLoading.value = false;
         return;
       }
@@ -45,7 +44,6 @@ class HistoryController extends GetxController {
         return dateB.compareTo(dateA);
       });
     } catch (e) {
-      print('Error fetching history: $e');
       Get.snackbar(
         'Error',
         'Gagal mengambil riwayat',
@@ -103,10 +101,8 @@ class HistoryController extends GetxController {
         }
       }
 
-      print('Format tanggal tidak dikenali: $dateString');
       return DateTime.now();
     } catch (e) {
-      print('Error parsing date: $e');
       return DateTime.now();
     }
   }

@@ -15,10 +15,10 @@ class DetailDoctorView extends GetView<DetailDoctorController> {
         backgroundColor: AppColors.blueColor,
         elevation: 0.0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          icon: Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () => Get.back(),
         ),
-        title: const Text(
+        title: Text(
           'Profil Dokter',
           style: TextStyle(
             color: Colors.white,
@@ -28,7 +28,7 @@ class DetailDoctorView extends GetView<DetailDoctorController> {
         centerTitle: true,
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(12.0),
+        padding: EdgeInsets.all(AppSizes.paddingAll12),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -39,33 +39,33 @@ class DetailDoctorView extends GetView<DetailDoctorController> {
                 borderRadius: BorderRadius.circular(16),
               ),
               child: Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding: EdgeInsets.all(AppSizes.borderRadius16),
                 child: Row(
                   children: [
                     CircleAvatar(
-                      radius: 40,
+                      radius: AppSizes.avatarRadius40,
                       backgroundImage: NetworkImage(
                         doctorData['image'] ?? '',
                       ),
                     ),
-                    const SizedBox(width: 16),
+                    SizedBox(width: AppSizes.heightSizeBox16),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
                             doctorData['name'] ?? 'Unknown',
-                            style: const TextStyle(
-                              fontSize: 22,
+                            style: TextStyle(
+                              fontSize: AppSizes.fontSize12,
                               fontWeight: FontWeight.bold,
                               color: Colors.black,
                             ),
                           ),
-                          const SizedBox(height: 8),
+                          SizedBox(height: AppSizes.heightSizeBox8),
                           Text(
                             doctorData['specialty'] ?? 'Unknown',
-                            style: const TextStyle(
-                              fontSize: 16,
+                            style: TextStyle(
+                              fontSize: AppSizes.fontSize16,
                               color: Colors.grey,
                             ),
                           ),
@@ -87,9 +87,11 @@ class DetailDoctorView extends GetView<DetailDoctorController> {
 
                 return Card(
                   elevation: 4,
-                  margin: const EdgeInsets.symmetric(vertical: 8),
+                  margin: EdgeInsets.symmetric(vertical: 8),
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(
+                      AppSizes.marginVertical8,
+                    ),
                   ),
                   child: Column(
                     children: [
@@ -98,54 +100,55 @@ class DetailDoctorView extends GetView<DetailDoctorController> {
                           expandedIndex.value = isExpanded ? -1 : index;
                         },
                         child: Padding(
-                          padding: const EdgeInsets.all(16.0),
+                          padding: EdgeInsets.all(16.0),
                           child: Row(
                             children: [
                               ClipRRect(
-                                borderRadius: BorderRadius.circular(12),
+                                borderRadius: BorderRadius.circular(
+                                  AppSizes.borderRadius12,
+                                ),
                                 child: Image.network(
                                   clinic['clinicImage'] ?? '',
-                                  width: 80,
-                                  height: 80,
+                                  width: AppSizes.imageWidth80,
+                                  height: AppSizes.imageHeight80,
                                   fit: BoxFit.cover,
                                   errorBuilder: (context, error, stackTrace) {
                                     return Container(
-                                      width: 80,
-                                      height: 80,
+                                      width: AppSizes.imageWidth80,
+                                      height: AppSizes.imageHeight80,
                                       color: Colors.grey,
-                                      child:
-                                          const Icon(Icons.image_not_supported),
+                                      child: Icon(Icons.image_not_supported),
                                     );
                                   },
                                 ),
                               ),
-                              const SizedBox(width: 16),
+                              SizedBox(width: AppSizes.widthSizeBox16),
                               Expanded(
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
                                       clinic['clinicName'] ?? 'Unknown Clinic',
-                                      style: const TextStyle(
-                                        fontSize: 18,
+                                      style: TextStyle(
+                                        fontSize: AppSizes.fontSize18,
                                         fontWeight: FontWeight.bold,
                                         color: Colors.black,
                                       ),
                                     ),
-                                    const SizedBox(height: 8),
+                                    SizedBox(height: AppSizes.heightSizeBox8),
                                     Text(
                                       clinic['address'] ??
                                           'No address available',
-                                      style: const TextStyle(
-                                        fontSize: 14,
+                                      style: TextStyle(
+                                        fontSize: AppSizes.fontSize14,
                                         color: Colors.grey,
                                       ),
                                     ),
-                                    const SizedBox(height: 8),
+                                    SizedBox(height: AppSizes.heightSizeBox8),
                                     Text(
                                       'Biaya: Rp$doctorFee',
-                                      style: const TextStyle(
-                                        fontSize: 16,
+                                      style: TextStyle(
+                                        fontSize: AppSizes.fontSize16,
                                         fontWeight: FontWeight.bold,
                                         color: Colors.black,
                                       ),
@@ -159,7 +162,7 @@ class DetailDoctorView extends GetView<DetailDoctorController> {
                       ),
                       if (isExpanded)
                         Padding(
-                          padding: const EdgeInsets.all(16.0),
+                          padding: EdgeInsets.all(AppSizes.paddingAll16),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children:
@@ -179,15 +182,15 @@ class DetailDoctorView extends GetView<DetailDoctorController> {
                                   children: [
                                     Text(
                                       dayName.toUpperCase(),
-                                      style: const TextStyle(
-                                        fontSize: 16,
+                                      style: TextStyle(
+                                        fontSize: AppSizes.fontSize16,
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),
                                     Text(
                                       nextDate,
-                                      style: const TextStyle(
-                                        fontSize: 14,
+                                      style: TextStyle(
+                                        fontSize: AppSizes.fontSize14,
                                         color: Colors.grey,
                                       ),
                                     ),
@@ -228,7 +231,7 @@ class DetailDoctorView extends GetView<DetailDoctorController> {
                                         );
                                       },
                                       trailing: isSelected
-                                          ? const Icon(
+                                          ? Icon(
                                               Icons.check_circle,
                                               color: Colors.green,
                                             )
@@ -269,23 +272,27 @@ class DetailDoctorView extends GetView<DetailDoctorController> {
 
       // Bottom Button
       bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(12.0),
+        padding: EdgeInsets.all(AppSizes.paddingAll12),
         child: ElevatedButton(
           onPressed: () {
             // Cek apakah schedule sudah dipilih
             controller.handleBuatJanji();
           },
           style: ElevatedButton.styleFrom(
-            padding: const EdgeInsets.symmetric(vertical: 16),
+            padding: EdgeInsets.symmetric(
+              vertical: AppSizes.paddingVertical16,
+            ),
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16),
+              borderRadius: BorderRadius.circular(
+                AppSizes.borderRadius16,
+              ),
             ),
             backgroundColor: AppColors.blueColor,
           ),
-          child: const Text(
+          child: Text(
             'Buat Janji Pertemuan',
             style: TextStyle(
-              fontSize: 18,
+              fontSize: AppSizes.fontSize18,
               fontWeight: FontWeight.bold,
               color: Colors.white,
             ),
@@ -301,25 +308,25 @@ class DetailDoctorView extends GetView<DetailDoctorController> {
       child: Card(
         elevation: 4,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(AppSizes.borderRadius10),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: EdgeInsets.all(AppSizes.paddingAll16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 title,
-                style: const TextStyle(
-                  fontSize: 16,
+                style: TextStyle(
+                  fontSize: AppSizes.fontSize16,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              const SizedBox(height: 8),
+              SizedBox(height: AppSizes.heightSizeBox8),
               Text(
                 content,
-                style: const TextStyle(
-                  fontSize: 14,
+                style: TextStyle(
+                  fontSize: AppSizes.fontSize14,
                   color: Colors.black87,
                 ),
               ),
@@ -334,39 +341,43 @@ class DetailDoctorView extends GetView<DetailDoctorController> {
     return Card(
       elevation: 4,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(
+          AppSizes.borderRadius10,
+        ),
       ),
       child: ExpansionTile(
         title: Text(
           title,
-          style: const TextStyle(
-            fontSize: 16,
+          style: TextStyle(
+            fontSize: AppSizes.fontSize16,
             fontWeight: FontWeight.bold,
           ),
         ),
         iconColor: AppColors.blueColor,
         children: [
           Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: EdgeInsets.all(AppSizes.paddingAll16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: items
                   .map<Widget>(
                     (item) => Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 4.0),
+                      padding: EdgeInsets.symmetric(
+                        vertical: AppSizes.paddingVertical4,
+                      ),
                       child: Row(
                         children: [
-                          const Icon(
+                          Icon(
                             Icons.check_circle,
                             color: Colors.green,
-                            size: 20,
+                            size: AppSizes.iconSize20,
                           ),
-                          const SizedBox(width: 8),
+                          SizedBox(width: AppSizes.widthSizeBox8),
                           Expanded(
                             child: Text(
                               item.toString(),
-                              style: const TextStyle(
-                                fontSize: 14,
+                              style: TextStyle(
+                                fontSize: AppSizes.fontSize14,
                                 color: Colors.black87,
                               ),
                             ),

@@ -1,4 +1,5 @@
 import 'package:aplikasi_booking_dokter/app/data/consts/colors.dart';
+import 'package:aplikasi_booking_dokter/app/data/consts/fonts.dart';
 import 'package:aplikasi_booking_dokter/app/modules/notification/controllers/notification_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -12,59 +13,68 @@ class NotificationView extends GetView<NotificationController> {
       appBar: AppBar(
         backgroundColor: AppColors.blueColor,
         elevation: 0.0,
-        title: const Text(
+        title: Text(
           'Notifikasi',
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
-            fontSize: 20,
+            fontSize: AppSizes.fontSize20,
           ),
         ),
         centerTitle: true,
       ),
       body: Obx(
         () => controller.notifications.isEmpty
-            ? const Center(
+            ? Center(
                 child: Text(
                   "Belum ada notifikasi",
-                  style: TextStyle(fontSize: 16, color: Colors.grey),
+                  style: TextStyle(
+                    fontSize: AppSizes.fontSize16,
+                    color: Colors.grey,
+                  ),
                 ),
               )
             : ListView.builder(
-                padding: const EdgeInsets.all(10.0),
+                padding: EdgeInsets.all(AppSizes.paddingAll10),
                 itemCount: controller.notifications.length,
                 itemBuilder: (context, index) {
                   final notification = controller.notifications[index];
                   return Card(
-                    margin: const EdgeInsets.only(bottom: 10.0),
+                    margin: EdgeInsets.only(
+                      bottom: AppSizes.marginBottom10,
+                    ),
                     elevation: 3,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
+                      borderRadius: BorderRadius.circular(
+                        AppSizes.borderRadius12,
+                      ),
                     ),
                     child: ListTile(
                       title: Text(
                         notification["title"] ?? "",
-                        style: const TextStyle(
-                          fontSize: 16,
+                        style: TextStyle(
+                          fontSize: AppSizes.fontSize16,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                       subtitle: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const SizedBox(height: 4),
+                          SizedBox(
+                            height: AppSizes.heightSizeBox6,
+                          ),
                           Text(
                             notification["message"] ?? "",
-                            style: const TextStyle(
-                              fontSize: 14,
+                            style: TextStyle(
+                              fontSize: AppSizes.fontSize14,
                               color: Colors.grey,
                             ),
                           ),
-                          const SizedBox(height: 4),
+                          SizedBox(height: AppSizes.heightSizeBox4),
                           Text(
                             notification["date"] ?? "",
-                            style: const TextStyle(
-                              fontSize: 12,
+                            style: TextStyle(
+                              fontSize: AppSizes.fontSize12,
                               color: Colors.grey,
                             ),
                           ),
@@ -75,7 +85,6 @@ class NotificationView extends GetView<NotificationController> {
                         color: Colors.blueAccent,
                       ),
                       onTap: () {
-                        // Tindakan saat notifikasi diklik
                         Get.snackbar(
                           "Notifikasi",
                           notification["message"] ?? "",

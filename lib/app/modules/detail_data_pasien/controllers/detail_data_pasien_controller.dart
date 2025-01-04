@@ -21,7 +21,6 @@ class DetailDataPasienController extends GetxController {
   Future<void> onInit() async {
     super.onInit();
     selectedSchedule = Get.arguments ?? {};
-    print(selectedSchedule);
 
     String? userId = _storage.read('userId');
     if (userId != null) {

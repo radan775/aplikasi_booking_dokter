@@ -12,12 +12,12 @@ class BeritaView extends GetView<BeritaController> {
       appBar: AppBar(
         backgroundColor: AppColors.blueColor,
         elevation: 0.0,
-        title: const Text(
+        title: Text(
           'Berita',
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
-            fontSize: 20,
+            fontSize: AppSizes.fontSize20,
           ),
         ),
         centerTitle: true,
@@ -25,14 +25,14 @@ class BeritaView extends GetView<BeritaController> {
       body: Obx(() {
         if (controller.isLoading.value) {
           // Tampilkan indikator loading saat data sedang diambil
-          return const Center(
+          return Center(
             child: CircularProgressIndicator(),
           );
         }
 
         if (controller.newsList.isEmpty) {
           // Tampilkan pesan jika data kosong
-          return const Center(
+          return Center(
             child: Text("No news available."),
           );
         }
@@ -41,7 +41,7 @@ class BeritaView extends GetView<BeritaController> {
         return RefreshIndicator(
           onRefresh: controller.fetchNewsFromFirestore,
           child: ListView.builder(
-            padding: const EdgeInsets.all(10.0),
+            padding: EdgeInsets.all(AppSizes.paddingAll10),
             itemCount: controller.newsList.length,
             itemBuilder: (context, index) {
               final news = controller.newsList[index];
@@ -75,11 +75,12 @@ class BeritaView extends GetView<BeritaController> {
                   background: Container(
                     color: Colors.red,
                     alignment: Alignment.centerRight,
-                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    padding: EdgeInsets.symmetric(
+                        horizontal: AppSizes.paddingHorizontal20),
                     child: Icon(
                       Icons.delete,
                       color: Colors.white,
-                      size: 30,
+                      size: AppSizes.iconSize30,
                     ),
                   ),
                   onDismissed: (direction) {
@@ -108,7 +109,7 @@ class BeritaView extends GetView<BeritaController> {
               }
             },
             backgroundColor: AppColors.blueColor,
-            icon: const Icon(
+            icon: Icon(
               Icons.add,
               color: Colors.white,
             ),
@@ -121,7 +122,7 @@ class BeritaView extends GetView<BeritaController> {
             ),
           );
         } else {
-          return const SizedBox.shrink();
+          return SizedBox.shrink();
         }
       }),
     );
@@ -132,32 +133,32 @@ class BeritaView extends GetView<BeritaController> {
       onTap: () {
         Get.toNamed(Routes.INI_WEBVIEW, arguments: news['url']);
       },
-      borderRadius: BorderRadius.circular(12), // Efek ripple
+      borderRadius: BorderRadius.circular(AppSizes.borderRadius12),
       child: Card(
-        margin: const EdgeInsets.only(bottom: 10.0),
+        margin: EdgeInsets.only(bottom: AppSizes.marginBottom10),
         elevation: 3,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(AppSizes.borderRadius12),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(12.0),
+          padding: EdgeInsets.all(AppSizes.paddingAll12),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               // Gambar
               ClipRRect(
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(AppSizes.borderRadius8),
                 child: Image.network(
                   news['image']!,
-                  width: 80,
-                  height: 80,
+                  width: AppSizes.imageWidth80,
+                  height: AppSizes.imageHeight80,
                   fit: BoxFit.cover,
                   errorBuilder: (context, error, stackTrace) {
                     return Container(
-                      width: 80,
-                      height: 80,
+                      width: AppSizes.imageWidth80,
+                      height: AppSizes.imageHeight80,
                       color: Colors.grey,
-                      child: const Icon(
+                      child: Icon(
                         Icons.image_not_supported,
                         color: Colors.white,
                       ),
@@ -165,13 +166,13 @@ class BeritaView extends GetView<BeritaController> {
                   },
                 ),
               ),
-              const SizedBox(width: 10),
+              SizedBox(width: AppSizes.widthSizeBox10),
               // Informasi Berita
               Expanded(
                 child: Text(
                   news['title']!,
-                  style: const TextStyle(
-                    fontSize: 16,
+                  style: TextStyle(
+                    fontSize: AppSizes.fontSize16,
                     fontWeight: FontWeight.bold,
                   ),
                   softWrap: true,

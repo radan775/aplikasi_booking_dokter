@@ -13,10 +13,10 @@ class DetailPasienView extends GetView<DetailPasienController> {
         backgroundColor: AppColors.blueColor,
         elevation: 0.0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          icon: Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () => Get.back(),
         ),
-        title: const Text(
+        title: Text(
           "Detail Pasien",
           style: TextStyle(
             color: Colors.white,
@@ -26,38 +26,38 @@ class DetailPasienView extends GetView<DetailPasienController> {
         centerTitle: true,
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16.0),
+        padding: EdgeInsets.all(AppSizes.paddingAll16),
         child: Card(
           elevation: 5,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(AppSizes.borderRadius12),
           ),
           child: Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: EdgeInsets.all(AppSizes.paddingAll16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
+                Text(
                   "Lengkapi data pasien",
                   style: TextStyle(
-                    fontSize: 18,
+                    fontSize: AppSizes.fontSize18,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                const SizedBox(height: 8),
-                const Text(
+                SizedBox(height: AppSizes.heightSizeBox8),
+                Text(
                   "Silahkan lengkapi data pasien untuk buat janji:",
                   style: TextStyle(
-                    fontSize: 14,
+                    fontSize: AppSizes.fontSize14,
                     color: Colors.grey,
                   ),
                 ),
-                const SizedBox(height: 16),
+                SizedBox(height: AppSizes.heightSizeBox16),
                 CustomTextfield(
                   hint: "Nama sesuai KTP/SKTT",
                   textController: controller.namaController,
                 ),
-                const SizedBox(height: 16),
+                SizedBox(height: AppSizes.heightSizeBox16),
                 Row(
                   children: [
                     Expanded(
@@ -69,7 +69,7 @@ class DetailPasienView extends GetView<DetailPasienController> {
                       ),
                     ),
                     IconButton(
-                      icon: const Icon(Icons.calendar_today),
+                      icon: Icon(Icons.calendar_today),
                       onPressed: () async {
                         final selectedDate = await showDatePicker(
                           context: context,
@@ -85,15 +85,15 @@ class DetailPasienView extends GetView<DetailPasienController> {
                     ),
                   ],
                 ),
-                const SizedBox(height: 16),
-                const Text(
+                SizedBox(height: AppSizes.heightSizeBox16),
+                Text(
                   "Jenis kelamin pasien",
                   style: TextStyle(
-                    fontSize: 14,
+                    fontSize: AppSizes.fontSize14,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                const SizedBox(height: 8),
+                SizedBox(height: AppSizes.heightSizeBox8),
                 Row(
                   children: [
                     Expanded(
@@ -124,7 +124,7 @@ class DetailPasienView extends GetView<DetailPasienController> {
                         ),
                       ),
                     ),
-                    const SizedBox(width: 2),
+                    SizedBox(width: AppSizes.widthSizeBox2),
                     Expanded(
                       child: Obx(
                         () => ElevatedButton(
@@ -134,8 +134,7 @@ class DetailPasienView extends GetView<DetailPasienController> {
                                     ? AppColors.blueColor
                                     : Colors.grey[300],
                             shape: RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.circular(0), // Sudut kotak
+                              borderRadius: BorderRadius.circular(0),
                             ),
                           ),
                           onPressed: () {
@@ -155,34 +154,36 @@ class DetailPasienView extends GetView<DetailPasienController> {
                     ),
                   ],
                 ),
-                const SizedBox(height: 16),
+                SizedBox(height: AppSizes.heightSizeBox16),
                 CustomTextfield(
                   hint: "No KTP/NIK Pasien",
                   textController: controller.nikController,
                 ),
-                const SizedBox(height: 16),
+                SizedBox(height: AppSizes.heightSizeBox16),
                 CustomTextfield(
                   hint: "Alamat sesuai KTP/SKTT pasien",
                   textController: controller.alamatController,
                   inputType: TextInputType.multiline,
                 ),
-                const SizedBox(height: 24),
+                SizedBox(height: AppSizes.heightSizeBox24),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    padding: EdgeInsets.symmetric(
+                        vertical: AppSizes.paddingVertical16),
                     backgroundColor: AppColors.blueColor,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
+                      borderRadius:
+                          BorderRadius.circular(AppSizes.borderRadius8),
                     ),
                   ),
                   onPressed: () {
                     controller.simpanDataPasien();
                   },
-                  child: const Center(
+                  child: Center(
                     child: Text(
                       "Lengkapi data pasien",
                       style: TextStyle(
-                        fontSize: 16,
+                        fontSize: AppSizes.fontSize16,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
                       ),

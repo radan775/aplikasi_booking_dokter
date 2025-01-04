@@ -1,5 +1,4 @@
 import 'package:aplikasi_booking_dokter/app/routes/app_pages.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:aplikasi_booking_dokter/app/data/consts/consts.dart';
 import 'package:aplikasi_booking_dokter/app/modules/add_doctor/controllers/add_doctor_controller.dart';
@@ -19,13 +18,13 @@ class AddDoctorView extends GetView<AddDoctorController> {
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
-            fontSize: 20,
+            fontSize: AppSizes.fontSize20,
           ),
         ),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
+        padding: EdgeInsets.all(AppSizes.paddingAll16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -36,7 +35,7 @@ class AddDoctorView extends GetView<AddDoctorController> {
               icon: Icons.person,
               borderColor: AppColors.blueColor,
             ),
-            SizedBox(height: 16),
+            SizedBox(height: AppSizes.heightSizeBox16),
 
             // Input Profil Dokter
             CustomTextfield(
@@ -45,7 +44,7 @@ class AddDoctorView extends GetView<AddDoctorController> {
               icon: Icons.description,
               borderColor: AppColors.blueColor,
             ),
-            SizedBox(height: 16),
+            SizedBox(height: AppSizes.heightSizeBox16),
 
             // Input Spesialisasi
             CustomTextfield(
@@ -54,7 +53,7 @@ class AddDoctorView extends GetView<AddDoctorController> {
               icon: Icons.medical_services,
               borderColor: AppColors.blueColor,
             ),
-            SizedBox(height: 16),
+            SizedBox(height: AppSizes.heightSizeBox16),
 
             // Input Biaya
             CustomTextfield(
@@ -64,7 +63,7 @@ class AddDoctorView extends GetView<AddDoctorController> {
               borderColor: AppColors.blueColor,
               inputType: TextInputType.number,
             ),
-            SizedBox(height: 16),
+            SizedBox(height: AppSizes.heightSizeBox16),
 
             // Input URL Gambar
             CustomTextfield(
@@ -73,7 +72,7 @@ class AddDoctorView extends GetView<AddDoctorController> {
               icon: Icons.image,
               borderColor: AppColors.blueColor,
             ),
-            SizedBox(height: 16),
+            SizedBox(height: AppSizes.heightSizeBox16),
 
             // Input Riwayat Pendidikan
             CustomTextfield(
@@ -91,7 +90,7 @@ class AddDoctorView extends GetView<AddDoctorController> {
             Obx(() {
               return ListView.builder(
                 shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
+                physics: NeverScrollableScrollPhysics(),
                 itemCount: controller.educationList.length,
                 itemBuilder: (context, index) {
                   return ListTile(
@@ -106,7 +105,7 @@ class AddDoctorView extends GetView<AddDoctorController> {
                 },
               );
             }),
-            SizedBox(height: 16),
+            SizedBox(height: AppSizes.heightSizeBox16),
 
             // Input Pengalaman
             CustomTextfield(
@@ -124,7 +123,7 @@ class AddDoctorView extends GetView<AddDoctorController> {
             Obx(() {
               return ListView.builder(
                 shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
+                physics: NeverScrollableScrollPhysics(),
                 itemCount: controller.experienceList.length,
                 itemBuilder: (context, index) {
                   return ListTile(
@@ -139,7 +138,7 @@ class AddDoctorView extends GetView<AddDoctorController> {
                 },
               );
             }),
-            SizedBox(height: 16),
+            SizedBox(height: AppSizes.heightSizeBox16),
 
             // Input Treatment
             CustomTextfield(
@@ -157,7 +156,7 @@ class AddDoctorView extends GetView<AddDoctorController> {
             Obx(() {
               return ListView.builder(
                 shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
+                physics: NeverScrollableScrollPhysics(),
                 itemCount: controller.treatmentsList.length,
                 itemBuilder: (context, index) {
                   return ListTile(
@@ -172,7 +171,7 @@ class AddDoctorView extends GetView<AddDoctorController> {
                 },
               );
             }),
-            SizedBox(height: 30),
+            SizedBox(height: AppSizes.heightSizeBox30),
 
             // Tombol Selanjutnya
             Row(
@@ -188,22 +187,26 @@ class AddDoctorView extends GetView<AddDoctorController> {
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.blueColor,
-                      padding: EdgeInsets.symmetric(vertical: 15),
+                      padding: EdgeInsets.symmetric(
+                          vertical: AppSizes.paddingVertical15),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
+                        borderRadius:
+                            BorderRadius.circular(AppSizes.borderRadius8),
                       ),
                     ),
                     child: Text(
                       'Tambah Klinik',
                       style: TextStyle(
-                        fontSize: 16,
+                        fontSize: AppSizes.fontSize16,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
                       ),
                     ),
                   ),
                 ),
-                SizedBox(width: 10), // Memberikan jarak antara tombol
+                SizedBox(
+                    width: AppSizes
+                        .widthSizeBox10), // Memberikan jarak antara tombol
                 Expanded(
                   child: Obx(
                     () => ElevatedButton(
@@ -218,15 +221,16 @@ class AddDoctorView extends GetView<AddDoctorController> {
                         backgroundColor: AppColors.blueColor,
                         padding: EdgeInsets.symmetric(vertical: 15),
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
+                          borderRadius:
+                              BorderRadius.circular(AppSizes.borderRadius8),
                         ),
                       ),
                       child: controller.isLoading.value
-                          ? const CircularProgressIndicator(color: Colors.white)
-                          : const Text(
+                          ? CircularProgressIndicator(color: Colors.white)
+                          : Text(
                               'Upload Data',
                               style: TextStyle(
-                                fontSize: 16,
+                                fontSize: AppSizes.fontSize16,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.white,
                               ),

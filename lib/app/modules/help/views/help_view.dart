@@ -13,35 +13,36 @@ class HelpView extends GetView<HelpController> {
         backgroundColor: AppColors.blueColor,
         elevation: 0.0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          icon: Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () => Get.back(),
         ),
-        title: const Text(
+        title: Text(
           "Bantuan",
           style: TextStyle(color: Colors.white),
         ),
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16.0),
+        padding: EdgeInsets.all(AppSizes.paddingAll16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
+            Text(
               "Bagaimana kami dapat membantu Anda?",
               style: TextStyle(
-                fontSize: 20,
+                fontSize: AppSizes.fontSize20,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(height: 16),
-            const Text(
+            SizedBox(height: AppSizes.heightSizeBox16),
+            Text(
               "Pilih kategori bantuan yang sesuai dengan kebutuhan Anda.",
-              style: TextStyle(fontSize: 14, color: Colors.black87),
+              style: TextStyle(
+                  fontSize: AppSizes.fontSize14, color: Colors.black87),
             ),
-            const SizedBox(height: 24),
+            SizedBox(height: AppSizes.heightSizeBox24),
             ListView(
               shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
+              physics: NeverScrollableScrollPhysics(),
               children: [
                 _buildHelpCard(
                   title: "Cara Membuat Janji",
@@ -52,7 +53,7 @@ class HelpView extends GetView<HelpController> {
                         arguments: "Cara Membuat Janji");
                   },
                 ),
-                const SizedBox(height: 16),
+                SizedBox(height: AppSizes.heightSizeBox16),
                 _buildHelpCard(
                   title: "Masalah Pembayaran",
                   description:
@@ -62,7 +63,7 @@ class HelpView extends GetView<HelpController> {
                         arguments: "Masalah Pembayaran");
                   },
                 ),
-                const SizedBox(height: 16),
+                SizedBox(height: AppSizes.heightSizeBox16),
                 _buildHelpCard(
                   title: "Akun dan Keamanan",
                   description:
@@ -72,7 +73,7 @@ class HelpView extends GetView<HelpController> {
                         arguments: "Akun dan Keamanan");
                   },
                 ),
-                const SizedBox(height: 16),
+                SizedBox(height: AppSizes.heightSizeBox16),
                 _buildHelpCard(
                   title: "Hubungi Kami",
                   description:
@@ -96,22 +97,25 @@ class HelpView extends GetView<HelpController> {
     return Card(
       elevation: 4,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(AppSizes.borderRadius10),
       ),
       child: ListTile(
         onTap: onTap,
         title: Text(
           title,
-          style: const TextStyle(
-            fontSize: 16,
+          style: TextStyle(
+            fontSize: AppSizes.fontSize16,
             fontWeight: FontWeight.bold,
           ),
         ),
         subtitle: Text(
           description,
-          style: const TextStyle(fontSize: 14, color: Colors.black87),
+          style: TextStyle(
+            fontSize: AppSizes.fontSize14,
+            color: Colors.black87,
+          ),
         ),
-        trailing: const Icon(Icons.arrow_forward_ios, color: Colors.grey),
+        trailing: Icon(Icons.arrow_forward_ios, color: Colors.grey),
       ),
     );
   }

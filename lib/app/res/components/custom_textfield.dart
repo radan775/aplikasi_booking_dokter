@@ -44,15 +44,12 @@ class _CustomTextfieldState extends State<CustomTextfield> {
 
   @override
   Widget build(BuildContext context) {
-    // Gabungkan input formatters default dengan custom input formatters
     List<TextInputFormatter> combinedFormatters = [];
 
-    // Tambahkan formatter digits only untuk input number
     if (widget.inputType == TextInputType.number) {
       combinedFormatters.add(FilteringTextInputFormatter.digitsOnly);
     }
 
-    // Tambahkan custom input formatters jika ada
     if (widget.inputFormatters != null) {
       combinedFormatters.addAll(widget.inputFormatters!);
     }
@@ -68,11 +65,18 @@ class _CustomTextfieldState extends State<CustomTextfield> {
       onChanged: widget.onChanged,
 
       style: TextStyle(
+        fontSize: AppSizes.fontSize16,
         color: widget.enabled ? widget.textColor : Colors.grey.withOpacity(0.7),
       ),
       inputFormatters: combinedFormatters,
       decoration: InputDecoration(
         isDense: true,
+        contentPadding: EdgeInsets.fromLTRB(
+          AppSizes.paddingHorizontal10,
+          AppSizes.paddingVertical12,
+          AppSizes.paddingHorizontal10,
+          AppSizes.paddingVertical12,
+        ),
         disabledBorder: OutlineInputBorder(
           borderSide: BorderSide(
             color: widget.borderColor.withOpacity(0.5),
@@ -95,34 +99,50 @@ class _CustomTextfieldState extends State<CustomTextfield> {
         ),
         labelText: widget.hint,
         labelStyle: TextStyle(
+          fontSize: AppSizes.fontSize14,
           color: widget.enabled
               ? widget.textColor.withOpacity(0.5)
               : Colors.grey.withOpacity(0.5),
         ),
         floatingLabelBehavior: FloatingLabelBehavior.auto,
         prefixIcon: widget.icon != null
-            ? Icon(
-                widget.icon,
-                color: widget.enabled ? widget.borderColor : Colors.grey,
+            ? Padding(
+                padding: EdgeInsets.symmetric(
+                    horizontal: AppSizes.paddingHorizontal10),
+                child: Icon(
+                  widget.icon,
+                  color: widget.enabled ? widget.borderColor : Colors.grey,
+                  size: AppSizes.iconSize20,
+                ),
               )
             : null,
         suffixIcon: widget.obscureText
-            ? IconButton(
-                icon: Icon(
-                  _isObscured ? Icons.visibility_off : Icons.visibility,
-                  color: widget.borderColor,
+            ? Padding(
+                padding: EdgeInsets.symmetric(
+                    horizontal: AppSizes.paddingHorizontal10),
+                child: IconButton(
+                  icon: Icon(
+                    _isObscured ? Icons.visibility_off : Icons.visibility,
+                    color: widget.borderColor,
+                    size: AppSizes.iconSize20,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      _isObscured = !_isObscured;
+                    });
+                  },
                 ),
-                onPressed: () {
-                  setState(() {
-                    _isObscured = !_isObscured;
-                  });
-                },
               )
             : widget.enabled
                 ? null
-                : Icon(
-                    Icons.lock_outline,
-                    color: Colors.grey,
+                : Padding(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: AppSizes.paddingHorizontal10),
+                    child: Icon(
+                      Icons.lock_outline,
+                      color: Colors.grey,
+                      size: AppSizes.iconSize20,
+                    ),
                   ),
       ),
     );

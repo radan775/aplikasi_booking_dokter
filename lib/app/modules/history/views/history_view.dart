@@ -14,12 +14,12 @@ class HistoryView extends GetView<HistoryController> {
       appBar: AppBar(
         backgroundColor: AppColors.blueColor,
         elevation: 0.0,
-        title: const Text(
+        title: Text(
           'History',
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
-            fontSize: 20,
+            fontSize: AppSizes.fontSize20,
           ),
         ),
         centerTitle: true,
@@ -27,9 +27,8 @@ class HistoryView extends GetView<HistoryController> {
       body: RefreshIndicator(
         onRefresh: () async => await controller.fetchHistory(),
         child: Obx(() {
-          // Tampilkan loading jika sedang mengambil data
           if (controller.isLoading.value) {
-            return const Center(child: CircularProgressIndicator());
+            return Center(child: CircularProgressIndicator());
           }
 
           if (controller.historyList.isEmpty) {
@@ -39,16 +38,16 @@ class HistoryView extends GetView<HistoryController> {
                 children: [
                   Lottie.asset(
                     AppLotties.empty_history,
-                    width: 200,
-                    height: 200,
+                    width: AppSizes.lottieWidth200,
+                    height: AppSizes.lottieHeight200,
                     repeat: true,
                     fit: BoxFit.cover,
                   ),
-                  const SizedBox(height: 16),
+                  SizedBox(height: AppSizes.heightSizeBox16),
                   Text(
                     'Tidak ada riwayat',
                     style: TextStyle(
-                      fontSize: 18,
+                      fontSize: AppSizes.fontSize18,
                       color: Colors.grey[600],
                     ),
                   ),
@@ -57,9 +56,8 @@ class HistoryView extends GetView<HistoryController> {
             );
           }
 
-          // ListView untuk menampilkan history
           return ListView.builder(
-            padding: const EdgeInsets.all(10.0),
+            padding: EdgeInsets.all(AppSizes.paddingAll10),
             itemCount: controller.historyList.length,
             itemBuilder: (context, index) {
               final history = controller.historyList[index];
@@ -69,32 +67,33 @@ class HistoryView extends GetView<HistoryController> {
                   Get.toNamed(Routes.DETAIL_HISTORY, arguments: history);
                 },
                 child: Card(
-                  margin: const EdgeInsets.only(bottom: 10.0),
+                  margin: EdgeInsets.only(bottom: AppSizes.marginBottom10),
                   elevation: 3,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius:
+                        BorderRadius.circular(AppSizes.borderRadius12),
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.all(16.0),
+                    padding: EdgeInsets.all(AppSizes.paddingAll16),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        // Type header
                         Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 12,
-                            vertical: 4,
+                          padding: EdgeInsets.symmetric(
+                            horizontal: AppSizes.paddingHorizontal12,
+                            vertical: AppSizes.paddingVertical4,
                           ),
                           decoration: BoxDecoration(
                             color: history['type'] == 'doctor'
                                 ? AppColors.blueColor.withOpacity(0.2)
                                 : Colors.green.withOpacity(0.2),
-                            borderRadius: BorderRadius.circular(12),
+                            borderRadius:
+                                BorderRadius.circular(AppSizes.borderRadius12),
                           ),
                           child: Text(
                             history['type'] == 'doctor' ? 'Doctor' : 'Lab Test',
                             style: TextStyle(
-                              fontSize: 14,
+                              fontSize: AppSizes.fontSize14,
                               fontWeight: FontWeight.bold,
                               color: history['type'] == 'doctor'
                                   ? AppColors.blueColor
@@ -102,25 +101,26 @@ class HistoryView extends GetView<HistoryController> {
                             ),
                           ),
                         ),
-                        const SizedBox(height: 10),
+                        SizedBox(height: AppSizes.heightSizeBox10),
                         Row(
                           children: [
                             // Image
                             ClipRRect(
-                              borderRadius: BorderRadius.circular(8),
+                              borderRadius:
+                                  BorderRadius.circular(AppSizes.borderRadius8),
                               child: Image.network(
                                 history['type'] == 'doctor'
                                     ? history["doctorImage"]
                                     : history["clinicImage"],
-                                width: 80,
-                                height: 80,
+                                width: AppSizes.imageWidth80,
+                                height: AppSizes.imageHeight80,
                                 fit: BoxFit.cover,
                                 errorBuilder: (context, error, stackTrace) {
                                   return Container(
-                                    width: 80,
-                                    height: 80,
+                                    width: AppSizes.imageWidth80,
+                                    height: AppSizes.imageHeight80,
                                     color: Colors.grey,
-                                    child: const Icon(
+                                    child: Icon(
                                       Icons.image_not_supported,
                                       color: Colors.white,
                                     ),
@@ -128,32 +128,31 @@ class HistoryView extends GetView<HistoryController> {
                                 },
                               ),
                             ),
-                            const SizedBox(width: 12),
+                            SizedBox(width: AppSizes.heightSizeBox12),
                             // Details
                             Expanded(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  // Name or Hospital
                                   Row(
                                     children: [
                                       Icon(
                                         history['type'] == 'doctor'
                                             ? Icons.person
                                             : Icons.local_hospital,
-                                        size: 18,
+                                        size: AppSizes.iconSize18,
                                         color: history['type'] == 'doctor'
                                             ? Colors.blue
                                             : Colors.green,
                                       ),
-                                      const SizedBox(width: 6),
+                                      SizedBox(width: AppSizes.widthSizeBox6),
                                       Expanded(
                                         child: Text(
                                           history['type'] == 'doctor'
                                               ? history["doctorName"]
                                               : history["clinicName"],
-                                          style: const TextStyle(
-                                            fontSize: 16,
+                                          style: TextStyle(
+                                            fontSize: AppSizes.fontSize16,
                                             fontWeight: FontWeight.bold,
                                             color: Colors.black,
                                           ),
@@ -163,24 +162,24 @@ class HistoryView extends GetView<HistoryController> {
                                       ),
                                     ],
                                   ),
-                                  const SizedBox(height: 6),
+                                  SizedBox(height: AppSizes.heightSizeBox6),
                                   Row(
                                     children: [
                                       Icon(
                                         history['type'] == 'doctor'
                                             ? Icons.medical_services
                                             : Icons.science,
-                                        size: 18,
+                                        size: AppSizes.iconSize18,
                                         color: Colors.grey[700],
                                       ),
-                                      const SizedBox(width: 6),
+                                      SizedBox(width: AppSizes.widthSizeBox6),
                                       Expanded(
                                         child: Text(
                                           history['type'] == 'doctor'
                                               ? history["doctorSpecialty"]
                                               : history["clinicTest"],
                                           style: TextStyle(
-                                            fontSize: 14,
+                                            fontSize: AppSizes.fontSize14,
                                             color: Colors.grey[700],
                                           ),
                                           maxLines: 1,
@@ -189,20 +188,20 @@ class HistoryView extends GetView<HistoryController> {
                                       ),
                                     ],
                                   ),
-                                  const SizedBox(height: 6),
+                                  SizedBox(height: AppSizes.heightSizeBox6),
                                   Row(
                                     children: [
                                       Icon(
                                         Icons.location_on,
-                                        size: 18,
+                                        size: AppSizes.iconSize18,
                                         color: Colors.grey[700],
                                       ),
-                                      const SizedBox(width: 6),
+                                      SizedBox(width: AppSizes.widthSizeBox6),
                                       Expanded(
                                         child: Text(
                                           history["clinicAddress"],
                                           style: TextStyle(
-                                            fontSize: 14,
+                                            fontSize: AppSizes.fontSize14,
                                             color: Colors.grey[700],
                                           ),
                                           maxLines: 1,
@@ -216,44 +215,47 @@ class HistoryView extends GetView<HistoryController> {
                             )
                           ],
                         ),
-                        Divider(color: Colors.grey[300], thickness: 1),
-                        const SizedBox(height: 5),
+                        Divider(
+                            color: Colors.grey[300],
+                            thickness: AppSizes.deviderThickness1),
+                        SizedBox(
+                          height: AppSizes.heightSizeBox5,
+                        ),
                         Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            // Date Section
                             Row(
                               children: [
                                 Icon(
                                   Icons.calendar_today,
-                                  size: 16,
+                                  size: AppSizes.fontSize16,
                                   color: Colors.blue,
                                 ),
-                                const SizedBox(width: 4),
+                                SizedBox(width: AppSizes.widthSizeBox4),
                                 Text(
                                   "Date: ${history['selectedDay'].toString().upperCamelCase}, ${history['selectedDate']}",
-                                  style: const TextStyle(
-                                    fontSize: 14,
+                                  style: TextStyle(
+                                    fontSize: AppSizes.fontSize14,
                                     color: Colors.black87,
                                     fontWeight: FontWeight.w500,
                                   ),
                                 ),
                               ],
                             ),
-                            SizedBox(height: 3),
+                            SizedBox(height: AppSizes.heightSizeBox3),
                             // Code Section
                             Row(
                               children: [
                                 Icon(
                                   Icons.qr_code,
-                                  size: 16,
+                                  size: AppSizes.iconSize16,
                                   color: Colors.green,
                                 ),
-                                const SizedBox(width: 4),
+                                SizedBox(width: AppSizes.widthSizeBox4),
                                 Text(
                                   "Code: ${history['code']}",
-                                  style: const TextStyle(
-                                    fontSize: 14,
+                                  style: TextStyle(
+                                    fontSize: AppSizes.fontSize14,
                                     color: Colors.black87,
                                     fontWeight: FontWeight.w500,
                                   ),

@@ -10,12 +10,12 @@ class DetailHistoryView extends GetView<DetailHistoryController> {
     return Scaffold(
       appBar: _buildAppBar(),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(12.0),
+        padding: EdgeInsets.all(AppSizes.paddingAll12),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _buildDoctorAndLocationCard(),
-            const SizedBox(height: 20),
+            SizedBox(height: AppSizes.heightSizeBox20),
             _buildPatientDataCard(),
           ],
         ),
@@ -28,15 +28,15 @@ class DetailHistoryView extends GetView<DetailHistoryController> {
       backgroundColor: AppColors.blueColor,
       elevation: 0.0,
       leading: IconButton(
-        icon: const Icon(Icons.arrow_back, color: Colors.white),
+        icon: Icon(Icons.arrow_back, color: Colors.white),
         onPressed: () => Get.back(),
       ),
-      title: const Text(
+      title: Text(
         'Detail History',
         style: TextStyle(
           color: Colors.white,
           fontWeight: FontWeight.bold,
-          fontSize: 20,
+          fontSize: AppSizes.fontSize20,
         ),
       ),
       centerTitle: true,
@@ -47,7 +47,9 @@ class DetailHistoryView extends GetView<DetailHistoryController> {
     return Card(
       elevation: 4,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(
+          AppSizes.borderRadius16,
+        ),
       ),
       child: Obx(() {
         if (controller.historyData['type'] == 'doctor') {
@@ -56,7 +58,10 @@ class DetailHistoryView extends GetView<DetailHistoryController> {
             children: [
               _buildStatusContainer(),
               _buildDoctorDetails(),
-              const Divider(thickness: 1, color: Colors.grey),
+              Divider(
+                thickness: AppSizes.deviderThickness1,
+                color: Colors.grey,
+              ),
               _buildLocationDetails(),
             ],
           );
@@ -75,43 +80,45 @@ class DetailHistoryView extends GetView<DetailHistoryController> {
 
   Widget _buildDoctorDetails() {
     return Padding(
-      padding: const EdgeInsets.all(16.0),
+      padding: EdgeInsets.all(AppSizes.paddingAll16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
+          Text(
             "Dokter pilihan anda",
             style: TextStyle(
-              fontSize: 16,
+              fontSize: AppSizes.fontSize16,
               fontWeight: FontWeight.bold,
             ),
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: AppSizes.heightSizeBox8),
           Row(
             children: [
               CircleAvatar(
-                radius: 40,
+                radius: AppSizes.avatarRadius40,
                 backgroundImage:
                     NetworkImage(controller.historyData['doctorImage']),
                 backgroundColor: Colors.grey[200],
               ),
-              const SizedBox(width: 16),
+              SizedBox(width: AppSizes.widthSizeBox16),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       controller.historyData['doctorName'],
-                      style: const TextStyle(
-                        fontSize: 18,
+                      style: TextStyle(
+                        fontSize: AppSizes.fontSize18,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const SizedBox(height: 4),
+                    SizedBox(
+                      height: AppSizes.heightSizeBox4,
+                    ),
                     Text(
                       controller.historyData['doctorSpecialty'],
-                      style: const TextStyle(
-                        fontSize: 16,
+                      style: TextStyle(
+                        fontSize: AppSizes.fontSize16,
                         color: Colors.grey,
                       ),
                     ),
@@ -127,48 +134,48 @@ class DetailHistoryView extends GetView<DetailHistoryController> {
 
   Widget _buildLocationDetails() {
     return Padding(
-      padding: const EdgeInsets.all(16.0),
+      padding: EdgeInsets.all(AppSizes.paddingAll16),
       child: Row(
         children: [
           ClipRRect(
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: BorderRadius.circular(AppSizes.borderRadius8),
             child: Image.network(
               controller.historyData['clinicImage'],
-              width: 80,
-              height: 80,
+              width: AppSizes.imageWidth80,
+              height: AppSizes.imageHeight80,
               fit: BoxFit.cover,
             ),
           ),
-          const SizedBox(width: 16),
+          SizedBox(width: AppSizes.heightSizeBox16),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   controller.historyData['clinicName'],
-                  style: const TextStyle(
-                    fontSize: 16,
+                  style: TextStyle(
+                    fontSize: AppSizes.fontSize16,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 Text(
                   controller.historyData['clinicAddress'],
-                  style: const TextStyle(
-                    fontSize: 14,
+                  style: TextStyle(
+                    fontSize: AppSizes.fontSize14,
                     color: Colors.grey,
                   ),
                 ),
                 Text(
                   '${controller.historyData['selectedDay']}, ${controller.historyData['selectedDate']}',
-                  style: const TextStyle(
-                    fontSize: 14,
+                  style: TextStyle(
+                    fontSize: AppSizes.fontSize14,
                     color: Colors.grey,
                   ),
                 ),
                 Text(
                   controller.historyData['selectedTime'],
-                  style: const TextStyle(
-                    fontSize: 14,
+                  style: TextStyle(
+                    fontSize: AppSizes.fontSize14,
                     color: Colors.grey,
                   ),
                 ),
@@ -182,13 +189,13 @@ class DetailHistoryView extends GetView<DetailHistoryController> {
 
   Widget _buildStatusContainer() {
     return Container(
-      padding: const EdgeInsets.all(8),
+      padding: EdgeInsets.all(AppSizes.paddingAll8),
       color: Colors.green[100],
       alignment: Alignment.center,
-      child: const Text(
+      child: Text(
         'Dikonfirmasi',
         style: TextStyle(
-          fontSize: 16,
+          fontSize: AppSizes.fontSize16,
           fontWeight: FontWeight.bold,
           color: Colors.green,
         ),
@@ -202,17 +209,17 @@ class DetailHistoryView extends GetView<DetailHistoryController> {
       child: Card(
         elevation: 4,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(AppSizes.borderRadius16),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: EdgeInsets.all(AppSizes.paddingAll16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
+              Text(
                 "Data Pasien",
                 style: TextStyle(
-                  fontSize: 16,
+                  fontSize: AppSizes.fontSize16,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -241,22 +248,22 @@ class DetailHistoryView extends GetView<DetailHistoryController> {
 
   Widget buildDetailRow(String label, String value) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 4.0),
+      padding: EdgeInsets.symmetric(vertical: AppSizes.paddingVertical4),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             label,
-            style: const TextStyle(
-              fontSize: 16,
+            style: TextStyle(
+              fontSize: AppSizes.fontSize16,
               color: Colors.grey,
             ),
           ),
-          const SizedBox(height: 4),
+          SizedBox(height: AppSizes.heightSizeBox4),
           Text(
             value,
-            style: const TextStyle(
-              fontSize: 14,
+            style: TextStyle(
+              fontSize: AppSizes.fontSize14,
               fontWeight: FontWeight.bold,
             ),
           ),

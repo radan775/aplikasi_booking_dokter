@@ -30,15 +30,12 @@ class LoginController extends GetxController {
         return;
       }
 
-      // Login ke Firebase Authentication
       UserCredential userCredential = await _auth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
 
       final userId = userCredential.user!.uid;
-
-      // Mendapatkan data pengguna dari Firestore
       DocumentSnapshot userDoc =
           await _firestore.collection('users').doc(userId).get();
 

@@ -15,8 +15,12 @@ class LoginView extends GetView<LoginController> {
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
-          margin: const EdgeInsets.only(top: 120),
-          padding: const EdgeInsets.symmetric(horizontal: 16),
+          margin: EdgeInsets.only(
+            top: AppSizes.marginTop120,
+          ),
+          padding: EdgeInsets.symmetric(
+            horizontal: AppSizes.paddingHorizontal16,
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -25,22 +29,22 @@ class LoginView extends GetView<LoginController> {
                 children: [
                   Image.asset(
                     AppAssets.imgLogin,
-                    width: 200,
+                    width: AppSizes.imageWidth200,
                   ),
-                  const SizedBox(height: 20),
+                  SizedBox(height: AppSizes.heightSizeBox20),
                   AppStyles.bold(
                     title: AppStrings.welcomeBack,
-                    size: AppSizes.size24,
+                    size: AppSizes.fontSize24,
                   ),
-                  const SizedBox(height: 10),
+                  SizedBox(height: AppSizes.heightSizeBox10),
                   AppStyles.normal(
                     title: AppStrings.weAreExcited,
-                    size: AppSizes.size16,
+                    size: AppSizes.fontSize16,
                     color: Colors.grey,
                   ),
                 ],
               ),
-              const SizedBox(height: 40),
+              SizedBox(height: AppSizes.heightSizeBox40),
               Form(
                 child: Column(
                   children: [
@@ -49,43 +53,50 @@ class LoginView extends GetView<LoginController> {
                       icon: Icons.email,
                       textController: controller.emailController,
                     ),
-                    const SizedBox(height: 20),
+                    SizedBox(height: AppSizes.heightSizeBox20),
                     CustomTextfield(
                       hint: AppStrings.password,
                       icon: Icons.lock,
                       obscureText: true,
                       textController: controller.passwordController,
                     ),
-                    const SizedBox(height: 30),
+                    SizedBox(height: AppSizes.heightSizeBox30),
                     Obx(() {
                       if (controller.isLoading.value) {
-                        return const CircularProgressIndicator();
+                        return SizedBox(
+                          width: AppSizes.loadingSize,
+                          height: AppSizes.loadingSize,
+                          child: CircularProgressIndicator(
+                            strokeWidth: AppSizes.strokeWidth3,
+                          ),
+                        );
                       }
                       return CustomButton(
                         buttonText: AppStrings.login,
                         onTap: controller.login,
                         buttonColor: AppColors.blueColor,
                         textColor: Colors.white,
-                        borderRadius: 12,
+                        borderRadius: AppSizes.borderRadius12,
+                        fontSize: AppSizes.fontSize16,
                       );
                     }),
-                    const SizedBox(height: 20),
+                    SizedBox(height: AppSizes.heightSizeBox20),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         AppStyles.normal(
                           title: AppStrings.dontHaveAccount,
-                          size: AppSizes.size14,
+                          size: AppSizes.fontSize14,
                           color: Colors.grey,
                         ),
-                        const SizedBox(width: 8),
+                        SizedBox(width: AppSizes.widthSizeBox8),
                         GestureDetector(
                           onTap: () {
                             Get.toNamed(Routes.SIGNUP);
                           },
                           child: AppStyles.bold(
                             title: AppStrings.signup,
-                            size: AppSizes.size14,
+                            size: AppSizes.fontSize14,
                             color: AppColors.blueColor,
                           ),
                         ),

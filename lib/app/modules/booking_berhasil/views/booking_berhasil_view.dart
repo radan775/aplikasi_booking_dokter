@@ -20,43 +20,44 @@ class BookingBerhasilView extends GetView<BookingBerhasilController> {
               // Lottie Animasi Centang
               Lottie.asset(
                 AppLotties.success,
-                width: 250,
-                height: 250,
+                width: AppSizes.lottieWidth250,
+                height: AppSizes.lottieHeight250,
                 repeat: true,
               ),
-              const SizedBox(height: 20),
+              SizedBox(height: AppSizes.heightSizeBox20),
               Text(
                 "Berhasil Melakukan Pemesanan",
                 style: TextStyle(
-                  fontSize: 24,
+                  fontSize: AppSizes.fontSize24,
                   fontWeight: FontWeight.bold,
                   color: AppColors.blueColor,
                 ),
               ),
 
-              const SizedBox(height: 10),
+              SizedBox(height: AppSizes.heightSizeBox10),
 
               Text(
                 controller.tipeLayanan.value,
-                style: const TextStyle(
-                  fontSize: 18,
+                style: TextStyle(
+                  fontSize: AppSizes.fontSize18,
                   color: Colors.grey,
                 ),
               ),
 
-              const SizedBox(height: 20),
+              SizedBox(height: AppSizes.heightSizeBox20),
 
               Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                padding: EdgeInsets.symmetric(
+                    horizontal: AppSizes.paddingHorizontal20,
+                    vertical: AppSizes.paddingVertical10),
                 decoration: BoxDecoration(
                   color: Colors.grey[200],
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(AppSizes.borderRadius10),
                 ),
                 child: Text(
                   controller.kodePemesanan.value,
                   style: TextStyle(
-                    fontSize: 22,
+                    fontSize: AppSizes.fontSize22,
                     fontWeight: FontWeight.bold,
                     color: AppColors.blueColor,
                     letterSpacing: 2,
@@ -64,23 +65,24 @@ class BookingBerhasilView extends GetView<BookingBerhasilController> {
                 ),
               ),
 
-              const SizedBox(height: 30),
+              SizedBox(height: AppSizes.heightSizeBox30),
               ElevatedButton(
                 onPressed: () {
                   Get.offAllNamed(Routes.BOTTOM_NAVBAR);
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.blueColor,
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+                  padding: EdgeInsets.symmetric(
+                      horizontal: 50, vertical: AppSizes.paddingVertical15),
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius:
+                        BorderRadius.circular(AppSizes.borderRadius10),
                   ),
                 ),
-                child: const Text(
+                child: Text(
                   "Kembali ke Beranda",
                   style: TextStyle(
-                    fontSize: 16,
+                    fontSize: AppSizes.fontSize16,
                     color: Colors.white,
                   ),
                 ),

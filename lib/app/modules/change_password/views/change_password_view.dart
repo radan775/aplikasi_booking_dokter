@@ -12,30 +12,30 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
       appBar: AppBar(
         backgroundColor: AppColors.blueColor,
         elevation: 0.0,
-        title: const Text(
+        title: Text(
           'Ubah Password',
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
-            fontSize: 20,
+            fontSize: AppSizes.fontSize20,
           ),
         ),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16.0),
+        padding: EdgeInsets.all(AppSizes.paddingAll16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
+            Text(
               "Silakan ubah password Anda dengan mengisi form di bawah ini:",
               style: TextStyle(
-                fontSize: 14,
+                fontSize: AppSizes.fontSize14,
                 color: Colors.grey,
                 fontWeight: FontWeight.w500,
               ),
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: AppSizes.heightSizeBox20),
 
             // Old Password Field
             CustomTextfield(
@@ -46,7 +46,7 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
               obscureText: true,
               icon: Icons.lock,
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: AppSizes.heightSizeBox16),
 
             // New Password Field
             CustomTextfield(
@@ -57,7 +57,7 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
               obscureText: true,
               icon: Icons.lock_open,
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: AppSizes.heightSizeBox16),
 
             // Confirm Password Field
             CustomTextfield(
@@ -68,13 +68,12 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
               obscureText: true,
               icon: Icons.check,
             ),
-            const SizedBox(height: 40),
+            SizedBox(height: AppSizes.heightSizeBox40),
 
-            // Submit Button Centered
             Center(
               child: Obx(
                 () => SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.8,
+                  width: AppSizes.widthContainer330,
                   child: ElevatedButton(
                     onPressed: controller.isLoading.value
                         ? null
@@ -118,7 +117,6 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
                                         // Tutup dialog
                                         Navigator.of(context).pop();
 
-                                        // Panggil method change password
                                         controller.changePassword();
                                       },
                                       style: ElevatedButton.styleFrom(
@@ -139,17 +137,20 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
                           },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.blueColor,
-                      padding: const EdgeInsets.symmetric(vertical: 12),
+                      padding: EdgeInsets.symmetric(
+                          vertical: AppSizes.paddingVertical12),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
+                        borderRadius: BorderRadius.circular(
+                          AppSizes.borderRadius8,
+                        ),
                       ),
                     ),
                     child: controller.isLoading.value
-                        ? const CircularProgressIndicator(color: Colors.white)
-                        : const Text(
+                        ? CircularProgressIndicator(color: Colors.white)
+                        : Text(
                             "Ubah Password",
                             style: TextStyle(
-                              fontSize: 16,
+                              fontSize: AppSizes.fontSize16,
                               color: Colors.white,
                             ),
                           ),

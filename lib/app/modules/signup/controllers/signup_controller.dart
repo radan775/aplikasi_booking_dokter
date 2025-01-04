@@ -7,18 +7,14 @@ import 'package:get/get.dart';
 class SignupController extends GetxController {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-
-  // Controllers untuk TextField
   final fullnameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
-  // Loading status
   var isLoading = false.obs;
 
-  // Fungsi untuk mendaftarkan pengguna
   Future<void> signup() async {
-    if (isLoading.value) return; // Prevent duplicate requests
+    if (isLoading.value) return;
 
     try {
       isLoading.value = true; // Tampilkan loading
@@ -33,7 +29,6 @@ class SignupController extends GetxController {
         return;
       }
 
-      // Mendaftarkan pengguna di Firebase Authentication
       UserCredential userCredential =
           await _auth.createUserWithEmailAndPassword(
         email: email,
@@ -42,7 +37,6 @@ class SignupController extends GetxController {
 
       final userId = userCredential.user!.uid;
 
-      // Menyimpan data pengguna di Firestore
       await _firestore.collection('users').doc(userId).set({
         'namalengkap': fullname,
         'email': email,
@@ -51,7 +45,6 @@ class SignupController extends GetxController {
         'role': 'user',
       });
 
-      // Membuat sub-koleksi `history` kosong
       await _firestore
           .collection('users')
           .doc(userId)

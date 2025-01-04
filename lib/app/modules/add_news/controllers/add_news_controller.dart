@@ -7,20 +7,15 @@ class AddNewsController extends GetxController {
 
   final titleController = TextEditingController();
   final linkController = TextEditingController();
-  final imageUrlController =
-      TextEditingController(); // Tambahkan controller untuk URL gambar
-  // Image URL Observable
+  final imageUrlController = TextEditingController();
   RxString imageUrl = ''.obs;
-  // Loading State
   RxBool isLoading = false.obs;
 
   void updateImageUrl(String value) {
     imageUrl.value = value;
   }
 
-  // Validasi URL Gambar
   bool isValidImageUrl(String url) {
-    // Regex sederhana untuk validasi URL gambar
     final urlPattern = r'^(https?:\/\/).*\.(jpg|jpeg|png|gif|bmp|webp)$';
     final regex = RegExp(urlPattern, caseSensitive: false);
     return regex.hasMatch(url);

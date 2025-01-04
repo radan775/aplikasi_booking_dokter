@@ -96,7 +96,6 @@ class LabTestController extends GetxController {
       }
     } catch (e) {
       userAddress.value = 'Gagal mendapatkan lokasi';
-      print("Error getting location: $e");
     }
   }
 
@@ -138,7 +137,6 @@ class LabTestController extends GetxController {
       }
     } catch (e) {
       userAddress.value = 'Gagal menerjemahkan lokasi';
-      print("Error converting coordinates: $e");
     }
   }
 
@@ -171,7 +169,7 @@ class LabTestController extends GetxController {
               stopVoiceSearch();
             }
           },
-          localeId: 'id_ID', // Gunakan bahasa Indonesia
+          localeId: 'id_ID',
         );
       }
     } else {

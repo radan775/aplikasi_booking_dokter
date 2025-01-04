@@ -10,22 +10,17 @@ class ForgetPasswordController extends GetxController {
   var isTimerExpired = false.obs;
   var timerDisplay = '60s'.obs;
 
-  // Fungsi untuk mengirim kode reset
   void sendResetCode() {
     isCodeSent.value = true;
   }
 
-  // Fungsi untuk mengirim ulang kode reset
   void resendCode() {
-    // Logika untuk mengirim ulang kode reset
-    startCountdown(); // Mulai countdown lagi
+    startCountdown();
   }
 
-  // Fungsi untuk memulai countdown 60 detik
   void startCountdown() {
-    // Reset timer sebelum memulai
     isTimerExpired.value = false;
-    timerDisplay.value = '60s'; // Set timer awal
+    timerDisplay.value = '60s';
     int countdown = 60;
 
     Timer.periodic(Duration(seconds: 1), (timer) {

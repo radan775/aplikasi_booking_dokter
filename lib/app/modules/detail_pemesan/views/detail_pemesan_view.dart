@@ -13,10 +13,10 @@ class DetailPemesanView extends GetView<DetailPemesanController> {
         backgroundColor: AppColors.blueColor,
         elevation: 0.0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          icon: Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () => Get.back(),
         ),
-        title: const Text(
+        title: Text(
           'Detail Pemesan',
           style: TextStyle(
             color: Colors.white,
@@ -26,22 +26,23 @@ class DetailPemesanView extends GetView<DetailPemesanController> {
         centerTitle: true,
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(12.0),
+        padding: EdgeInsets.all(AppSizes.paddingAll12),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Card(
               elevation: 5,
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(AppSizes.borderRadius10),
               ),
               child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Obx(() {
+                padding: EdgeInsets.all(AppSizes.paddingAll16),
+                child: Obx(
+                  () {
                     if (controller.selectedSchedule["type"] == 'doctor') {
                       if (controller.selectedDoctorData.value.isEmpty &&
                           controller.selectedClinicData.value.isEmpty) {
-                        return const Center(
+                        return Center(
                           child: CircularProgressIndicator(),
                         );
                       }
@@ -49,38 +50,38 @@ class DetailPemesanView extends GetView<DetailPemesanController> {
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
+                          Text(
                             "Dokter pilihan anda",
                             style: TextStyle(
-                              fontSize: 16,
+                              fontSize: AppSizes.fontSize16,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          const SizedBox(height: 16),
+                          SizedBox(height: AppSizes.heightSizeBox16),
                           Row(
                             children: [
                               CircleAvatar(
-                                radius: 40,
+                                radius: AppSizes.avatarRadius40,
                                 backgroundImage: NetworkImage(
                                   controller.selectedDoctorData.value['image'],
                                 ),
                               ),
-                              const SizedBox(width: 16),
+                              SizedBox(width: AppSizes.widthSizeBox16),
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
                                     '${controller.selectedDoctorData.value['name']}',
-                                    style: const TextStyle(
-                                      fontSize: 18,
+                                    style: TextStyle(
+                                      fontSize: AppSizes.fontSize18,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
-                                  const SizedBox(height: 8),
+                                  SizedBox(height: AppSizes.heightSizeBox8),
                                   Text(
                                     '${controller.selectedDoctorData.value['specialty']}',
-                                    style: const TextStyle(
-                                      fontSize: 14,
+                                    style: TextStyle(
+                                      fontSize: AppSizes.fontSize14,
                                       color: Colors.grey,
                                     ),
                                   ),
@@ -88,67 +89,68 @@ class DetailPemesanView extends GetView<DetailPemesanController> {
                               ),
                             ],
                           ),
-                          const SizedBox(height: 12),
-                          const Divider(),
-                          const Text(
+                          SizedBox(height: AppSizes.heightSizeBox12),
+                          Divider(),
+                          Text(
                             "Lokasi dan jadwal praktik",
                             style: TextStyle(
-                              fontSize: 16,
+                              fontSize: AppSizes.fontSize16,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          const SizedBox(height: 8),
+                          SizedBox(height: AppSizes.heightSizeBox8),
                           Row(
                             children: [
                               ClipRRect(
-                                borderRadius: BorderRadius.circular(10),
+                                borderRadius: BorderRadius.circular(
+                                    AppSizes.borderRadius10),
                                 child: Image.network(
                                   '${controller.selectedClinicData.value['clinicImage']}',
-                                  width: 80,
-                                  height: 80,
+                                  width: AppSizes.imageWidth80,
+                                  height: AppSizes.imageHeight80,
                                   fit: BoxFit.cover,
                                   errorBuilder: (context, error, stackTrace) =>
                                       Container(
-                                    width: 80,
-                                    height: 80,
+                                    width: AppSizes.imageWidth80,
+                                    height: AppSizes.imageHeight80,
                                     color: Colors.grey,
-                                    child: const Icon(
+                                    child: Icon(
                                       Icons.image_not_supported,
                                       color: Colors.white,
                                     ),
                                   ),
                                 ),
                               ),
-                              const SizedBox(width: 16),
+                              SizedBox(width: AppSizes.widthSizeBox16),
                               Expanded(
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
                                       '${controller.selectedClinicData.value['clinicName']}',
-                                      style: const TextStyle(
-                                        fontSize: 16,
+                                      style: TextStyle(
+                                        fontSize: AppSizes.fontSize16,
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),
                                     Text(
                                       "${controller.selectedClinicData.value['scheduleDay']}, ${controller.selectedClinicData.value['scheduleDate']}",
-                                      style: const TextStyle(
-                                        fontSize: 14,
+                                      style: TextStyle(
+                                        fontSize: AppSizes.fontSize14,
                                         color: Colors.grey,
                                       ),
                                     ),
                                     Text(
                                       '${controller.selectedClinicData.value['scheduleTime']}',
-                                      style: const TextStyle(
-                                        fontSize: 14,
+                                      style: TextStyle(
+                                        fontSize: AppSizes.fontSize14,
                                         color: Colors.grey,
                                       ),
                                     ),
                                     Text(
                                       "Biaya: Rp${controller.selectedClinicData.value['fee']}",
-                                      style: const TextStyle(
-                                        fontSize: 16,
+                                      style: TextStyle(
+                                        fontSize: AppSizes.fontSize16,
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),
@@ -161,7 +163,7 @@ class DetailPemesanView extends GetView<DetailPemesanController> {
                       );
                     } else {
                       if (controller.selectedClinicData.value.isEmpty) {
-                        return const Center(
+                        return Center(
                           child: CircularProgressIndicator(),
                         );
                       }
@@ -169,65 +171,66 @@ class DetailPemesanView extends GetView<DetailPemesanController> {
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
+                          Text(
                             "Lokasi dan jadwal praktik",
                             style: TextStyle(
-                              fontSize: 16,
+                              fontSize: AppSizes.fontSize16,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          const SizedBox(height: 8),
+                          SizedBox(height: AppSizes.heightSizeBox8),
                           Row(
                             children: [
                               ClipRRect(
-                                borderRadius: BorderRadius.circular(10),
+                                borderRadius: BorderRadius.circular(
+                                    AppSizes.borderRadius10),
                                 child: Image.network(
                                   '${controller.selectedClinicData.value['clinicImage']}',
-                                  width: 80,
-                                  height: 80,
+                                  width: AppSizes.imageWidth80,
+                                  height: AppSizes.imageHeight80,
                                   fit: BoxFit.cover,
                                   errorBuilder: (context, error, stackTrace) =>
                                       Container(
-                                    width: 80,
-                                    height: 80,
+                                    width: AppSizes.imageWidth80,
+                                    height: AppSizes.imageHeight80,
                                     color: Colors.grey,
-                                    child: const Icon(
+                                    child: Icon(
                                       Icons.image_not_supported,
                                       color: Colors.white,
                                     ),
                                   ),
                                 ),
                               ),
-                              const SizedBox(width: 16),
+                              SizedBox(width: AppSizes.widthSizeBox16),
                               Expanded(
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
                                       '${controller.selectedClinicData.value['name']}',
-                                      style: const TextStyle(
-                                        fontSize: 16,
+                                      style: TextStyle(
+                                        fontSize: AppSizes.fontSize16,
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),
                                     Text(
                                       "${controller.selectedClinicData.value['scheduleDay']}, ${controller.selectedClinicData.value['scheduleDate']}",
-                                      style: const TextStyle(
-                                        fontSize: 14,
+                                      style: TextStyle(
+                                        fontSize: AppSizes.fontSize14,
                                         color: Colors.grey,
                                       ),
                                     ),
                                     Text(
                                       '${controller.selectedClinicData.value['scheduleTime']}',
-                                      style: const TextStyle(
-                                        fontSize: 14,
+                                      style: TextStyle(
+                                        fontSize: AppSizes.fontSize14,
                                         color: Colors.grey,
                                       ),
                                     ),
                                     Text(
                                       "Biaya: Rp${controller.selectedClinicData.value['fee']}",
-                                      style: const TextStyle(
-                                        fontSize: 16,
+                                      style: TextStyle(
+                                        fontSize: AppSizes.fontSize16,
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),
@@ -236,20 +239,20 @@ class DetailPemesanView extends GetView<DetailPemesanController> {
                               ),
                             ],
                           ),
-                          SizedBox(height: 6),
+                          SizedBox(height: AppSizes.heightSizeBox6),
                           Row(
                             children: [
                               Text(
                                 "Tes: ",
-                                style: const TextStyle(
-                                  fontSize: 16,
+                                style: TextStyle(
+                                  fontSize: AppSizes.fontSize16,
                                   fontWeight: FontWeight.normal,
                                 ),
                               ),
                               Text(
                                 controller.selectedClinicData.value['test'],
-                                style: const TextStyle(
-                                  fontSize: 16,
+                                style: TextStyle(
+                                  fontSize: AppSizes.fontSize16,
                                   fontWeight: FontWeight.normal,
                                   color: AppColors.blueColor,
                                 ),
@@ -259,19 +262,21 @@ class DetailPemesanView extends GetView<DetailPemesanController> {
                         ],
                       );
                     }
-                  })),
+                  },
+                ),
+              ),
             ),
-            const SizedBox(height: 10),
+            SizedBox(height: AppSizes.heightSizeBox10),
             Card(
               elevation: 5,
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(AppSizes.borderRadius10),
               ),
               child: Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding: EdgeInsets.all(AppSizes.paddingAll16),
                 child: Obx(() {
                   if (controller.userData.value.isEmpty) {
-                    return const Center(
+                    return Center(
                       child: CircularProgressIndicator(),
                     );
                   }
@@ -287,21 +292,21 @@ class DetailPemesanView extends GetView<DetailPemesanController> {
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
+                      Text(
                         "Data pemesan",
                         style: TextStyle(
-                          fontSize: 16,
+                          fontSize: AppSizes.fontSize16,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      const SizedBox(height: 16),
+                      SizedBox(height: AppSizes.heightSizeBox16),
                       CustomTextfield(
                         hint: 'Nomor Ponsel',
                         textController: phoneController,
                         inputType: TextInputType.phone,
                         icon: Icons.phone,
                       ),
-                      const SizedBox(height: 12),
+                      SizedBox(height: AppSizes.heightSizeBox12),
                       CustomTextfield(
                         hint: 'Email',
                         textController: emailController,
@@ -309,13 +314,13 @@ class DetailPemesanView extends GetView<DetailPemesanController> {
                         icon: Icons.email,
                         enabled: false,
                       ),
-                      const SizedBox(height: 12),
+                      SizedBox(height: AppSizes.heightSizeBox12),
                       CustomTextfield(
                         hint: 'Nama Lengkap',
                         textController: fullNameController,
                         icon: Icons.person,
                       ),
-                      const SizedBox(height: 16),
+                      SizedBox(height: AppSizes.heightSizeBox16),
                       ElevatedButton(
                         onPressed: () {
                           if (controller.validateForm(phoneController.text,
@@ -326,16 +331,18 @@ class DetailPemesanView extends GetView<DetailPemesanController> {
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: AppColors.blueColor,
-                          padding: const EdgeInsets.symmetric(vertical: 16),
+                          padding: EdgeInsets.symmetric(
+                              vertical: AppSizes.paddingVertical16),
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
+                            borderRadius:
+                                BorderRadius.circular(AppSizes.borderRadius10),
                           ),
                         ),
-                        child: const Center(
+                        child: Center(
                           child: Text(
                             "Lanjut ke data pasien",
                             style: TextStyle(
-                              fontSize: 16,
+                              fontSize: AppSizes.fontSize16,
                               color: Colors.white,
                             ),
                           ),
