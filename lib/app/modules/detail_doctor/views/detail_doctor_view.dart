@@ -61,7 +61,7 @@ class DetailDoctorView extends GetView<DetailDoctorController> {
                           Text(
                             doctorData['name'] ?? 'Unknown',
                             style: TextStyle(
-                              fontSize: AppSizes.fontSize12,
+                              fontSize: AppSizes.fontSize16,
                               fontWeight: FontWeight.bold,
                               color: AppColors.black,
                             ),

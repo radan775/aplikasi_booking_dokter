@@ -185,7 +185,7 @@ class LabTestView extends GetView<LabTestController> {
                           Lottie.asset(
                             AppLotties.search_not_found,
                             width: AppSizes.lottieWidth250,
-                            height: AppSizes.lottieHeight250,
+                            height: AppSizes.lottieHeight200,
                             fit: BoxFit.contain,
                           ),
                           SizedBox(height: AppSizes.heightSizeBox16),

@@ -28,15 +28,17 @@ class AppColors {
 
   // Inisialisasi default
   static void initializeDefaultColors() {
+    // warna utama
+    blueColor = Colors.blue;
+    blueAccentColor = Colors.blueAccent;
+
     yellowColor = const Color(0xffFF9F00);
     bgColor = const Color(0xffF5F5F5);
     textColor = Colors.black;
-    blueColor = Colors.blue;
     whiteColor = Colors.white;
     whiteColor70 = Colors.white70;
     greyColor = Colors.grey;
     redColor = Colors.red;
-    blueAccentColor = Colors.blueAccent;
     darkGreyColor = const Color(0xFF424242);
     black87 = Colors.black87;
     black = Colors.black;

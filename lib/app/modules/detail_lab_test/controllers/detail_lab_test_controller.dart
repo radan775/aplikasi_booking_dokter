@@ -47,8 +47,8 @@ class DetailLabTestController extends GetxController {
   Future<void> pickDate() async {
     DateTime? selectedDate = await showDatePicker(
       context: Get.context!,
-      initialDate: DateTime.now(),
-      firstDate: DateTime.now(),
+      initialDate: DateTime.now().add(const Duration(days: 1)),
+      firstDate: DateTime.now().add(const Duration(days: 1)),
       lastDate: DateTime.now().add(const Duration(days: 300)),
       helpText: "Pilih Tanggal Janji",
       builder: (context, child) {

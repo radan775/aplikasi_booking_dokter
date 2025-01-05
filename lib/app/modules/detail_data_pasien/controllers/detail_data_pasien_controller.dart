@@ -143,7 +143,6 @@ class DetailDataPasienController extends GetxController {
       }
 
       Map<String, dynamic> historyData = {
-        // Data umum untuk semua tipe
         "selectedDay": selectedSchedule['day'],
         "selectedDate": selectedSchedule['date'],
         "selectedTime":

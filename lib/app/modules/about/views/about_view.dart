@@ -64,7 +64,7 @@ class AboutView extends GetView<AboutController> {
                     color: AppColors.blueColor), // Ganti dengan AppColors
                 SizedBox(width: AppSizes.heightSizeBox8),
                 Text(
-                  "radan775",
+                  "Taufiq Ramadhan",
                   style: TextStyle(
                     fontSize: AppSizes.fontSize18,
                     fontWeight: FontWeight.bold,
@@ -72,7 +72,20 @@ class AboutView extends GetView<AboutController> {
                 ),
               ],
             ),
-            SizedBox(height: AppSizes.heightSizeBox8),
+            Row(
+              children: [
+                Icon(Icons.format_list_numbered,
+                    color: AppColors.blueColor), // Ganti dengan AppColors
+                SizedBox(width: AppSizes.heightSizeBox8),
+                Text(
+                  "202210370311208",
+                  style: TextStyle(
+                    fontSize: AppSizes.fontSize16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
             Row(
               children: [
                 Icon(Icons.link,
@@ -80,6 +93,190 @@ class AboutView extends GetView<AboutController> {
                 SizedBox(width: AppSizes.widthSizeBox8),
                 Text(
                   "https://github.com/radan775",
+                  style: TextStyle(
+                    fontSize: AppSizes.fontSize14,
+                    color: AppColors.blueColor, // Ganti dengan AppColors
+                    decoration: TextDecoration.underline,
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: AppSizes.heightSizeBox8),
+            Row(
+              children: [
+                Icon(Icons.person,
+                    color: AppColors.blueColor), // Ganti dengan AppColors
+                SizedBox(width: AppSizes.heightSizeBox8),
+                Text(
+                  "Hisyam Bima Ekhsantama",
+                  style: TextStyle(
+                    fontSize: AppSizes.fontSize18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                Icon(Icons.format_list_numbered,
+                    color: AppColors.blueColor), // Ganti dengan AppColors
+                SizedBox(width: AppSizes.heightSizeBox8),
+                Text(
+                  "202210370311190",
+                  style: TextStyle(
+                    fontSize: AppSizes.fontSize16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                Icon(Icons.link,
+                    color: AppColors.blueColor), // Ganti dengan AppColors
+                SizedBox(width: AppSizes.widthSizeBox8),
+                Text(
+                  "https://github.com/Softdrinks14",
+                  style: TextStyle(
+                    fontSize: AppSizes.fontSize14,
+                    color: AppColors.blueColor, // Ganti dengan AppColors
+                    decoration: TextDecoration.underline,
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: AppSizes.heightSizeBox8),
+            Row(
+              children: [
+                Icon(Icons.person,
+                    color: AppColors.blueColor), // Ganti dengan AppColors
+                SizedBox(width: AppSizes.heightSizeBox8),
+                Text(
+                  "Rahmatullah Akbar Prima",
+                  style: TextStyle(
+                    fontSize: AppSizes.fontSize18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                Icon(Icons.format_list_numbered,
+                    color: AppColors.blueColor), // Ganti dengan AppColors
+                SizedBox(width: AppSizes.heightSizeBox8),
+                Text(
+                  "202210370311188",
+                  style: TextStyle(
+                    fontSize: AppSizes.fontSize16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                Icon(Icons.link,
+                    color: AppColors.blueColor), // Ganti dengan AppColors
+                SizedBox(width: AppSizes.widthSizeBox8),
+                Text(
+                  "https://github.com/Arabmeme",
+                  style: TextStyle(
+                    fontSize: AppSizes.fontSize14,
+                    color: AppColors.blueColor, // Ganti dengan AppColors
+                    decoration: TextDecoration.underline,
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: AppSizes.heightSizeBox8),
+            Row(
+              children: [
+                Icon(Icons.person,
+                    color: AppColors.blueColor), // Ganti dengan AppColors
+                SizedBox(width: AppSizes.heightSizeBox8),
+                Text(
+                  "M. Haidar Afif Al Azizi",
+                  style: TextStyle(
+                    fontSize: AppSizes.fontSize18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                Icon(Icons.format_list_numbered,
+                    color: AppColors.blueColor), // Ganti dengan AppColors
+                SizedBox(width: AppSizes.heightSizeBox8),
+                Text(
+                  "202210370311191",
+                  style: TextStyle(
+                    fontSize: AppSizes.fontSize16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                Icon(Icons.link,
+                    color: AppColors.blueColor), // Ganti dengan AppColors
+                SizedBox(width: AppSizes.widthSizeBox8),
+                Text(
+                  "https://github.com/Hadarafif",
+                  style: TextStyle(
+                    fontSize: AppSizes.fontSize14,
+                    color: AppColors.blueColor, // Ganti dengan AppColors
+                    decoration: TextDecoration.underline,
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: AppSizes.heightSizeBox10),
+            Text(
+              "Figma Desain",
+              style: TextStyle(
+                fontSize: AppSizes.fontSize18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(height: AppSizes.heightSizeBox8),
+            Row(
+              children: [
+                Icon(Icons.person,
+                    color: AppColors.blueColor), // Ganti dengan AppColors
+                SizedBox(width: AppSizes.heightSizeBox8),
+                Text(
+                  "Bima Bhakti Brawijaya",
+                  style: TextStyle(
+                    fontSize: AppSizes.fontSize18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                Icon(Icons.format_list_numbered,
+                    color: AppColors.blueColor), // Ganti dengan AppColors
+                SizedBox(width: AppSizes.heightSizeBox8),
+                Text(
+                  "202210370311168",
+                  style: TextStyle(
+                    fontSize: AppSizes.fontSize16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                Icon(Icons.link,
+                    color: AppColors.blueColor), // Ganti dengan AppColors
+                SizedBox(width: AppSizes.widthSizeBox8),
+                Text(
+                  "https://bit.ly/figmaMobile",
                   style: TextStyle(
                     fontSize: AppSizes.fontSize14,
                     color: AppColors.blueColor, // Ganti dengan AppColors

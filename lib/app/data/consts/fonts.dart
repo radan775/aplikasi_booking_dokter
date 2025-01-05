@@ -124,6 +124,7 @@ class AppSizes {
   static double get lottieWidth250 => 250.w;
 
   static double get lottieHeight200 => 200.h;
+  static double get lottieHeight230 => 230.h;
   static double get lottieHeight250 => 250.h;
 
   // Others

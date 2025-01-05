@@ -55,15 +55,12 @@ class AddNewsController extends GetxController {
     try {
       // Set loading state sebelum proses
       isLoading.value = true;
-
-      // Tambahkan delay untuk simulasi proses
       await Future.delayed(const Duration(seconds: 2));
 
-      // Proses upload
       await _firestore.collection('news').add({
         'title': titleController.text,
-        'imageUrl': imageUrlController.text,
-        'link': linkController.text,
+        'image': imageUrlController.text,
+        'url': linkController.text,
         'createdAt': FieldValue.serverTimestamp(),
       });
 

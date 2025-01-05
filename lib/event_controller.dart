@@ -25,10 +25,10 @@ class EventController extends GetxController {
   }
 
   void updateAppColors(String event) {
-    if (event == 'Bulan agustus') {
+    if (event.toLowerCase() == 'bulan agustus') {
       AppColors.blueColor = const Color(0xFFD71313);
       AppColors.blueAccentColor = const Color(0xFFBAD7E9);
-    } else if (event == 'Hari ibu') {
+    } else if (event.toLowerCase() == 'hari ibu') {
       AppColors.blueColor = const Color(0xFFE195AB);
       AppColors.blueAccentColor = const Color(0xFFFFCCE1);
     } else {

@@ -67,7 +67,7 @@ class DetailPasienView extends GetView<DetailPasienController> {
                   children: [
                     Expanded(
                       child: CustomTextfield(
-                        hint: "Tanggal/Bulan/Tahun",
+                        hint: "Tanggal lahir pasien",
                         textController: controller.tanggalController,
                         inputType: TextInputType.number,
                         enabled: false,
