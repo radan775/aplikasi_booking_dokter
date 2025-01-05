@@ -38,7 +38,7 @@ class ForgetPasswordView extends GetView<ForgetPasswordController> {
                   AppStyles.normal(
                     title: AppStrings.enterYourEmail,
                     size: AppSizes.fontSize16,
-                    color: Colors.grey,
+                    color: AppColors.greyColor,
                   ),
                 ],
               ),
@@ -62,7 +62,7 @@ class ForgetPasswordView extends GetView<ForgetPasswordController> {
                                 controller.startCountdown();
                               },
                               buttonColor: AppColors.blueColor,
-                              textColor: Colors.white,
+                              textColor: AppColors.whiteColor,
                               borderRadius: AppSizes.borderRadius12,
                             );
                     }),
@@ -80,7 +80,7 @@ class ForgetPasswordView extends GetView<ForgetPasswordController> {
                             SizedBox(height: AppSizes.heightSizeBox20),
                             Text(
                               'Kirim ulang dalam: ${controller.timerDisplay.value}',
-                              style: TextStyle(color: Colors.red),
+                              style: TextStyle(color: AppColors.redColor),
                             ),
                             SizedBox(height: AppSizes.heightSizeBox10),
                             CustomButton(
@@ -89,7 +89,7 @@ class ForgetPasswordView extends GetView<ForgetPasswordController> {
                                 print("RESET DITEKAN");
                               },
                               buttonColor: AppColors.blueColor,
-                              textColor: Colors.white,
+                              textColor: AppColors.whiteColor,
                               borderRadius: AppSizes.borderRadius12,
                             ),
                             SizedBox(height: AppSizes.heightSizeBox20),
@@ -98,7 +98,7 @@ class ForgetPasswordView extends GetView<ForgetPasswordController> {
                                 buttonText: AppStrings.resendCode,
                                 onTap: controller.resendCode,
                                 buttonColor: AppColors.yellowColor,
-                                textColor: Colors.black,
+                                textColor: AppColors.textColor,
                                 borderRadius: AppSizes.borderRadius12,
                               ),
                           ],
@@ -113,7 +113,7 @@ class ForgetPasswordView extends GetView<ForgetPasswordController> {
                         AppStyles.normal(
                           title: AppStrings.rememberedYourPassword,
                           size: AppSizes.fontSize14,
-                          color: Colors.grey,
+                          color: AppColors.greyColor,
                         ),
                         SizedBox(width: AppSizes.widthSizeBox8),
                         GestureDetector(

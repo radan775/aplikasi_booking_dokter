@@ -17,7 +17,7 @@ class DetailDoctorView extends GetView<DetailDoctorController> {
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back,
-            color: Colors.white,
+            color: AppColors.whiteColor,
             size: AppSizes.iconSize28,
           ),
           onPressed: () => Get.back(),
@@ -25,7 +25,7 @@ class DetailDoctorView extends GetView<DetailDoctorController> {
         title: Text(
           'Profil Dokter',
           style: TextStyle(
-            color: Colors.white,
+            color: AppColors.whiteColor,
             fontWeight: FontWeight.bold,
             fontSize: AppSizes.fontSize20,
           ),
@@ -63,7 +63,7 @@ class DetailDoctorView extends GetView<DetailDoctorController> {
                             style: TextStyle(
                               fontSize: AppSizes.fontSize12,
                               fontWeight: FontWeight.bold,
-                              color: Colors.black,
+                              color: AppColors.black,
                             ),
                           ),
                           SizedBox(height: AppSizes.heightSizeBox8),
@@ -71,7 +71,7 @@ class DetailDoctorView extends GetView<DetailDoctorController> {
                             doctorData['specialty'] ?? 'Unknown',
                             style: TextStyle(
                               fontSize: AppSizes.fontSize16,
-                              color: Colors.grey,
+                              color: AppColors.greyColor,
                             ),
                           ),
                         ],
@@ -121,7 +121,7 @@ class DetailDoctorView extends GetView<DetailDoctorController> {
                                     return Container(
                                       width: AppSizes.imageWidth80,
                                       height: AppSizes.imageHeight80,
-                                      color: Colors.grey,
+                                      color: AppColors.greyColor,
                                       child: Icon(Icons.image_not_supported),
                                     );
                                   },
@@ -137,7 +137,7 @@ class DetailDoctorView extends GetView<DetailDoctorController> {
                                       style: TextStyle(
                                         fontSize: AppSizes.fontSize18,
                                         fontWeight: FontWeight.bold,
-                                        color: Colors.black,
+                                        color: AppColors.black,
                                       ),
                                     ),
                                     SizedBox(height: AppSizes.heightSizeBox8),
@@ -146,7 +146,7 @@ class DetailDoctorView extends GetView<DetailDoctorController> {
                                           'No address available',
                                       style: TextStyle(
                                         fontSize: AppSizes.fontSize14,
-                                        color: Colors.grey,
+                                        color: AppColors.greyColor,
                                       ),
                                     ),
                                     SizedBox(height: AppSizes.heightSizeBox8),
@@ -155,7 +155,7 @@ class DetailDoctorView extends GetView<DetailDoctorController> {
                                       style: TextStyle(
                                         fontSize: AppSizes.fontSize16,
                                         fontWeight: FontWeight.bold,
-                                        color: Colors.black,
+                                        color: AppColors.black,
                                       ),
                                     ),
                                   ],
@@ -196,7 +196,7 @@ class DetailDoctorView extends GetView<DetailDoctorController> {
                                       nextDate,
                                       style: TextStyle(
                                         fontSize: AppSizes.fontSize14,
-                                        color: Colors.grey,
+                                        color: AppColors.greyColor,
                                       ),
                                     ),
                                   ],
@@ -220,8 +220,8 @@ class DetailDoctorView extends GetView<DetailDoctorController> {
                                       leading: Icon(
                                         Icons.access_time,
                                         color: isSelected
-                                            ? Colors.green
-                                            : Colors.blueAccent,
+                                            ? AppColors.greenColor
+                                            : AppColors.blueAccentColor,
                                         size: AppSizes.iconSize25,
                                       ),
                                       title: Text(
@@ -244,7 +244,7 @@ class DetailDoctorView extends GetView<DetailDoctorController> {
                                       trailing: isSelected
                                           ? Icon(
                                               Icons.check_circle,
-                                              color: Colors.green,
+                                              color: AppColors.greenColor,
                                             )
                                           : null,
                                     );
@@ -305,7 +305,7 @@ class DetailDoctorView extends GetView<DetailDoctorController> {
             style: TextStyle(
               fontSize: AppSizes.fontSize18,
               fontWeight: FontWeight.bold,
-              color: Colors.white,
+              color: AppColors.whiteColor,
             ),
           ),
         ),
@@ -338,7 +338,7 @@ class DetailDoctorView extends GetView<DetailDoctorController> {
                 content,
                 style: TextStyle(
                   fontSize: AppSizes.fontSize14,
-                  color: Colors.black87,
+                  color: AppColors.black87,
                 ),
               ),
             ],
@@ -380,7 +380,7 @@ class DetailDoctorView extends GetView<DetailDoctorController> {
                         children: [
                           Icon(
                             Icons.check_circle,
-                            color: Colors.green,
+                            color: AppColors.greenColor,
                             size: AppSizes.iconSize20,
                           ),
                           SizedBox(width: AppSizes.widthSizeBox8),
@@ -389,7 +389,7 @@ class DetailDoctorView extends GetView<DetailDoctorController> {
                               item.toString(),
                               style: TextStyle(
                                 fontSize: AppSizes.fontSize14,
-                                color: Colors.black87,
+                                color: AppColors.black87,
                               ),
                             ),
                           ),

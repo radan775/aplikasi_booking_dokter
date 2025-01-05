@@ -14,7 +14,7 @@ class TermConditionView extends GetView<TermConditionController> {
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back,
-            color: Colors.white,
+            color: AppColors.whiteColor, // Ganti dengan AppColors
             size: AppSizes.iconSize28,
           ),
           onPressed: () => Get.back(),
@@ -22,7 +22,7 @@ class TermConditionView extends GetView<TermConditionController> {
         title: Text(
           'Syarat dan Ketentuan',
           style: TextStyle(
-            color: Colors.white,
+            color: AppColors.whiteColor, // Ganti dengan AppColors
             fontWeight: FontWeight.bold,
             fontSize: AppSizes.fontSize20,
           ),
@@ -54,7 +54,7 @@ class TermConditionView extends GetView<TermConditionController> {
               "Aplikasi ini dirancang untuk mempermudah pengguna dalam melakukan reservasi dokter secara online. Dengan menggunakan aplikasi ini, Anda setuju untuk mematuhi semua syarat dan ketentuan yang berlaku.",
               style: TextStyle(
                 fontSize: AppSizes.fontSize14,
-                color: Colors.black87,
+                color: AppColors.textColor, // Ganti dengan AppColors
               ),
             ),
             SizedBox(height: AppSizes.heightSizeBox16),
@@ -70,7 +70,7 @@ class TermConditionView extends GetView<TermConditionController> {
               "Aplikasi ini hanya dapat digunakan untuk tujuan pribadi dan tidak untuk keperluan komersial. Anda bertanggung jawab atas semua informasi yang Anda berikan.",
               style: TextStyle(
                 fontSize: AppSizes.fontSize14,
-                color: Colors.black87,
+                color: AppColors.textColor, // Ganti dengan AppColors
               ),
             ),
             SizedBox(height: AppSizes.heightSizeBox16),
@@ -86,7 +86,7 @@ class TermConditionView extends GetView<TermConditionController> {
               "Pengguna wajib memberikan informasi yang akurat saat melakukan reservasi. Kesalahan dalam informasi dapat mengakibatkan pembatalan reservasi.",
               style: TextStyle(
                 fontSize: AppSizes.fontSize14,
-                color: Colors.black87,
+                color: AppColors.textColor, // Ganti dengan AppColors
               ),
             ),
             SizedBox(height: AppSizes.heightSizeBox16),
@@ -102,7 +102,7 @@ class TermConditionView extends GetView<TermConditionController> {
               "Kami menjaga kerahasiaan data pribadi Anda sesuai dengan kebijakan privasi kami. Namun, kami tidak bertanggung jawab atas kebocoran data yang diakibatkan oleh pihak ketiga.",
               style: TextStyle(
                 fontSize: AppSizes.fontSize14,
-                color: Colors.black87,
+                color: AppColors.textColor, // Ganti dengan AppColors
               ),
             ),
             SizedBox(height: AppSizes.heightSizeBox16),
@@ -118,7 +118,7 @@ class TermConditionView extends GetView<TermConditionController> {
               "Pembatalan reservasi dapat dilakukan sesuai dengan kebijakan yang telah ditentukan oleh masing-masing klinik atau rumah sakit.",
               style: TextStyle(
                 fontSize: AppSizes.fontSize14,
-                color: Colors.black87,
+                color: AppColors.textColor, // Ganti dengan AppColors
               ),
             ),
             SizedBox(height: AppSizes.heightSizeBox16),
@@ -134,14 +134,14 @@ class TermConditionView extends GetView<TermConditionController> {
               "Kami berhak mengubah syarat dan ketentuan ini kapan saja tanpa pemberitahuan sebelumnya. Disarankan untuk memeriksa syarat dan ketentuan secara berkala.",
               style: TextStyle(
                 fontSize: AppSizes.fontSize14,
-                color: Colors.black87,
+                color: AppColors.textColor, // Ganti dengan AppColors
               ),
             ),
             SizedBox(height: AppSizes.heightSizeBox24),
             ElevatedButton(
               onPressed: () => Get.back(),
               style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.blueColor,
+                backgroundColor: AppColors.blueColor, // Ganti dengan AppColors
                 padding: EdgeInsets.symmetric(
                   vertical: AppSizes.paddingVertical16,
                 ),
@@ -156,7 +156,7 @@ class TermConditionView extends GetView<TermConditionController> {
                   "Kembali",
                   style: TextStyle(
                     fontSize: AppSizes.fontSize16,
-                    color: Colors.white,
+                    color: AppColors.whiteColor, // Ganti dengan AppColors
                   ),
                 ),
               ),

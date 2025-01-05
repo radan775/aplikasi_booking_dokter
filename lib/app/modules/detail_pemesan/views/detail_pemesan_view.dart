@@ -15,7 +15,7 @@ class DetailPemesanView extends GetView<DetailPemesanController> {
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back,
-            color: Colors.white,
+            color: AppColors.whiteColor,
             size: AppSizes.iconSize28,
           ),
           onPressed: () => Get.back(),
@@ -23,7 +23,7 @@ class DetailPemesanView extends GetView<DetailPemesanController> {
         title: Text(
           'Detail Pemesan',
           style: TextStyle(
-            color: Colors.white,
+            color: AppColors.whiteColor,
             fontWeight: FontWeight.bold,
             fontSize: AppSizes.fontSize20,
           ),
@@ -87,7 +87,7 @@ class DetailPemesanView extends GetView<DetailPemesanController> {
                                     '${controller.selectedDoctorData.value['specialty']}',
                                     style: TextStyle(
                                       fontSize: AppSizes.fontSize14,
-                                      color: Colors.grey,
+                                      color: AppColors.greyColor,
                                     ),
                                   ),
                                 ],
@@ -118,10 +118,10 @@ class DetailPemesanView extends GetView<DetailPemesanController> {
                                       Container(
                                     width: AppSizes.imageWidth80,
                                     height: AppSizes.imageHeight80,
-                                    color: Colors.grey,
+                                    color: AppColors.greyColor,
                                     child: Icon(
                                       Icons.image_not_supported,
-                                      color: Colors.white,
+                                      color: AppColors.whiteColor,
                                     ),
                                   ),
                                 ),
@@ -142,14 +142,14 @@ class DetailPemesanView extends GetView<DetailPemesanController> {
                                       "${controller.selectedClinicData.value['scheduleDay']}, ${controller.selectedClinicData.value['scheduleDate']}",
                                       style: TextStyle(
                                         fontSize: AppSizes.fontSize14,
-                                        color: Colors.grey,
+                                        color: AppColors.greyColor,
                                       ),
                                     ),
                                     Text(
                                       '${controller.selectedClinicData.value['scheduleTime']}',
                                       style: TextStyle(
                                         fontSize: AppSizes.fontSize14,
-                                        color: Colors.grey,
+                                        color: AppColors.greyColor,
                                       ),
                                     ),
                                     Text(
@@ -198,10 +198,10 @@ class DetailPemesanView extends GetView<DetailPemesanController> {
                                       Container(
                                     width: AppSizes.imageWidth80,
                                     height: AppSizes.imageHeight80,
-                                    color: Colors.grey,
+                                    color: AppColors.greyColor,
                                     child: Icon(
                                       Icons.image_not_supported,
-                                      color: Colors.white,
+                                      color: AppColors.whiteColor,
                                     ),
                                   ),
                                 ),
@@ -222,14 +222,14 @@ class DetailPemesanView extends GetView<DetailPemesanController> {
                                       "${controller.selectedClinicData.value['scheduleDay']}, ${controller.selectedClinicData.value['scheduleDate']}",
                                       style: TextStyle(
                                         fontSize: AppSizes.fontSize14,
-                                        color: Colors.grey,
+                                        color: AppColors.greyColor,
                                       ),
                                     ),
                                     Text(
                                       '${controller.selectedClinicData.value['scheduleTime']}',
                                       style: TextStyle(
                                         fontSize: AppSizes.fontSize14,
-                                        color: Colors.grey,
+                                        color: AppColors.greyColor,
                                       ),
                                     ),
                                     Text(
@@ -348,7 +348,7 @@ class DetailPemesanView extends GetView<DetailPemesanController> {
                             "Lanjut ke data pasien",
                             style: TextStyle(
                               fontSize: AppSizes.fontSize16,
-                              color: Colors.white,
+                              color: AppColors.whiteColor,
                             ),
                           ),
                         ),

@@ -17,7 +17,7 @@ class DetailLabTestView extends GetView<DetailLabTestController> {
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back,
-            color: Colors.white,
+            color: AppColors.whiteColor,
             size: AppSizes.iconSize28,
           ),
           onPressed: () => Get.back(),
@@ -28,7 +28,7 @@ class DetailLabTestView extends GetView<DetailLabTestController> {
             Text(
               labTestData['test'] ?? 'Unknown Test',
               style: TextStyle(
-                color: Colors.white,
+                color: AppColors.whiteColor,
                 fontWeight: FontWeight.bold,
                 fontSize: AppSizes.fontSize18,
               ),
@@ -36,7 +36,7 @@ class DetailLabTestView extends GetView<DetailLabTestController> {
             Text(
               '${labTestData['currency']}${labTestData['price']}',
               style: TextStyle(
-                color: Colors.white70,
+                color: AppColors.whiteColor70,
                 fontSize: AppSizes.fontSize14,
               ),
             ),
@@ -90,9 +90,9 @@ class DetailLabTestView extends GetView<DetailLabTestController> {
                     errorBuilder: (context, error, stackTrace) => Container(
                       width: AppSizes.imageWidth80,
                       height: AppSizes.imageHeight80,
-                      color: Colors.grey[300],
-                      child:
-                          Icon(Icons.image_not_supported, color: Colors.grey),
+                      color: AppColors.grey300,
+                      child: Icon(Icons.image_not_supported,
+                          color: AppColors.greyColor),
                     ),
                   ),
                 ),
@@ -113,7 +113,7 @@ class DetailLabTestView extends GetView<DetailLabTestController> {
                         labTestData['address'] ?? 'Unknown Address',
                         style: TextStyle(
                           fontSize: AppSizes.fontSize14,
-                          color: Colors.grey,
+                          color: AppColors.greyColor,
                         ),
                       ),
                       SizedBox(height: AppSizes.heightSizeBox8),
@@ -121,7 +121,7 @@ class DetailLabTestView extends GetView<DetailLabTestController> {
                         'Jam Operasional: ${labTestData['operasionalHours']['start']} - ${labTestData['operasionalHours']['end']}',
                         style: TextStyle(
                           fontSize: AppSizes.fontSize14,
-                          color: Colors.grey,
+                          color: AppColors.greyColor,
                         ),
                       ),
                     ],
@@ -158,7 +158,7 @@ class DetailLabTestView extends GetView<DetailLabTestController> {
               labTestData['description'] ?? 'No description available.',
               style: TextStyle(
                 fontSize: AppSizes.fontSize14,
-                color: Colors.black87,
+                color: AppColors.black87,
                 height: AppSizes.textHeight1_5,
               ),
             ),
@@ -192,7 +192,7 @@ class DetailLabTestView extends GetView<DetailLabTestController> {
                 return ElevatedButton(
                   onPressed: () => controller.pickDate(),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.transparent,
+                    backgroundColor: AppColors.transparentColor,
                     elevation: 0,
                     minimumSize: Size(
                       double.infinity,
@@ -248,7 +248,7 @@ class DetailLabTestView extends GetView<DetailLabTestController> {
                       child: Text(
                         "Ganti Tanggal",
                         style: TextStyle(
-                          color: Colors.red,
+                          color: AppColors.redColor,
                           fontSize: AppSizes.fontSize14,
                           fontWeight: FontWeight.bold,
                         ),
@@ -287,7 +287,7 @@ class DetailLabTestView extends GetView<DetailLabTestController> {
                               '${schedule['start']} - ${schedule['end']}',
                               style: TextStyle(
                                 fontSize: AppSizes.fontSize14,
-                                color: Colors.grey,
+                                color: AppColors.greyColor,
                               ),
                             ),
                           ],
@@ -299,7 +299,7 @@ class DetailLabTestView extends GetView<DetailLabTestController> {
                               schedule['start'], schedule['end']);
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.green,
+                          backgroundColor: AppColors.greenColor,
                           shape: RoundedRectangleBorder(
                             borderRadius:
                                 BorderRadius.circular(AppSizes.borderRadius8),
@@ -308,7 +308,7 @@ class DetailLabTestView extends GetView<DetailLabTestController> {
                         child: Text(
                           "Buat Janji",
                           style: TextStyle(
-                            color: Colors.white,
+                            color: AppColors.whiteColor,
                             fontSize: AppSizes.fontSize16,
                           ),
                         ),

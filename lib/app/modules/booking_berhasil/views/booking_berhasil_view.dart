@@ -11,7 +11,7 @@ class BookingBerhasilView extends GetView<BookingBerhasilController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.whiteColor,
       body: SafeArea(
         child: Center(
           child: Column(
@@ -40,7 +40,7 @@ class BookingBerhasilView extends GetView<BookingBerhasilController> {
                 controller.tipeLayanan.value,
                 style: TextStyle(
                   fontSize: AppSizes.fontSize18,
-                  color: Colors.grey,
+                  color: AppColors.greyColor,
                 ),
               ),
 
@@ -51,7 +51,7 @@ class BookingBerhasilView extends GetView<BookingBerhasilController> {
                     horizontal: AppSizes.paddingHorizontal20,
                     vertical: AppSizes.paddingVertical10),
                 decoration: BoxDecoration(
-                  color: Colors.grey[200],
+                  color: AppColors.grey200,
                   borderRadius: BorderRadius.circular(AppSizes.borderRadius10),
                 ),
                 child: Text(
@@ -83,7 +83,7 @@ class BookingBerhasilView extends GetView<BookingBerhasilController> {
                   "Kembali ke Beranda",
                   style: TextStyle(
                     fontSize: AppSizes.fontSize16,
-                    color: Colors.white,
+                    color: AppColors.whiteColor,
                   ),
                 ),
               ),

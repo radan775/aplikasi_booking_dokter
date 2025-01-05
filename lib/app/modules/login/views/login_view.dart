@@ -11,16 +11,12 @@ class LoginView extends GetView<LoginController> {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(LoginController());
-
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
-          margin: EdgeInsets.only(
-            top: AppSizes.marginTop120,
-          ),
-          padding: EdgeInsets.symmetric(
-            horizontal: AppSizes.paddingHorizontal16,
-          ),
+          margin: EdgeInsets.only(top: AppSizes.marginTop120),
+          padding:
+              EdgeInsets.symmetric(horizontal: AppSizes.paddingHorizontal16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -40,7 +36,7 @@ class LoginView extends GetView<LoginController> {
                   AppStyles.normal(
                     title: AppStrings.weAreExcited,
                     size: AppSizes.fontSize16,
-                    color: Colors.grey,
+                    color: AppColors.greyColor,
                   ),
                 ],
               ),
@@ -60,6 +56,24 @@ class LoginView extends GetView<LoginController> {
                       obscureText: true,
                       textController: controller.passwordController,
                     ),
+                    SizedBox(height: AppSizes.heightSizeBox10),
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: GestureDetector(
+                        onTap: () {
+                          // Tambahkan logika untuk mengarahkan ke halaman lupa password
+                          Get.toNamed(Routes.FORGET_PASSWORD);
+                        },
+                        child: Text(
+                          "Lupa Password?",
+                          style: TextStyle(
+                            fontSize: AppSizes.fontSize14,
+                            color: AppColors.redColor,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
                     SizedBox(height: AppSizes.heightSizeBox30),
                     Obx(() {
                       if (controller.isLoading.value) {
@@ -75,7 +89,7 @@ class LoginView extends GetView<LoginController> {
                         buttonText: AppStrings.login,
                         onTap: controller.login,
                         buttonColor: AppColors.blueColor,
-                        textColor: Colors.white,
+                        textColor: AppColors.whiteColor,
                         borderRadius: AppSizes.borderRadius12,
                         fontSize: AppSizes.fontSize16,
                       );
@@ -87,7 +101,7 @@ class LoginView extends GetView<LoginController> {
                         AppStyles.normal(
                           title: AppStrings.dontHaveAccount,
                           size: AppSizes.fontSize14,
-                          color: Colors.grey,
+                          color: AppColors.greyColor,
                         ),
                         SizedBox(width: AppSizes.widthSizeBox8),
                         GestureDetector(

@@ -15,7 +15,7 @@ class AddNewsView extends GetView<AddNewsController> {
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back,
-            color: Colors.white,
+            color: AppColors.whiteColor,
             size: AppSizes.iconSize28,
           ),
           onPressed: () => Get.back(),
@@ -23,7 +23,7 @@ class AddNewsView extends GetView<AddNewsController> {
         title: Text(
           'Tambah Berita',
           style: TextStyle(
-            color: Colors.white,
+            color: AppColors.whiteColor,
             fontWeight: FontWeight.bold,
             fontSize: AppSizes.fontSize20,
           ),
@@ -53,7 +53,7 @@ class AddNewsView extends GetView<AddNewsController> {
                   : Container(
                       height: AppSizes.heightContainer200,
                       decoration: BoxDecoration(
-                        color: Colors.grey[200],
+                        color: AppColors.grey200,
                         borderRadius: BorderRadius.circular(
                           AppSizes.borderRadius10,
                         ),
@@ -64,7 +64,7 @@ class AddNewsView extends GetView<AddNewsController> {
                           Icon(
                             Icons.image,
                             size: AppSizes.iconSize50,
-                            color: Colors.grey[400],
+                            color: AppColors.grey600,
                           ),
                           SizedBox(
                             height: AppSizes.heightSizeBox10,
@@ -72,7 +72,7 @@ class AddNewsView extends GetView<AddNewsController> {
                           Text(
                             'Masukkan URL Gambar',
                             style: TextStyle(
-                              color: Colors.grey[600],
+                              color: AppColors.grey600,
                               fontSize: AppSizes.fontSize16,
                             ),
                           ),
@@ -128,13 +128,13 @@ class AddNewsView extends GetView<AddNewsController> {
                   ),
                 ),
                 child: controller.isLoading.value
-                    ? CircularProgressIndicator(color: Colors.white)
+                    ? CircularProgressIndicator(color: AppColors.whiteColor)
                     : Text(
                         'Unggah Berita',
                         style: TextStyle(
                           fontSize: AppSizes.fontSize16,
                           fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                          color: AppColors.whiteColor,
                         ),
                       ),
               );

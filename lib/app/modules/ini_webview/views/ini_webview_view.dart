@@ -12,12 +12,12 @@ class IniWebviewView extends GetView<IniWebViewController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: AppColors.blueColor,
+        backgroundColor: AppColors.blueColor, // Menggunakan AppColors
         elevation: 0.0,
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back,
-            color: Colors.white,
+            color: AppColors.whiteColor, // Menggunakan AppColors
             size: AppSizes.iconSize28,
           ),
           onPressed: () => Get.back(),
@@ -25,7 +25,7 @@ class IniWebviewView extends GetView<IniWebViewController> {
         title: Text(
           'Webview Berita',
           style: TextStyle(
-            color: Colors.white,
+            color: AppColors.whiteColor, // Menggunakan AppColors
             fontWeight: FontWeight.bold,
             fontSize: AppSizes.fontSize20,
           ),

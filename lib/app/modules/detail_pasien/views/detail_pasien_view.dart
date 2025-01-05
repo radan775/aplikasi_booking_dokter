@@ -15,7 +15,7 @@ class DetailPasienView extends GetView<DetailPasienController> {
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back,
-            color: Colors.white,
+            color: AppColors.whiteColor,
             size: AppSizes.iconSize28,
           ),
           onPressed: () => Get.back(),
@@ -23,7 +23,7 @@ class DetailPasienView extends GetView<DetailPasienController> {
         title: Text(
           'Detail Pasien',
           style: TextStyle(
-            color: Colors.white,
+            color: AppColors.whiteColor,
             fontWeight: FontWeight.bold,
             fontSize: AppSizes.fontSize20,
           ),
@@ -54,7 +54,7 @@ class DetailPasienView extends GetView<DetailPasienController> {
                   "Silahkan lengkapi data pasien untuk buat janji:",
                   style: TextStyle(
                     fontSize: AppSizes.fontSize14,
-                    color: Colors.grey,
+                    color: AppColors.greyColor,
                   ),
                 ),
                 SizedBox(height: AppSizes.heightSizeBox16),
@@ -111,7 +111,7 @@ class DetailPasienView extends GetView<DetailPasienController> {
                             backgroundColor:
                                 controller.selectedGender.value == "Laki-laki"
                                     ? AppColors.blueColor
-                                    : Colors.grey[300],
+                                    : AppColors.grey300,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(0),
                             ),
@@ -124,8 +124,8 @@ class DetailPasienView extends GetView<DetailPasienController> {
                             style: TextStyle(
                               color:
                                   controller.selectedGender.value == "Laki-laki"
-                                      ? Colors.white
-                                      : Colors.black,
+                                      ? AppColors.whiteColor
+                                      : AppColors.black,
                               fontSize: AppSizes.fontSize14,
                             ),
                           ),
@@ -140,7 +140,7 @@ class DetailPasienView extends GetView<DetailPasienController> {
                             backgroundColor:
                                 controller.selectedGender.value == "Perempuan"
                                     ? AppColors.blueColor
-                                    : Colors.grey[300],
+                                    : AppColors.grey300,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(0),
                             ),
@@ -153,8 +153,8 @@ class DetailPasienView extends GetView<DetailPasienController> {
                             style: TextStyle(
                               color:
                                   controller.selectedGender.value == "Perempuan"
-                                      ? Colors.white
-                                      : Colors.black,
+                                      ? AppColors.whiteColor
+                                      : AppColors.black,
                               fontSize: AppSizes.fontSize14,
                             ),
                           ),
@@ -194,7 +194,7 @@ class DetailPasienView extends GetView<DetailPasienController> {
                       style: TextStyle(
                         fontSize: AppSizes.fontSize16,
                         fontWeight: FontWeight.bold,
-                        color: Colors.white,
+                        color: AppColors.whiteColor,
                       ),
                     ),
                   ),

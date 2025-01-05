@@ -10,16 +10,12 @@ class SignupView extends GetView<SignupController> {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(SignupController());
-
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
-          margin: EdgeInsets.only(
-            top: AppSizes.marginTop100,
-          ),
-          padding: EdgeInsets.symmetric(
-            horizontal: AppSizes.paddingHorizontal16,
-          ),
+          margin: EdgeInsets.only(top: AppSizes.marginTop100),
+          padding:
+              EdgeInsets.symmetric(horizontal: AppSizes.paddingHorizontal16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -39,7 +35,7 @@ class SignupView extends GetView<SignupController> {
                   AppStyles.normal(
                     title: AppStrings.createAccount,
                     size: AppSizes.fontSize16,
-                    color: Colors.grey,
+                    color: AppColors.greyColor,
                   ),
                 ],
               ),
@@ -74,7 +70,7 @@ class SignupView extends GetView<SignupController> {
                         buttonText: AppStrings.signup,
                         onTap: controller.signup,
                         buttonColor: AppColors.blueColor,
-                        textColor: Colors.white,
+                        textColor: AppColors.whiteColor,
                         borderRadius: AppSizes.borderRadius12,
                         fontSize: AppSizes.fontSize16,
                       );
@@ -86,7 +82,7 @@ class SignupView extends GetView<SignupController> {
                         AppStyles.normal(
                           title: AppStrings.alreadyHaveAccount,
                           size: AppSizes.fontSize14,
-                          color: Colors.grey,
+                          color: AppColors.greyColor, // Ganti dengan AppColors
                         ),
                         SizedBox(width: AppSizes.widthSizeBox8),
                         GestureDetector(
@@ -96,7 +92,7 @@ class SignupView extends GetView<SignupController> {
                           child: AppStyles.bold(
                             title: AppStrings.login,
                             size: AppSizes.fontSize14,
-                            color: AppColors.blueColor,
+                            color: AppColors.blueColor, // Sudah ada
                           ),
                         ),
                       ],

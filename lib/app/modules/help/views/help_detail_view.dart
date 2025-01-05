@@ -9,7 +9,6 @@ class HelpDetailView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final String helpTitle = Get.arguments ?? "Detail Bantuan";
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.blueColor,
@@ -17,7 +16,7 @@ class HelpDetailView extends StatelessWidget {
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back,
-            color: Colors.white,
+            color: AppColors.whiteColor, // Ganti dengan AppColors
             size: AppSizes.iconSize28,
           ),
           onPressed: () => Get.back(),
@@ -25,7 +24,7 @@ class HelpDetailView extends StatelessWidget {
         title: Text(
           helpTitle,
           style: TextStyle(
-            color: Colors.white,
+            color: AppColors.whiteColor, // Ganti dengan AppColors
             fontWeight: FontWeight.bold,
             fontSize: AppSizes.fontSize20,
           ),
@@ -38,7 +37,7 @@ class HelpDetailView extends StatelessWidget {
           "Informasi detail untuk kategori \"$helpTitle\" akan ditampilkan di sini.",
           style: TextStyle(
             fontSize: AppSizes.fontSize14,
-            color: Colors.black87,
+            color: AppColors.greyColor, // Ganti dengan AppColors
           ),
         ),
       ),

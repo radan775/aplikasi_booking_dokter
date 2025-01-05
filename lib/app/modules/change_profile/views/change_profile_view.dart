@@ -18,7 +18,7 @@ class ChangeProfileView extends GetView<ChangeProfileController> {
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back,
-            color: Colors.white,
+            color: AppColors.whiteColor,
             size: AppSizes.iconSize28,
           ),
           onPressed: () => Get.back(),
@@ -26,7 +26,7 @@ class ChangeProfileView extends GetView<ChangeProfileController> {
         title: Text(
           'Ubah Profile',
           style: TextStyle(
-            color: Colors.white,
+            color: AppColors.whiteColor,
             fontWeight: FontWeight.bold,
             fontSize: AppSizes.fontSize20,
           ),
@@ -42,20 +42,17 @@ class ChangeProfileView extends GetView<ChangeProfileController> {
                 child: CircularProgressIndicator(),
               );
             }
-
             return SingleChildScrollView(
               padding: EdgeInsets.all(AppSizes.paddingAll16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // User Photo
                   Center(
                     child: Column(
                       children: [
                         Stack(
                           children: [
                             Obx(() {
-                              // Tampilkan foto dari storage atau placeholder
                               return CircleAvatar(
                                 radius: AppSizes.avatarRadius50,
                                 backgroundImage: controller
@@ -73,10 +70,11 @@ class ChangeProfileView extends GetView<ChangeProfileController> {
                           onPressed: () {
                             controller.showImageSourceDialog();
                           },
-                          icon: Icon(Icons.edit, color: Colors.blueAccent),
+                          icon: Icon(Icons.edit,
+                              color: AppColors.blueAccentColor),
                           label: Text(
                             "Ubah Foto",
-                            style: TextStyle(color: Colors.blueAccent),
+                            style: TextStyle(color: AppColors.blueAccentColor),
                           ),
                         ),
                       ],
@@ -88,15 +86,12 @@ class ChangeProfileView extends GetView<ChangeProfileController> {
                     textController: controller.nameController,
                   ),
                   SizedBox(height: AppSizes.heightSizeBox16),
-
                   CustomTextfield(
                     hint: "Nomor HP",
                     textController: controller.phoneController,
                     inputType: TextInputType.phone,
                   ),
                   SizedBox(height: AppSizes.heightSizeBox16),
-
-                  // Email Field
                   CustomTextfield(
                     hint: "Email",
                     textController: controller.emailController,
@@ -104,15 +99,12 @@ class ChangeProfileView extends GetView<ChangeProfileController> {
                     enabled: false,
                   ),
                   SizedBox(height: AppSizes.heightSizeBox16),
-
-                  // Age Field
                   CustomTextfield(
                     hint: "Umur",
                     textController: controller.ageController,
                     inputType: TextInputType.number,
                   ),
                   SizedBox(height: AppSizes.heightSizeBox16),
-
                   Row(
                     children: [
                       Expanded(
@@ -144,8 +136,6 @@ class ChangeProfileView extends GetView<ChangeProfileController> {
                     ],
                   ),
                   SizedBox(height: AppSizes.heightSizeBox16),
-
-                  // Gender Field
                   Text(
                     "Jenis Kelamin",
                     style: TextStyle(
@@ -169,8 +159,8 @@ class ChangeProfileView extends GetView<ChangeProfileController> {
                               decoration: BoxDecoration(
                                 color: controller.selectedGender.value ==
                                         "Laki-laki"
-                                    ? Colors.blueAccent
-                                    : Colors.grey[300],
+                                    ? AppColors.blueAccentColor
+                                    : AppColors.greyColor.withOpacity(0.3),
                                 borderRadius: BorderRadius.circular(
                                   AppSizes.borderRadius8,
                                 ),
@@ -202,8 +192,8 @@ class ChangeProfileView extends GetView<ChangeProfileController> {
                               decoration: BoxDecoration(
                                 color: controller.selectedGender.value ==
                                         "Perempuan"
-                                    ? Colors.blueAccent
-                                    : Colors.grey[300],
+                                    ? AppColors.blueAccentColor
+                                    : AppColors.greyColor.withOpacity(0.3),
                                 borderRadius: BorderRadius.circular(
                                   AppSizes.borderRadius8,
                                 ),
@@ -212,9 +202,10 @@ class ChangeProfileView extends GetView<ChangeProfileController> {
                               child: Text(
                                 "Perempuan",
                                 style: TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: AppSizes.fontSize12),
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: AppSizes.fontSize12,
+                                ),
                               ),
                             ),
                           ),
@@ -223,8 +214,6 @@ class ChangeProfileView extends GetView<ChangeProfileController> {
                     ],
                   ),
                   SizedBox(height: AppSizes.heightSizeBox16),
-
-                  // Submit Button
                   Center(
                     child: ElevatedButton(
                       onPressed: () {
@@ -255,19 +244,15 @@ class ChangeProfileView extends GetView<ChangeProfileController> {
                                   child: Text(
                                     'Tidak',
                                     style: TextStyle(
-                                      color: Colors.red,
+                                      color: AppColors.redColor,
                                       fontWeight: FontWeight.bold,
                                       fontSize: AppSizes.fontSize14,
                                     ),
                                   ),
                                 ),
-                                // Tombol Sudah
                                 ElevatedButton(
                                   onPressed: () {
-                                    // Tutup dialog
                                     Navigator.of(context).pop();
-
-                                    // Panggil method update profile
                                     controller.updateProfile();
                                   },
                                   style: ElevatedButton.styleFrom(
@@ -276,7 +261,7 @@ class ChangeProfileView extends GetView<ChangeProfileController> {
                                   child: Text(
                                     'Sudah',
                                     style: TextStyle(
-                                      color: Colors.white,
+                                      color: AppColors.whiteColor,
                                       fontWeight: FontWeight.bold,
                                       fontSize: AppSizes.fontSize14,
                                     ),
@@ -302,7 +287,7 @@ class ChangeProfileView extends GetView<ChangeProfileController> {
                       child: Text(
                         "Simpan Perubahan",
                         style: TextStyle(
-                          color: Colors.white,
+                          color: AppColors.whiteColor,
                           fontSize: AppSizes.fontSize16,
                           fontWeight: FontWeight.bold,
                         ),

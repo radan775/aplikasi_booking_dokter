@@ -30,7 +30,7 @@ class DetailHistoryView extends GetView<DetailHistoryController> {
       leading: IconButton(
         icon: Icon(
           Icons.arrow_back,
-          color: Colors.white,
+          color: AppColors.whiteColor,
           size: AppSizes.iconSize28,
         ),
         onPressed: () => Get.back(),
@@ -38,7 +38,7 @@ class DetailHistoryView extends GetView<DetailHistoryController> {
       title: Text(
         'Detail History',
         style: TextStyle(
-          color: Colors.white,
+          color: AppColors.whiteColor,
           fontWeight: FontWeight.bold,
           fontSize: AppSizes.fontSize20,
         ),
@@ -51,9 +51,7 @@ class DetailHistoryView extends GetView<DetailHistoryController> {
     return Card(
       elevation: 4,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(
-          AppSizes.borderRadius16,
-        ),
+        borderRadius: BorderRadius.circular(AppSizes.borderRadius16),
       ),
       child: Obx(() {
         if (controller.historyData['type'] == 'doctor') {
@@ -64,7 +62,7 @@ class DetailHistoryView extends GetView<DetailHistoryController> {
               _buildDoctorDetails(),
               Divider(
                 thickness: AppSizes.deviderThickness1,
-                color: Colors.grey,
+                color: AppColors.greyColor,
               ),
               _buildLocationDetails(),
             ],
@@ -102,7 +100,7 @@ class DetailHistoryView extends GetView<DetailHistoryController> {
                 radius: AppSizes.avatarRadius40,
                 backgroundImage:
                     NetworkImage(controller.historyData['doctorImage']),
-                backgroundColor: Colors.grey[200],
+                backgroundColor: AppColors.grey200,
               ),
               SizedBox(width: AppSizes.widthSizeBox16),
               Expanded(
@@ -123,7 +121,7 @@ class DetailHistoryView extends GetView<DetailHistoryController> {
                       controller.historyData['doctorSpecialty'],
                       style: TextStyle(
                         fontSize: AppSizes.fontSize16,
-                        color: Colors.grey,
+                        color: AppColors.greyColor,
                       ),
                     ),
                   ],
@@ -166,21 +164,21 @@ class DetailHistoryView extends GetView<DetailHistoryController> {
                   controller.historyData['clinicAddress'],
                   style: TextStyle(
                     fontSize: AppSizes.fontSize14,
-                    color: Colors.grey,
+                    color: AppColors.greyColor,
                   ),
                 ),
                 Text(
                   '${controller.historyData['selectedDay']}, ${controller.historyData['selectedDate']}',
                   style: TextStyle(
                     fontSize: AppSizes.fontSize14,
-                    color: Colors.grey,
+                    color: AppColors.greyColor,
                   ),
                 ),
                 Text(
                   controller.historyData['selectedTime'],
                   style: TextStyle(
                     fontSize: AppSizes.fontSize14,
-                    color: Colors.grey,
+                    color: AppColors.greyColor,
                   ),
                 ),
               ],
@@ -194,14 +192,14 @@ class DetailHistoryView extends GetView<DetailHistoryController> {
   Widget _buildStatusContainer() {
     return Container(
       padding: EdgeInsets.all(AppSizes.paddingAll8),
-      color: Colors.green[100],
+      color: AppColors.green100,
       alignment: Alignment.center,
       child: Text(
         'Dikonfirmasi',
         style: TextStyle(
           fontSize: AppSizes.fontSize16,
           fontWeight: FontWeight.bold,
-          color: Colors.green,
+          color: AppColors.greenColor,
         ),
       ),
     );
@@ -260,7 +258,7 @@ class DetailHistoryView extends GetView<DetailHistoryController> {
             label,
             style: TextStyle(
               fontSize: AppSizes.fontSize16,
-              color: Colors.grey,
+              color: AppColors.greyColor,
             ),
           ),
           SizedBox(height: AppSizes.heightSizeBox4),

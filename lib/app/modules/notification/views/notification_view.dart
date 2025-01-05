@@ -16,7 +16,7 @@ class NotificationView extends GetView<NotificationController> {
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back,
-            color: Colors.white,
+            color: AppColors.whiteColor,
             size: AppSizes.iconSize28,
           ),
           onPressed: () => Get.back(),
@@ -24,7 +24,7 @@ class NotificationView extends GetView<NotificationController> {
         title: Text(
           'Notifikasi',
           style: TextStyle(
-            color: Colors.white,
+            color: AppColors.whiteColor,
             fontWeight: FontWeight.bold,
             fontSize: AppSizes.fontSize20,
           ),
@@ -38,7 +38,7 @@ class NotificationView extends GetView<NotificationController> {
                   "Belum ada notifikasi",
                   style: TextStyle(
                     fontSize: AppSizes.fontSize16,
-                    color: Colors.grey,
+                    color: AppColors.greyColor,
                   ),
                 ),
               )
@@ -75,7 +75,7 @@ class NotificationView extends GetView<NotificationController> {
                             notification["message"] ?? "",
                             style: TextStyle(
                               fontSize: AppSizes.fontSize14,
-                              color: Colors.grey,
+                              color: AppColors.greyColor,
                             ),
                           ),
                           SizedBox(height: AppSizes.heightSizeBox4),
@@ -83,14 +83,14 @@ class NotificationView extends GetView<NotificationController> {
                             notification["date"] ?? "",
                             style: TextStyle(
                               fontSize: AppSizes.fontSize12,
-                              color: Colors.grey,
+                              color: AppColors.greyColor,
                             ),
                           ),
                         ],
                       ),
                       trailing: Icon(
                         Icons.notifications_active,
-                        color: Colors.blueAccent,
+                        color: AppColors.blueAccentColor,
                         size: AppSizes.iconSize28,
                       ),
                       onTap: () {
@@ -98,8 +98,8 @@ class NotificationView extends GetView<NotificationController> {
                           "Notifikasi",
                           notification["message"] ?? "",
                           snackPosition: SnackPosition.BOTTOM,
-                          backgroundColor: Colors.blueAccent,
-                          colorText: Colors.white,
+                          backgroundColor: AppColors.blueAccentColor,
+                          colorText: AppColors.whiteColor,
                         );
                       },
                     ),

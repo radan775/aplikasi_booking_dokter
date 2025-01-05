@@ -1,6 +1,6 @@
-import 'package:get/get.dart';
 import 'package:aplikasi_booking_dokter/app/data/consts/consts.dart';
 import 'package:aplikasi_booking_dokter/app/modules/about/controllers/about_controller.dart';
+import 'package:get/get.dart';
 
 class AboutView extends GetView<AboutController> {
   const AboutView({super.key});
@@ -14,7 +14,7 @@ class AboutView extends GetView<AboutController> {
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back,
-            color: Colors.white,
+            color: AppColors.whiteColor, // Ganti dengan AppColors
             size: AppSizes.iconSize28,
           ),
           onPressed: () => Get.back(),
@@ -22,7 +22,7 @@ class AboutView extends GetView<AboutController> {
         title: Text(
           'Tentang',
           style: TextStyle(
-            color: Colors.white,
+            color: AppColors.whiteColor, // Ganti dengan AppColors
             fontWeight: FontWeight.bold,
             fontSize: AppSizes.fontSize20,
           ),
@@ -46,7 +46,7 @@ class AboutView extends GetView<AboutController> {
               "Aplikasi ini dirancang untuk membantu Anda memesan janji dengan dokter secara mudah dan cepat. Anda dapat memilih dokter, jadwal, dan lokasi yang sesuai dengan kebutuhan Anda.",
               style: TextStyle(
                 fontSize: AppSizes.fontSize14,
-                color: Colors.black87,
+                color: AppColors.black87, // Ganti dengan AppColors
               ),
             ),
             SizedBox(height: AppSizes.heightSizeBox24),
@@ -60,7 +60,8 @@ class AboutView extends GetView<AboutController> {
             SizedBox(height: AppSizes.heightSizeBox8),
             Row(
               children: [
-                Icon(Icons.person, color: AppColors.blueColor),
+                Icon(Icons.person,
+                    color: AppColors.blueColor), // Ganti dengan AppColors
                 SizedBox(width: AppSizes.heightSizeBox8),
                 Text(
                   "radan775",
@@ -74,13 +75,14 @@ class AboutView extends GetView<AboutController> {
             SizedBox(height: AppSizes.heightSizeBox8),
             Row(
               children: [
-                Icon(Icons.link, color: AppColors.blueColor),
+                Icon(Icons.link,
+                    color: AppColors.blueColor), // Ganti dengan AppColors
                 SizedBox(width: AppSizes.widthSizeBox8),
                 Text(
                   "https://github.com/radan775",
                   style: TextStyle(
                     fontSize: AppSizes.fontSize14,
-                    color: AppColors.blueColor,
+                    color: AppColors.blueColor, // Ganti dengan AppColors
                     decoration: TextDecoration.underline,
                   ),
                 ),
@@ -102,7 +104,7 @@ class AboutView extends GetView<AboutController> {
               "- Data pengguna terjamin aman.",
               style: TextStyle(
                 fontSize: AppSizes.fontSize14,
-                color: Colors.black87,
+                color: AppColors.black87, // Ganti dengan AppColors
               ),
             ),
           ],

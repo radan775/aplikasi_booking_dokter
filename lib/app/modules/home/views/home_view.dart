@@ -93,8 +93,8 @@ class HomeView extends GetView<HomeController> {
                               ? Icons.mic
                               : Icons.mic_none,
                           color: controller.isListening.value
-                              ? Colors.red
-                              : Colors.white,
+                              ? AppColors.redColor
+                              : AppColors.whiteColor,
                           size: AppSizes.iconSize30),
                       onPressed: () {
                         if (controller.isListening.value) {
@@ -160,7 +160,7 @@ class HomeView extends GetView<HomeController> {
                                   title: specialty,
                                   size: AppSizes.fontSize14,
                                   color: isSelected
-                                      ? Colors.white
+                                      ? AppColors.whiteColor
                                       : AppColors.blueColor,
                                 ),
                               ),
@@ -195,7 +195,7 @@ class HomeView extends GetView<HomeController> {
                             Text(
                               "Hasil tidak ada",
                               style: TextStyle(
-                                color: Colors.grey[600],
+                                color: AppColors.grey600,
                                 fontSize: AppSizes.fontSize18,
                                 fontWeight: FontWeight.bold,
                               ),
@@ -204,7 +204,7 @@ class HomeView extends GetView<HomeController> {
                             Text(
                               "Coba kata kunci lain",
                               style: TextStyle(
-                                color: Colors.grey[500],
+                                color: AppColors.grey600,
                                 fontSize: AppSizes.fontSize14,
                               ),
                             ),
@@ -226,14 +226,14 @@ class HomeView extends GetView<HomeController> {
                               key: Key(doctor['id']),
                               direction: DismissDirection.endToStart,
                               background: Container(
-                                color: Colors.red,
+                                color: AppColors.redColor,
                                 padding: EdgeInsets.only(
                                   right: AppSizes.paddingRigth20,
                                 ),
                                 alignment: Alignment.centerRight,
                                 child: Icon(
                                   Icons.delete,
-                                  color: Colors.white,
+                                  color: AppColors.whiteColor,
                                   size: AppSizes.iconSize32,
                                 ),
                               ),
@@ -253,7 +253,7 @@ class HomeView extends GetView<HomeController> {
                                       content: Text(
                                         "Apakah Anda yakin ingin menghapus dokter ini?",
                                         style: TextStyle(
-                                          color: Colors.black87,
+                                          color: AppColors.black87,
                                           fontSize: AppSizes.fontSize12,
                                         ),
                                       ),
@@ -276,7 +276,7 @@ class HomeView extends GetView<HomeController> {
                                           child: Text(
                                             "Hapus",
                                             style: TextStyle(
-                                              color: Colors.red,
+                                              color: AppColors.redColor,
                                               fontWeight: FontWeight.bold,
                                               fontSize: AppSizes.fontSize14,
                                             ),
@@ -319,13 +319,13 @@ class HomeView extends GetView<HomeController> {
             backgroundColor: AppColors.blueColor,
             icon: Icon(
               Icons.add,
-              color: Colors.white,
+              color: AppColors.whiteColor,
               size: AppSizes.iconSize28,
             ),
             label: Text(
               'Tambah Dokter',
               style: TextStyle(
-                  color: Colors.white,
+                  color: AppColors.whiteColor,
                   fontWeight: FontWeight.bold,
                   fontSize: AppSizes.fontSize14),
             ),
@@ -376,10 +376,10 @@ class HomeView extends GetView<HomeController> {
                             child: Container(
                               width: AppSizes.imageWidth70,
                               height: AppSizes.imageHeight70,
-                              color: Colors.blue,
+                              color: AppColors.blueColor,
                               child: Icon(
                                 Icons.person,
-                                color: Colors.white,
+                                color: AppColors.whiteColor,
                                 size: AppSizes.iconSize40,
                               ),
                             ),
@@ -396,7 +396,7 @@ class HomeView extends GetView<HomeController> {
                             children: [
                               Icon(
                                 Icons.person,
-                                color: Colors.blueAccent,
+                                color: AppColors.blueAccentColor,
                                 size: AppSizes.iconSize20,
                               ),
                               SizedBox(width: AppSizes.widthSizeBox8),
@@ -404,7 +404,7 @@ class HomeView extends GetView<HomeController> {
                                 child: AppStyles.bold(
                                   title: doctor["name"],
                                   size: AppSizes.fontSize18,
-                                  color: Colors.black,
+                                  color: AppColors.black,
                                 ),
                               ),
                             ],
@@ -415,7 +415,7 @@ class HomeView extends GetView<HomeController> {
                             children: [
                               Icon(
                                 Icons.local_hospital,
-                                color: Colors.grey[700],
+                                color: AppColors.grey700,
                                 size: AppSizes.iconSize18,
                               ),
                               SizedBox(width: AppSizes.widthSizeBox8),
@@ -423,7 +423,7 @@ class HomeView extends GetView<HomeController> {
                                 child: AppStyles.normal(
                                   title: doctor["specialty"],
                                   size: AppSizes.fontSize14,
-                                  color: Colors.grey[700]!,
+                                  color: AppColors.grey700,
                                 ),
                               ),
                             ],
@@ -433,7 +433,7 @@ class HomeView extends GetView<HomeController> {
                             children: [
                               Icon(
                                 Icons.location_on,
-                                color: Colors.redAccent,
+                                color: AppColors.redAccentColor,
                                 size: AppSizes.iconSize18,
                               ),
                               SizedBox(width: AppSizes.widthSizeBox8),
@@ -442,7 +442,7 @@ class HomeView extends GetView<HomeController> {
                                   title: firstClinic?["clinicName"] ??
                                       "No Clinic Available",
                                   size: AppSizes.fontSize14,
-                                  color: Colors.grey[700]!,
+                                  color: AppColors.grey700,
                                 ),
                               ),
                             ],
@@ -455,7 +455,7 @@ class HomeView extends GetView<HomeController> {
                 SizedBox(height: AppSizes.heightSizeBox8),
                 Divider(
                   thickness: AppSizes.deviderThickness1,
-                  color: Colors.grey[300],
+                  color: AppColors.grey300,
                 ),
                 SizedBox(height: AppSizes.heightSizeBox8),
                 Row(
@@ -467,13 +467,13 @@ class HomeView extends GetView<HomeController> {
                         AppStyles.normal(
                           title: "Estimated Fee",
                           size: AppSizes.fontSize14,
-                          color: Colors.grey[700]!,
+                          color: AppColors.grey700,
                         ),
                         AppStyles.bold(
                           title: controller.formatFee(
                               doctor["currency"], doctor["fee"]),
                           size: AppSizes.fontSize16,
-                          color: Colors.black,
+                          color: AppColors.black,
                         ),
                       ],
                     ),
@@ -485,7 +485,7 @@ class HomeView extends GetView<HomeController> {
                         );
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.blue,
+                        backgroundColor: AppColors.blueColor,
                         shape: RoundedRectangleBorder(
                           borderRadius:
                               BorderRadius.circular(AppSizes.borderRadius12),
@@ -496,7 +496,7 @@ class HomeView extends GetView<HomeController> {
                       child: AppStyles.normal(
                         title: "Make Appointment",
                         size: AppSizes.fontSize14,
-                        color: Colors.white,
+                        color: AppColors.whiteColor,
                       ),
                     ),
                   ],

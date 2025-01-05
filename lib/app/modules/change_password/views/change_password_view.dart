@@ -1,7 +1,9 @@
+import 'package:aplikasi_booking_dokter/app/data/consts/colors.dart';
+import 'package:aplikasi_booking_dokter/app/data/consts/fonts.dart';
 import 'package:aplikasi_booking_dokter/app/res/components/custom_textfield.dart';
 import 'package:get/get.dart';
-import 'package:aplikasi_booking_dokter/app/data/consts/consts.dart';
 import 'package:aplikasi_booking_dokter/app/modules/change_password/controllers/change_password_controller.dart';
+import 'package:flutter/material.dart';
 
 class ChangePasswordView extends GetView<ChangePasswordController> {
   const ChangePasswordView({super.key});
@@ -15,7 +17,7 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back,
-            color: Colors.white,
+            color: AppColors.whiteColor, // Ganti dengan AppColors
             size: AppSizes.iconSize28,
           ),
           onPressed: () => Get.back(),
@@ -23,7 +25,7 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
         title: Text(
           'Ubah Password',
           style: TextStyle(
-            color: Colors.white,
+            color: AppColors.whiteColor, // Ganti dengan AppColors
             fontWeight: FontWeight.bold,
             fontSize: AppSizes.fontSize20,
           ),
@@ -39,45 +41,41 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
               "Silakan ubah password Anda dengan mengisi form di bawah ini:",
               style: TextStyle(
                 fontSize: AppSizes.fontSize14,
-                color: Colors.grey,
+                color: AppColors.greyColor, // Ganti dengan AppColors
                 fontWeight: FontWeight.w500,
               ),
             ),
             SizedBox(height: AppSizes.heightSizeBox20),
-
             // Old Password Field
             CustomTextfield(
               hint: "Password Lama",
               textController: controller.oldPasswordController,
-              textColor: Colors.black,
+              textColor: AppColors.textColor, // Ganti dengan AppColors
               borderColor: AppColors.blueColor,
               obscureText: true,
               icon: Icons.lock,
             ),
             SizedBox(height: AppSizes.heightSizeBox16),
-
             // New Password Field
             CustomTextfield(
               hint: "Password Baru",
               textController: controller.newPasswordController,
-              textColor: Colors.black,
+              textColor: AppColors.textColor, // Ganti dengan AppColors
               borderColor: AppColors.blueColor,
               obscureText: true,
               icon: Icons.lock_open,
             ),
             SizedBox(height: AppSizes.heightSizeBox16),
-
             // Confirm Password Field
             CustomTextfield(
               hint: "Konfirmasi Password Baru",
               textController: controller.confirmPasswordController,
-              textColor: Colors.black,
+              textColor: AppColors.textColor, // Ganti dengan AppColors
               borderColor: AppColors.blueColor,
               obscureText: true,
               icon: Icons.check,
             ),
             SizedBox(height: AppSizes.heightSizeBox40),
-
             Center(
               child: Obx(
                 () => SizedBox(
@@ -95,14 +93,16 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
                                     'Konfirmasi Ubah Password',
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
-                                      color: AppColors.blueColor,
+                                      color: AppColors
+                                          .blueColor, // Ganti dengan AppColors
                                       fontSize: AppSizes.fontSize18,
                                     ),
                                   ),
                                   content: Text(
                                     'Apakah Anda yakin ingin mengubah password?',
                                     style: TextStyle(
-                                      color: Colors.grey[800],
+                                      color: AppColors
+                                          .greyColor, // Ganti dengan AppColors
                                       fontSize: AppSizes.fontSize12,
                                     ),
                                   ),
@@ -116,7 +116,8 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
                                       child: Text(
                                         'Batal',
                                         style: TextStyle(
-                                          color: Colors.red,
+                                          color: AppColors
+                                              .redColor, // Ganti dengan AppColors
                                           fontWeight: FontWeight.bold,
                                           fontSize: AppSizes.fontSize14,
                                         ),
@@ -127,16 +128,17 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
                                       onPressed: () {
                                         // Tutup dialog
                                         Navigator.of(context).pop();
-
                                         controller.changePassword();
                                       },
                                       style: ElevatedButton.styleFrom(
-                                        backgroundColor: AppColors.blueColor,
+                                        backgroundColor: AppColors
+                                            .blueColor, // Ganti dengan AppColors
                                       ),
                                       child: Text(
                                         'Yakin',
                                         style: TextStyle(
-                                          color: Colors.white,
+                                          color: AppColors
+                                              .whiteColor, // Ganti dengan AppColors
                                           fontWeight: FontWeight.bold,
                                           fontSize: AppSizes.fontSize14,
                                         ),
@@ -158,12 +160,12 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
                       ),
                     ),
                     child: controller.isLoading.value
-                        ? CircularProgressIndicator(color: Colors.white)
+                        ? CircularProgressIndicator(color: AppColors.whiteColor)
                         : Text(
                             "Ubah Password",
                             style: TextStyle(
                               fontSize: AppSizes.fontSize16,
-                              color: Colors.white,
+                              color: AppColors.whiteColor,
                             ),
                           ),
                   ),

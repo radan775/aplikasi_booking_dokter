@@ -1,6 +1,6 @@
+import 'package:get/get.dart';
 import 'package:aplikasi_booking_dokter/app/data/consts/lists.dart';
 import 'package:aplikasi_booking_dokter/app/routes/app_pages.dart';
-import 'package:get/get.dart';
 import 'package:aplikasi_booking_dokter/app/data/consts/consts.dart';
 import 'package:aplikasi_booking_dokter/app/modules/profiles/controllers/profiles_controller.dart';
 
@@ -22,31 +22,27 @@ class ProfilesView extends GetView<ProfilesController> {
       ),
       body: RefreshIndicator(
         onRefresh: () async => await controller.fetchUserData(),
-        child: Obx(
-          () {
-            if (controller.isLoading.value) {
-              return Center(child: CircularProgressIndicator());
-            }
-
-            return Column(
-              children: [
-                _buildUserProfile(),
-                Divider(
-                  thickness: AppSizes.deviderThickness1,
-                  color: Colors.grey,
+        child: Obx(() {
+          if (controller.isLoading.value) {
+            return Center(child: CircularProgressIndicator());
+          }
+          return Column(
+            children: [
+              _buildUserProfile(),
+              Divider(
+                thickness: AppSizes.deviderThickness1,
+                color: AppColors.greyColor,
+              ),
+              SizedBox(height: AppSizes.heightSizeBox20),
+              Expanded(
+                child: ListView.builder(
+                  itemCount: controller.settingsList.length,
+                  itemBuilder: (context, index) => _buildSettingsOption(index),
                 ),
-                SizedBox(height: AppSizes.heightSizeBox20),
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: controller.settingsList.length,
-                    itemBuilder: (context, index) =>
-                        _buildSettingsOption(index),
-                  ),
-                ),
-              ],
-            );
-          },
-        ),
+              ),
+            ],
+          );
+        }),
       ),
     );
   }
@@ -56,9 +52,7 @@ class ProfilesView extends GetView<ProfilesController> {
       padding: EdgeInsets.all(AppSizes.paddingAll16),
       decoration: BoxDecoration(
         color: AppColors.blueColor.withOpacity(0.1),
-        borderRadius: BorderRadius.circular(
-          AppSizes.borderRadius12,
-        ),
+        borderRadius: BorderRadius.circular(AppSizes.borderRadius12),
       ),
       margin: EdgeInsets.symmetric(
         horizontal: AppSizes.marginHorizontal16,
@@ -90,6 +84,7 @@ class ProfilesView extends GetView<ProfilesController> {
                         ? "Memuat Email..."
                         : controller.userEmail.value,
                     size: AppSizes.fontSize14,
+                    color: AppColors.greyColor,
                   ),
                 ],
               ),
@@ -124,13 +119,11 @@ class ProfilesView extends GetView<ProfilesController> {
         vertical: AppSizes.marginVertical4,
       ),
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(
-          AppSizes.borderRadius12,
-        ),
+        color: AppColors.whiteColor,
+        borderRadius: BorderRadius.circular(AppSizes.borderRadius12),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.2),
+            color: AppColors.greyColor.withOpacity(0.2),
             spreadRadius: AppSizes.boxShadowSpreadRadius2,
             blurRadius: AppSizes.boxShadowBlurRadius5,
             offset: Offset(0, AppSizes.boxShadowOffsetY3),
@@ -145,9 +138,7 @@ class ProfilesView extends GetView<ProfilesController> {
             padding: EdgeInsets.all(AppSizes.paddingAll8),
             decoration: BoxDecoration(
               color: AppColors.blueColor.withOpacity(0.1),
-              borderRadius: BorderRadius.circular(
-                AppSizes.borderRadius8,
-              ),
+              borderRadius: BorderRadius.circular(AppSizes.borderRadius8),
             ),
             child: Icon(
               settingsListIcon[index],
@@ -158,7 +149,7 @@ class ProfilesView extends GetView<ProfilesController> {
           title: AppStyles.bold(
               title: controller.settingsList[index], size: AppSizes.fontSize16),
           trailing: Icon(Icons.arrow_forward_ios,
-              size: AppSizes.iconSize16, color: Colors.grey),
+              size: AppSizes.iconSize16, color: AppColors.greyColor),
         ),
       ),
     );

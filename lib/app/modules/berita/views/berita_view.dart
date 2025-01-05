@@ -15,7 +15,7 @@ class BeritaView extends GetView<BeritaController> {
         title: Text(
           'Berita',
           style: TextStyle(
-            color: Colors.white,
+            color: AppColors.whiteColor,
             fontWeight: FontWeight.bold,
             fontSize: AppSizes.fontSize20,
           ),
@@ -24,20 +24,17 @@ class BeritaView extends GetView<BeritaController> {
       ),
       body: Obx(() {
         if (controller.isLoading.value) {
-          // Tampilkan indikator loading saat data sedang diambil
           return Center(
             child: CircularProgressIndicator(),
           );
         }
 
         if (controller.newsList.isEmpty) {
-          // Tampilkan pesan jika data kosong
           return Center(
             child: Text("No news available."),
           );
         }
 
-        // Tampilkan data berita setelah selesai diambil
         return RefreshIndicator(
           onRefresh: controller.fetchNewsFromFirestore,
           child: ListView.builder(
@@ -50,7 +47,6 @@ class BeritaView extends GetView<BeritaController> {
                   key: Key(news['id']),
                   direction: DismissDirection.endToStart,
                   confirmDismiss: (direction) async {
-                    // Tampilkan dialog konfirmasi
                     return await showDialog(
                       context: context,
                       builder: (BuildContext context) {
@@ -66,7 +62,7 @@ class BeritaView extends GetView<BeritaController> {
                           content: Text(
                             'Apakah Anda yakin ingin menghapus berita ini?',
                             style: TextStyle(
-                              color: Colors.grey[800],
+                              color: AppColors.grey800,
                               fontSize: AppSizes.fontSize12,
                             ),
                           ),
@@ -76,7 +72,7 @@ class BeritaView extends GetView<BeritaController> {
                               child: Text(
                                 'Batal',
                                 style: TextStyle(
-                                  color: Colors.red,
+                                  color: AppColors.redColor,
                                   fontWeight: FontWeight.bold,
                                   fontSize: AppSizes.fontSize14,
                                 ),
@@ -99,25 +95,22 @@ class BeritaView extends GetView<BeritaController> {
                     );
                   },
                   background: Container(
-                    color: Colors.red,
+                    color: AppColors.redColor,
                     alignment: Alignment.centerRight,
                     padding: EdgeInsets.symmetric(
                         horizontal: AppSizes.paddingHorizontal20),
                     child: Icon(
                       Icons.delete,
-                      color: Colors.white,
+                      color: AppColors.whiteColor,
                       size: AppSizes.iconSize30,
                     ),
                   ),
                   onDismissed: (direction) {
-                    // Hapus berita
                     controller.deleteNews(news['id']);
                   },
                   child: _buildNewsCard(news, context),
                 );
-              }
-              // Jika bukan admin, tampilkan card biasa
-              else {
+              } else {
                 return _buildNewsCard(news, context);
               }
             },
@@ -137,13 +130,13 @@ class BeritaView extends GetView<BeritaController> {
             backgroundColor: AppColors.blueColor,
             icon: Icon(
               Icons.add,
-              color: Colors.white,
+              color: AppColors.whiteColor,
               size: AppSizes.iconSize28,
             ),
             label: Text(
               'Tambah Berita',
               style: TextStyle(
-                color: Colors.white,
+                color: AppColors.whiteColor,
                 fontWeight: FontWeight.bold,
                 fontSize: AppSizes.fontSize14,
               ),
@@ -173,7 +166,6 @@ class BeritaView extends GetView<BeritaController> {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              // Gambar
               ClipRRect(
                 borderRadius: BorderRadius.circular(AppSizes.borderRadius8),
                 child: Image.network(
@@ -185,17 +177,16 @@ class BeritaView extends GetView<BeritaController> {
                     return Container(
                       width: AppSizes.imageWidth80,
                       height: AppSizes.imageHeight80,
-                      color: Colors.grey,
+                      color: AppColors.greyColor,
                       child: Icon(
                         Icons.image_not_supported,
-                        color: Colors.white,
+                        color: AppColors.whiteColor,
                       ),
                     );
                   },
                 ),
               ),
               SizedBox(width: AppSizes.widthSizeBox10),
-              // Informasi Berita
               Expanded(
                 child: Text(
                   news['title']!,

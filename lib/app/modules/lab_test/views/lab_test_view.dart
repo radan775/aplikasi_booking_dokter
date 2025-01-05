@@ -95,8 +95,8 @@ class LabTestView extends GetView<LabTestController> {
                               ? Icons.mic
                               : Icons.mic_none,
                           color: controller.isListening.value
-                              ? Colors.red
-                              : Colors.white,
+                              ? AppColors.redColor
+                              : AppColors.whiteColor,
                           size: AppSizes.iconSize30),
                       onPressed: () {
                         if (controller.isListening.value) {
@@ -160,7 +160,7 @@ class LabTestView extends GetView<LabTestController> {
                                       title: test,
                                       size: AppSizes.fontSize14,
                                       color: isSelected
-                                          ? Colors.white
+                                          ? AppColors.whiteColor
                                           : AppColors.blueColor,
                                     ),
                                   ),
@@ -192,7 +192,7 @@ class LabTestView extends GetView<LabTestController> {
                           Text(
                             "Hasil tidak ada",
                             style: TextStyle(
-                              color: Colors.grey[600],
+                              color: AppColors.grey600,
                               fontSize: AppSizes.fontSize18,
                               fontWeight: FontWeight.bold,
                             ),
@@ -201,7 +201,7 @@ class LabTestView extends GetView<LabTestController> {
                           Text(
                             "Coba kata kunci lain",
                             style: TextStyle(
-                              color: Colors.grey[500],
+                              color: AppColors.grey600,
                               fontSize: AppSizes.fontSize14,
                             ),
                           ),
@@ -241,7 +241,7 @@ class LabTestView extends GetView<LabTestController> {
                                     content: Text(
                                       'Apakah Anda yakin ingin menghapus lab test ini?',
                                       style: TextStyle(
-                                        color: Colors.grey[800],
+                                        color: AppColors.grey800,
                                         fontSize: AppSizes.fontSize12,
                                       ),
                                     ),
@@ -252,7 +252,7 @@ class LabTestView extends GetView<LabTestController> {
                                         child: Text(
                                           'Batal',
                                           style: TextStyle(
-                                            color: Colors.red,
+                                            color: AppColors.redColor,
                                             fontWeight: FontWeight.bold,
                                             fontSize: AppSizes.fontSize14,
                                           ),
@@ -276,14 +276,14 @@ class LabTestView extends GetView<LabTestController> {
                               );
                             },
                             background: Container(
-                              color: Colors.red,
+                              color: AppColors.redColor,
                               alignment: Alignment.centerRight,
                               padding: EdgeInsets.symmetric(
                                 horizontal: AppSizes.paddingHorizontal20,
                               ),
                               child: Icon(
                                 Icons.delete,
-                                color: Colors.white,
+                                color: AppColors.whiteColor,
                                 size: AppSizes.iconSize30,
                               ),
                             ),
@@ -318,13 +318,13 @@ class LabTestView extends GetView<LabTestController> {
             backgroundColor: AppColors.blueColor,
             icon: Icon(
               Icons.add,
-              color: Colors.white,
+              color: AppColors.whiteColor,
               size: AppSizes.iconSize28,
             ),
             label: Text(
               'Tambah Lab Test',
               style: TextStyle(
-                color: Colors.white,
+                color: AppColors.whiteColor,
                 fontWeight: FontWeight.bold,
                 fontSize: AppSizes.fontSize14,
               ),
@@ -373,10 +373,10 @@ class LabTestView extends GetView<LabTestController> {
                           return Container(
                             width: AppSizes.imageWidth70,
                             height: AppSizes.imageHeight70,
-                            color: Colors.blue,
+                            color: AppColors.blueColor,
                             child: Icon(
                               Icons.image_not_supported,
-                              color: Colors.white,
+                              color: AppColors.whiteColor,
                             ),
                           );
                         },
@@ -394,14 +394,14 @@ class LabTestView extends GetView<LabTestController> {
                               Icon(
                                 Icons.local_hospital,
                                 size: AppSizes.iconSize20,
-                                color: Colors.green,
+                                color: AppColors.greenColor,
                               ),
                               SizedBox(width: AppSizes.widthSizeBox6),
                               Expanded(
                                 child: AppStyles.bold(
                                   title: labTest["hospital"],
                                   size: AppSizes.fontSize18,
-                                  color: Colors.black,
+                                  color: AppColors.black,
                                 ),
                               ),
                             ],
@@ -414,14 +414,14 @@ class LabTestView extends GetView<LabTestController> {
                               Icon(
                                 Icons.science,
                                 size: AppSizes.iconSize18,
-                                color: Colors.grey[700],
+                                color: AppColors.grey700,
                               ),
                               SizedBox(width: AppSizes.widthSizeBox6),
                               Expanded(
                                 child: AppStyles.normal(
                                   title: labTest["test"],
                                   size: AppSizes.fontSize14,
-                                  color: Colors.grey[700]!,
+                                  color: AppColors.grey700,
                                 ),
                               ),
                             ],
@@ -434,7 +434,7 @@ class LabTestView extends GetView<LabTestController> {
                               Icon(
                                 Icons.map_outlined,
                                 size: AppSizes.iconSize18,
-                                color: Colors.redAccent,
+                                color: AppColors.redAccentColor,
                               ),
                               SizedBox(width: AppSizes.widthSizeBox6),
                               Expanded(
@@ -442,7 +442,7 @@ class LabTestView extends GetView<LabTestController> {
                                   title:
                                       "${labTest['location']['district']}, ${labTest['location']['city']}",
                                   size: AppSizes.fontSize14,
-                                  color: Colors.grey[700]!,
+                                  color: AppColors.grey700,
                                 ),
                               ),
                             ],
@@ -455,7 +455,7 @@ class LabTestView extends GetView<LabTestController> {
                 SizedBox(height: AppSizes.heightSizeBox8),
                 Divider(
                   thickness: AppSizes.deviderThickness1,
-                  color: Colors.grey[300],
+                  color: AppColors.grey300,
                 ),
                 SizedBox(height: AppSizes.heightSizeBox8),
                 Row(
@@ -467,13 +467,13 @@ class LabTestView extends GetView<LabTestController> {
                         AppStyles.normal(
                           title: "Estimated Fee",
                           size: AppSizes.fontSize14,
-                          color: Colors.grey[700]!,
+                          color: AppColors.grey700,
                         ),
                         AppStyles.bold(
                           title: controller.formatFee(
                               labTest['currency'], labTest['price']),
                           size: AppSizes.fontSize16,
-                          color: Colors.black,
+                          color: AppColors.black,
                         ),
                       ],
                     ),
@@ -482,7 +482,7 @@ class LabTestView extends GetView<LabTestController> {
                         Get.toNamed(Routes.DETAIL_LAB_TEST, arguments: labTest);
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.blue,
+                        backgroundColor: AppColors.blueColor,
                         shape: RoundedRectangleBorder(
                           borderRadius:
                               BorderRadius.circular(AppSizes.borderRadius12),
@@ -493,7 +493,7 @@ class LabTestView extends GetView<LabTestController> {
                       child: AppStyles.normal(
                         title: "Book Test",
                         size: AppSizes.fontSize14,
-                        color: Colors.white,
+                        color: AppColors.whiteColor,
                       ),
                     ),
                   ],

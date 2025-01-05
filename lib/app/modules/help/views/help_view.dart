@@ -15,7 +15,7 @@ class HelpView extends GetView<HelpController> {
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back,
-            color: Colors.white,
+            color: AppColors.whiteColor, // Ganti dengan AppColors
             size: AppSizes.iconSize28,
           ),
           onPressed: () => Get.back(),
@@ -23,7 +23,7 @@ class HelpView extends GetView<HelpController> {
         title: Text(
           'Bantuan',
           style: TextStyle(
-            color: Colors.white,
+            color: AppColors.whiteColor, // Ganti dengan AppColors
             fontWeight: FontWeight.bold,
             fontSize: AppSizes.fontSize20,
           ),
@@ -46,7 +46,9 @@ class HelpView extends GetView<HelpController> {
             Text(
               "Pilih kategori bantuan yang sesuai dengan kebutuhan Anda.",
               style: TextStyle(
-                  fontSize: AppSizes.fontSize14, color: Colors.black87),
+                fontSize: AppSizes.fontSize14,
+                color: AppColors.greyColor, // Ganti dengan AppColors
+              ),
             ),
             SizedBox(height: AppSizes.heightSizeBox24),
             ListView(
@@ -99,10 +101,11 @@ class HelpView extends GetView<HelpController> {
     );
   }
 
-  Widget _buildHelpCard(
-      {required String title,
-      required String description,
-      required VoidCallback onTap}) {
+  Widget _buildHelpCard({
+    required String title,
+    required String description,
+    required VoidCallback onTap,
+  }) {
     return Card(
       elevation: 4,
       shape: RoundedRectangleBorder(
@@ -121,10 +124,11 @@ class HelpView extends GetView<HelpController> {
           description,
           style: TextStyle(
             fontSize: AppSizes.fontSize14,
-            color: Colors.black87,
+            color: AppColors.greyColor, // Ganti dengan AppColors
           ),
         ),
-        trailing: Icon(Icons.arrow_forward_ios, color: Colors.grey),
+        trailing: Icon(Icons.arrow_forward_ios,
+            color: AppColors.greyColor), // Ganti dengan AppColors
       ),
     );
   }

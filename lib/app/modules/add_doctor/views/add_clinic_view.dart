@@ -15,7 +15,7 @@ class AddClinicView extends GetView<AddDoctorController> {
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back,
-            color: Colors.white,
+            color: AppColors.whiteColor,
             size: AppSizes.iconSize28,
           ),
           onPressed: () => Get.back(),
@@ -23,7 +23,7 @@ class AddClinicView extends GetView<AddDoctorController> {
         title: Text(
           'Tambah Klinik',
           style: TextStyle(
-            color: Colors.white,
+            color: AppColors.whiteColor,
             fontWeight: FontWeight.bold,
             fontSize: AppSizes.fontSize20,
           ),
@@ -35,7 +35,6 @@ class AddClinicView extends GetView<AddDoctorController> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            // Input Nama Klinik
             CustomTextfield(
               hint: 'Nama Klinik',
               textController: controller.clinicNameController,
@@ -43,8 +42,6 @@ class AddClinicView extends GetView<AddDoctorController> {
               borderColor: AppColors.blueColor,
             ),
             SizedBox(height: AppSizes.heightSizeBox16),
-
-            // Input Alamat Klinik
             CustomTextfield(
               hint: 'Alamat Klinik',
               textController: controller.clinicAddressController,
@@ -52,8 +49,6 @@ class AddClinicView extends GetView<AddDoctorController> {
               borderColor: AppColors.blueColor,
             ),
             SizedBox(height: AppSizes.heightSizeBox16),
-
-            // Input Kota Klinik
             CustomTextfield(
               hint: 'Kota',
               textController: controller.clinicCityController,
@@ -61,8 +56,6 @@ class AddClinicView extends GetView<AddDoctorController> {
               borderColor: AppColors.blueColor,
             ),
             SizedBox(height: AppSizes.heightSizeBox16),
-
-            // Input Kecamatan Klinik
             CustomTextfield(
               hint: 'Kecamatan',
               textController: controller.clinicDistrictController,
@@ -70,8 +63,6 @@ class AddClinicView extends GetView<AddDoctorController> {
               borderColor: AppColors.blueColor,
             ),
             SizedBox(height: AppSizes.heightSizeBox16),
-
-            // Input URL Gambar Klinik
             CustomTextfield(
               hint: 'URL Gambar Klinik',
               textController: controller.clinicImageController,
@@ -79,8 +70,6 @@ class AddClinicView extends GetView<AddDoctorController> {
               borderColor: AppColors.blueColor,
             ),
             SizedBox(height: AppSizes.heightSizeBox16),
-
-            // Input Hari
             CustomTextfield(
               hint: 'Hari (Senin - Minggu)',
               textController: controller.scheduleDayController,
@@ -88,8 +77,6 @@ class AddClinicView extends GetView<AddDoctorController> {
               borderColor: AppColors.blueColor,
             ),
             SizedBox(height: AppSizes.heightSizeBox16),
-
-            // Input Jam Mulai
             CustomTextfield(
               hint: 'Jam Mulai (HH:MM)',
               textController: controller.scheduleStartController,
@@ -97,8 +84,6 @@ class AddClinicView extends GetView<AddDoctorController> {
               borderColor: AppColors.blueColor,
             ),
             SizedBox(height: AppSizes.heightSizeBox16),
-
-            // Input Jam Selesai
             CustomTextfield(
               hint: 'Jam Selesai (HH:MM)',
               textController: controller.scheduleEndController,
@@ -106,8 +91,6 @@ class AddClinicView extends GetView<AddDoctorController> {
               borderColor: AppColors.blueColor,
             ),
             SizedBox(height: AppSizes.heightSizeBox16),
-
-            // Tampilkan Daftar Jadwal
             Obx(() {
               return ListView.builder(
                 shrinkWrap: true,
@@ -119,14 +102,12 @@ class AddClinicView extends GetView<AddDoctorController> {
                   return ListTile(
                     title: Text(
                       '$day : ${schedule[day][0]["startTime"]} - ${schedule[day][0]["endTime"]}',
-                      style: TextStyle(
-                        fontSize: AppSizes.fontSize12,
-                      ),
+                      style: TextStyle(fontSize: AppSizes.fontSize12),
                     ),
                     trailing: IconButton(
                       icon: Icon(
                         Icons.delete,
-                        color: Colors.red,
+                        color: AppColors.redColor,
                         size: AppSizes.iconSize25,
                       ),
                       onPressed: () {
@@ -137,28 +118,19 @@ class AddClinicView extends GetView<AddDoctorController> {
                 },
               );
             }),
-
-            // Tambah Jadwal Button
             ElevatedButton(
               onPressed: () {
-                // Ambil nilai dari controller
                 String day = controller.scheduleDayController.text;
                 String startTime = controller.scheduleStartController.text;
                 String endTime = controller.scheduleEndController.text;
-
-                // Panggil method untuk menambah jadwal
                 controller.addSchedule(day, startTime, endTime);
               },
               child: Text(
                 'Tambah Jadwal',
-                style: TextStyle(
-                  fontSize: AppSizes.fontSize14,
-                ),
+                style: TextStyle(fontSize: AppSizes.fontSize14),
               ),
             ),
             SizedBox(height: AppSizes.heightSizeBox24),
-
-            // Tombol Tambah Dokter
             ElevatedButton(
               onPressed: () {
                 controller.saveClinicData();
@@ -177,7 +149,7 @@ class AddClinicView extends GetView<AddDoctorController> {
                 style: TextStyle(
                   fontSize: AppSizes.fontSize16,
                   fontWeight: FontWeight.bold,
-                  color: Colors.white,
+                  color: AppColors.whiteColor,
                 ),
               ),
             ),

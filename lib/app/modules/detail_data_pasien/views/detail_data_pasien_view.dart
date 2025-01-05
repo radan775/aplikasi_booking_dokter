@@ -14,7 +14,7 @@ class DetailDataPasienView extends GetView<DetailDataPasienController> {
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back,
-            color: Colors.white,
+            color: AppColors.whiteColor,
             size: AppSizes.iconSize28,
           ),
           onPressed: () => Get.back(),
@@ -22,7 +22,7 @@ class DetailDataPasienView extends GetView<DetailDataPasienController> {
         title: Text(
           'Lengkapi data pasien',
           style: TextStyle(
-            color: Colors.white,
+            color: AppColors.whiteColor,
             fontWeight: FontWeight.bold,
             fontSize: AppSizes.fontSize20,
           ),
@@ -85,7 +85,7 @@ class DetailDataPasienView extends GetView<DetailDataPasienController> {
                                   '${controller.selectedDoctorData.value['specialty']}',
                                   style: TextStyle(
                                     fontSize: AppSizes.fontSize14,
-                                    color: Colors.grey,
+                                    color: AppColors.greyColor,
                                   ),
                                 ),
                               ],
@@ -117,10 +117,10 @@ class DetailDataPasienView extends GetView<DetailDataPasienController> {
                                     Container(
                                   width: AppSizes.imageWidth80,
                                   height: AppSizes.imageHeight80,
-                                  color: Colors.grey,
+                                  color: AppColors.greyColor,
                                   child: Icon(
                                     Icons.image_not_supported,
-                                    color: Colors.white,
+                                    color: AppColors.whiteColor,
                                   ),
                                 ),
                               ),
@@ -141,14 +141,14 @@ class DetailDataPasienView extends GetView<DetailDataPasienController> {
                                     "${controller.selectedClinicData.value['scheduleDay']}, ${controller.selectedClinicData.value['scheduleDate']}",
                                     style: TextStyle(
                                       fontSize: AppSizes.fontSize14,
-                                      color: Colors.grey,
+                                      color: AppColors.greyColor,
                                     ),
                                   ),
                                   Text(
                                     '${controller.selectedClinicData.value['scheduleTime']}',
                                     style: TextStyle(
                                       fontSize: AppSizes.fontSize14,
-                                      color: Colors.grey,
+                                      color: AppColors.greyColor,
                                     ),
                                   ),
                                   Text(
@@ -197,10 +197,10 @@ class DetailDataPasienView extends GetView<DetailDataPasienController> {
                                     Container(
                                   width: AppSizes.imageWidth80,
                                   height: AppSizes.imageHeight80,
-                                  color: Colors.grey,
+                                  color: AppColors.greyColor,
                                   child: Icon(
                                     Icons.image_not_supported,
-                                    color: Colors.white,
+                                    color: AppColors.whiteColor,
                                   ),
                                 ),
                               ),
@@ -221,14 +221,14 @@ class DetailDataPasienView extends GetView<DetailDataPasienController> {
                                     "${controller.selectedClinicData.value['scheduleDay']}, ${controller.selectedClinicData.value['scheduleDate']}",
                                     style: TextStyle(
                                       fontSize: AppSizes.fontSize14,
-                                      color: Colors.grey,
+                                      color: AppColors.greyColor,
                                     ),
                                   ),
                                   Text(
                                     '${controller.selectedClinicData.value['scheduleTime']}',
                                     style: TextStyle(
                                       fontSize: AppSizes.fontSize14,
-                                      color: Colors.grey,
+                                      color: AppColors.greyColor,
                                     ),
                                   ),
                                   Text(
@@ -293,7 +293,7 @@ class DetailDataPasienView extends GetView<DetailDataPasienController> {
                       "Selesaikan proses buat janji dengan melengkapi data berikut:",
                       style: TextStyle(
                         fontSize: AppSizes.fontSize14,
-                        color: Colors.grey,
+                        color: AppColors.greyColor,
                       ),
                     ),
 
@@ -313,7 +313,7 @@ class DetailDataPasienView extends GetView<DetailDataPasienController> {
                                 backgroundColor:
                                     controller.selectedVisitStatus.value == "Ya"
                                         ? AppColors.blueColor
-                                        : Colors.grey[300],
+                                        : AppColors.grey300,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(
                                     AppSizes.borderRadius10,
@@ -328,8 +328,8 @@ class DetailDataPasienView extends GetView<DetailDataPasienController> {
                                 style: TextStyle(
                                   color: controller.selectedVisitStatus.value ==
                                           "Ya"
-                                      ? Colors.white
-                                      : Colors.black,
+                                      ? AppColors.whiteColor
+                                      : AppColors.black,
                                   fontSize: AppSizes.fontSize14,
                                 ),
                               ),
@@ -345,7 +345,7 @@ class DetailDataPasienView extends GetView<DetailDataPasienController> {
                                     controller.selectedVisitStatus.value ==
                                             "Tidak"
                                         ? AppColors.blueColor
-                                        : Colors.grey[300],
+                                        : AppColors.grey300,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(
                                     AppSizes.borderRadius10,
@@ -360,8 +360,8 @@ class DetailDataPasienView extends GetView<DetailDataPasienController> {
                                 style: TextStyle(
                                   color: controller.selectedVisitStatus.value ==
                                           "Tidak"
-                                      ? Colors.white
-                                      : Colors.black,
+                                      ? AppColors.whiteColor
+                                      : AppColors.black,
                                   fontSize: AppSizes.fontSize14,
                                 ),
                               ),
@@ -390,7 +390,7 @@ class DetailDataPasienView extends GetView<DetailDataPasienController> {
                                     controller.selectedPaymentMethod.value ==
                                             "Dana Pribadi"
                                         ? AppColors.blueColor
-                                        : Colors.grey[300],
+                                        : AppColors.grey300,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(
                                     AppSizes.borderRadius10,
@@ -407,8 +407,8 @@ class DetailDataPasienView extends GetView<DetailDataPasienController> {
                                   color:
                                       controller.selectedPaymentMethod.value ==
                                               "Dana Pribadi"
-                                          ? Colors.white
-                                          : Colors.black,
+                                          ? AppColors.whiteColor
+                                          : AppColors.black,
                                   fontSize: AppSizes.fontSize14,
                                 ),
                               ),
@@ -424,7 +424,7 @@ class DetailDataPasienView extends GetView<DetailDataPasienController> {
                                     controller.selectedPaymentMethod.value ==
                                             "Asuransi"
                                         ? AppColors.blueColor
-                                        : Colors.grey[300],
+                                        : AppColors.grey300,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(
                                     AppSizes.borderRadius10,
@@ -441,8 +441,8 @@ class DetailDataPasienView extends GetView<DetailDataPasienController> {
                                   color:
                                       controller.selectedPaymentMethod.value ==
                                               "Asuransi"
-                                          ? Colors.white
-                                          : Colors.black,
+                                          ? AppColors.whiteColor
+                                          : AppColors.black,
                                   fontSize: AppSizes.fontSize14,
                                 ),
                               ),
@@ -470,7 +470,7 @@ class DetailDataPasienView extends GetView<DetailDataPasienController> {
                               content: Text(
                                 'Apakah semua data sudah benar?',
                                 style: TextStyle(
-                                  color: Colors.grey[800],
+                                  color: AppColors.grey800,
                                   fontSize: AppSizes.fontSize12,
                                 ),
                               ),
@@ -484,7 +484,7 @@ class DetailDataPasienView extends GetView<DetailDataPasienController> {
                                   child: Text(
                                     'Belum',
                                     style: TextStyle(
-                                      color: Colors.red,
+                                      color: AppColors.redColor,
                                       fontWeight: FontWeight.bold,
                                       fontSize: AppSizes.fontSize14,
                                     ),
@@ -503,7 +503,7 @@ class DetailDataPasienView extends GetView<DetailDataPasienController> {
                                   child: Text(
                                     'Ya',
                                     style: TextStyle(
-                                      color: Colors.white,
+                                      color: AppColors.whiteColor,
                                       fontWeight: FontWeight.bold,
                                       fontSize: AppSizes.fontSize14,
                                     ),
@@ -529,7 +529,7 @@ class DetailDataPasienView extends GetView<DetailDataPasienController> {
                           "Selesai dan buat janji",
                           style: TextStyle(
                             fontSize: AppSizes.fontSize16,
-                            color: Colors.white,
+                            color: AppColors.whiteColor,
                           ),
                         ),
                       ),

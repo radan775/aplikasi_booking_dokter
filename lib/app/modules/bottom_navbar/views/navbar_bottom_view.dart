@@ -1,3 +1,4 @@
+import 'package:aplikasi_booking_dokter/app/data/consts/colors.dart';
 import 'package:aplikasi_booking_dokter/app/data/consts/fonts.dart';
 import 'package:aplikasi_booking_dokter/app/modules/bottom_navbar/controllers/navbar_bottom_controller.dart';
 import 'package:flutter/material.dart';
@@ -28,11 +29,11 @@ class NavbarBottomView extends GetView<NavbarBottomController> {
       }),
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: AppColors.whiteColor,
           boxShadow: [
             BoxShadow(
               blurRadius: 20,
-              color: Colors.black.withOpacity(.1),
+              color: AppColors.shadowColor,
             ),
           ],
         ),
@@ -43,18 +44,18 @@ class NavbarBottomView extends GetView<NavbarBottomController> {
               vertical: AppSizes.paddingVertical8,
             ),
             child: GNav(
-              rippleColor: Colors.grey[300]!,
-              hoverColor: Colors.grey[100]!,
+              rippleColor: AppColors.grey300,
+              hoverColor: AppColors.grey200,
               gap: 5,
-              activeColor: Colors.black,
+              activeColor: AppColors.textColor,
               iconSize: AppSizes.iconSize20,
               padding: EdgeInsets.symmetric(
                 horizontal: AppSizes.paddingHorizontal16,
                 vertical: AppSizes.paddingVertical10,
               ),
               duration: Duration(milliseconds: 400),
-              tabBackgroundColor: Colors.grey[100]!,
-              color: Colors.black,
+              tabBackgroundColor: AppColors.tabBackgroundColor,
+              color: AppColors.textColor,
               tabs: [
                 GButton(
                   icon: LineIcons.home,

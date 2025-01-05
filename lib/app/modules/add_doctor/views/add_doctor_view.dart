@@ -16,7 +16,7 @@ class AddDoctorView extends GetView<AddDoctorController> {
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back,
-            color: Colors.white,
+            color: AppColors.whiteColor,
             size: AppSizes.iconSize28,
           ),
           onPressed: () => Get.back(),
@@ -24,7 +24,7 @@ class AddDoctorView extends GetView<AddDoctorController> {
         title: Text(
           'Tambah Dokter',
           style: TextStyle(
-            color: Colors.white,
+            color: AppColors.whiteColor,
             fontWeight: FontWeight.bold,
             fontSize: AppSizes.fontSize20,
           ),
@@ -36,7 +36,6 @@ class AddDoctorView extends GetView<AddDoctorController> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            // Input Nama Dokter
             CustomTextfield(
               hint: 'Nama Dokter',
               textController: controller.nameController,
@@ -44,8 +43,6 @@ class AddDoctorView extends GetView<AddDoctorController> {
               borderColor: AppColors.blueColor,
             ),
             SizedBox(height: AppSizes.heightSizeBox16),
-
-            // Input Profil Dokter
             CustomTextfield(
               hint: 'Deskripsi Singkat',
               textController: controller.profileController,
@@ -53,8 +50,6 @@ class AddDoctorView extends GetView<AddDoctorController> {
               borderColor: AppColors.blueColor,
             ),
             SizedBox(height: AppSizes.heightSizeBox16),
-
-            // Input Spesialisasi
             CustomTextfield(
               hint: 'Spesialisasi',
               textController: controller.specialtyController,
@@ -62,8 +57,6 @@ class AddDoctorView extends GetView<AddDoctorController> {
               borderColor: AppColors.blueColor,
             ),
             SizedBox(height: AppSizes.heightSizeBox16),
-
-            // Input Biaya
             CustomTextfield(
               hint: 'Biaya Konsultasi',
               textController: controller.feeController,
@@ -72,8 +65,6 @@ class AddDoctorView extends GetView<AddDoctorController> {
               inputType: TextInputType.number,
             ),
             SizedBox(height: AppSizes.heightSizeBox16),
-
-            // Input URL Gambar
             CustomTextfield(
               hint: 'URL Gambar Dokter',
               textController: controller.imageController,
@@ -81,8 +72,6 @@ class AddDoctorView extends GetView<AddDoctorController> {
               borderColor: AppColors.blueColor,
             ),
             SizedBox(height: AppSizes.heightSizeBox16),
-
-            // Input Riwayat Pendidikan
             CustomTextfield(
               hint: 'Riwayat Pendidikan',
               textController: controller.educationController,
@@ -107,14 +96,12 @@ class AddDoctorView extends GetView<AddDoctorController> {
                   return ListTile(
                     title: Text(
                       controller.educationList[index],
-                      style: TextStyle(
-                        fontSize: AppSizes.fontSize14,
-                      ),
+                      style: TextStyle(fontSize: AppSizes.fontSize14),
                     ),
                     trailing: IconButton(
                       icon: Icon(
                         Icons.delete,
-                        color: Colors.red,
+                        color: AppColors.redColor,
                         size: AppSizes.iconSize25,
                       ),
                       onPressed: () {
@@ -126,8 +113,6 @@ class AddDoctorView extends GetView<AddDoctorController> {
               );
             }),
             SizedBox(height: AppSizes.heightSizeBox16),
-
-            // Input Pengalaman
             CustomTextfield(
               hint: 'Pengalaman',
               textController: controller.experienceController,
@@ -152,14 +137,12 @@ class AddDoctorView extends GetView<AddDoctorController> {
                   return ListTile(
                     title: Text(
                       controller.experienceList[index],
-                      style: TextStyle(
-                        fontSize: AppSizes.fontSize14,
-                      ),
+                      style: TextStyle(fontSize: AppSizes.fontSize14),
                     ),
                     trailing: IconButton(
                       icon: Icon(
                         Icons.delete,
-                        color: Colors.red,
+                        color: AppColors.redColor,
                         size: AppSizes.iconSize25,
                       ),
                       onPressed: () {
@@ -171,8 +154,6 @@ class AddDoctorView extends GetView<AddDoctorController> {
               );
             }),
             SizedBox(height: AppSizes.heightSizeBox16),
-
-            // Input Treatment
             CustomTextfield(
               hint: 'Treatment yang Dilakukan',
               textController: controller.treatmentsController,
@@ -197,14 +178,12 @@ class AddDoctorView extends GetView<AddDoctorController> {
                   return ListTile(
                     title: Text(
                       controller.treatmentsList[index],
-                      style: TextStyle(
-                        fontSize: AppSizes.fontSize14,
-                      ),
+                      style: TextStyle(fontSize: AppSizes.fontSize14),
                     ),
                     trailing: IconButton(
                       icon: Icon(
                         Icons.delete,
-                        color: Colors.red,
+                        color: AppColors.redColor,
                         size: AppSizes.iconSize25,
                       ),
                       onPressed: () {
@@ -216,11 +195,8 @@ class AddDoctorView extends GetView<AddDoctorController> {
               );
             }),
             SizedBox(height: AppSizes.heightSizeBox30),
-
-            // Tombol Selanjutnya
             Row(
-              mainAxisAlignment: MainAxisAlignment
-                  .spaceBetween, // Memastikan tombol memiliki jarak
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Expanded(
                   child: ElevatedButton(
@@ -243,19 +219,17 @@ class AddDoctorView extends GetView<AddDoctorController> {
                       style: TextStyle(
                         fontSize: AppSizes.fontSize16,
                         fontWeight: FontWeight.bold,
-                        color: Colors.white,
+                        color: AppColors.whiteColor,
                       ),
                     ),
                   ),
                 ),
-                SizedBox(
-                    width: AppSizes
-                        .widthSizeBox10), // Memberikan jarak antara tombol
+                SizedBox(width: AppSizes.widthSizeBox10),
                 Expanded(
                   child: Obx(
                     () => ElevatedButton(
                       onPressed: controller.isLoading.value
-                          ? null // Nonaktifkan tombol saat loading
+                          ? null
                           : () async {
                               if (controller.validateDoctorInput()) {
                                 await controller.uploadDoctorData();
@@ -271,13 +245,15 @@ class AddDoctorView extends GetView<AddDoctorController> {
                         ),
                       ),
                       child: controller.isLoading.value
-                          ? CircularProgressIndicator(color: Colors.white)
+                          ? CircularProgressIndicator(
+                              color: AppColors.whiteColor,
+                            )
                           : Text(
                               'Upload Data',
                               style: TextStyle(
                                 fontSize: AppSizes.fontSize16,
                                 fontWeight: FontWeight.bold,
-                                color: Colors.white,
+                                color: AppColors.whiteColor,
                               ),
                             ),
                     ),
