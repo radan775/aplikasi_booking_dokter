@@ -1,6 +1,7 @@
 import 'package:aplikasi_booking_dokter/app/data/consts/consts.dart';
 import 'package:aplikasi_booking_dokter/app/routes/app_pages.dart';
 import 'package:aplikasi_booking_dokter/firebase_options.dart';
+import 'package:aplikasi_booking_dokter/initial_binding.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -9,6 +10,7 @@ import 'package:get_storage/get_storage.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  AppColors.initializeDefaultColors();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await GetStorage.init();
 
@@ -20,6 +22,7 @@ Future<void> main() async {
         theme: ThemeData(fontFamily: AppFonts.nunito),
         debugShowCheckedModeBanner: false,
         initialRoute: isLogin ? Routes.BOTTOM_NAVBAR : AppPages.INITIAL,
+        initialBinding: InitialBinding(),
         getPages: AppPages.routes,
         localizationsDelegates: const [
           GlobalMaterialLocalizations.delegate,
